@@ -1,0 +1,31 @@
+    <div class="container mx-auto w-50 text-center pt-5">
+        <h1 class="text-center">Veículos</h1>
+       
+        <div class="card w-56 border border-primary text-center mx-auto mt-5"> 
+            <div class="card-body">
+                <div class="card-title">
+                    Cadastre um novo veiculo
+                </div>
+                <%= link_to "Clique aqui", new_vehicle_path, class: "btn btn-primary" %>
+            </div>
+        </div>
+    </div>
+        <h2 class="text-center mx-auto pt-5 pb-2"> Todos os veiculos cadastrados: </h2>
+        <div class="container mx-auto"> 
+            <div class="jumbotron mx-auto text-center my-4 border border-dark mx-auto">
+            <div class="d-flex flex-wrap  rounded text-center mx-auto p-5">
+             <% @vehicles.each do |vehicle| %>
+                 <div class="card0  mx-auto card p-3 mx-5 my-5 border-dark rounded" id="card" style="width: 18rem;">
+                     <h2 class="card-text">Modelo: <%= vehicle.model %> </h2>
+                        <p class="card-title bg-primary text-white border-dark rounded p-3"><%= vehicle.registration_plate %> </p>
+                        <%= link_to "Editar", edit_vehicle_path(vehicle), class: "btn btn-md btn-warning my-2" %>
+                        <%= link_to "Deletar", vehicle_path(vehicle), class: "btn btn-md btn-danger my-2", 
+                                                                      method: :delete, 
+                                                                      data: { confirm: "Tem certeza que deseja deletar o veiculo " + vehicle.model + " ?"}  %>
+
+                </div> 
+            <% end %>
+            </div>
+        </div>
+    </div>
+      

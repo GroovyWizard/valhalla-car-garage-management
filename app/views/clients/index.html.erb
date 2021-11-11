@@ -1,0 +1,32 @@
+    <div class="container mx-auto w-50 text-center pt-5">
+        <h1 class="text-center">Clientes</h1>
+       
+        <div class="card w-56 border border-primary text-center mx-auto mt-5"> 
+            <div class="card-body">
+                <div class="card-title">
+                    Cadastre um novo cliente
+                </div>
+                <%= link_to "Clique aqui", new_client_path, class: "btn btn-primary" %>
+            </div>
+        </div>
+    </div>
+        <h2 class="text-center mx-auto pt-5 pb-2"> Todos os clientes cadastrados: </h2>
+        <div class="container mx-auto"> 
+            <div class="jumbotron mx-auto my-4 border border-dark mx-auto">
+                <div class="row">        
+                    <% @clients.each_slice(25) do |clients|%>
+                        <% @clients.each do |client|%>
+                            <div class="col-lg-6"> 
+                                <%= link_to client.name, client%>
+                                <p class="text-normal fs-2 mb-4">Documento: <%= client.document %> </h2>
+                            </div>
+                        <% end %>
+                    <% end %>
+                </div>
+                <div class="digg_pagination">
+                    <%= will_paginate @clients, :container => false %>
+                </div>
+            </div>
+        </div>
+    </div>
+      

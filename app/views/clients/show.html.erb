@@ -1,0 +1,38 @@
+<div class="container mx-auto">
+    <div class="jumbotron ">
+        <h1 class="text-center display-4 font-weight-bold"> <%= @client.name %> </h1>
+        <div class="row my-5 ">
+            <ul class="">
+            <li class="" >
+                 <i class="bi bi-telephone mr-3" style="font-size: 40px"></i>            
+                 <span class="font-italic h2" > Telefone do cliente: 
+                    <span class="text-primary"> <%= @client.phone %>  </span>
+                 </span>
+            </li>
+            <li class="">
+                <i class="bi bi-house-fill mr-3" style="font-size: 40px"></i>
+                 <span class=" font-italic h2"> Endereço do cliente: 
+                    <span class="text-primary"> <%= @client.address %>  </span>
+                 </span>
+            </li>
+             <li class="">
+                <i class="bi bi-person-badge mr-3" style="font-size: 40px"></i>
+                 <span class=" font-italic h2"> Documento do cliente: 
+                    <span class="text-primary"> <%= @client.document %>  </span>
+                 </span>
+            </li>
+            </ul>
+        </div>
+        
+        <div class="row my-5 text-center">
+            <div class="col-12">
+                 <%= link_to 'Voltar', url_for(:back), class: "btn btn-lg btn-info my-2 mr-5" %> 
+                 <%= link_to "Editar", edit_client_path(@client), class: "btn btn-lg btn-warning my-2 mr-5" %>
+                 <%= link_to "Deletar", client_path(@client), class: "btn btn-lg btn-danger my-2 mr-5", 
+                                                                      method: :delete, 
+                                                                      data: { confirm: "Tem certeza que deseja deletar o cliente " + @client.name + " ?"}  %>
+            </div>
+        </div>
+    
+    </div>
+</div>

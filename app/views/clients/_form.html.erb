@@ -1,0 +1,25 @@
+     <%= form_with model: client do |form|%>            
+            <div class="form-group pt-2">
+                <%= form.label :name, value: "Nome:" %> 
+                <%= form.text_field :name, {class: "form-control", placeholder: "Digite o nome do cliente"} %>
+            </div>
+            <div class="form-group pt-2">
+                <%= form.label :document, value: "CPF ou CNPJ:" %> 
+                <%= form.text_field :document, {class: "form-control", placeholder: "Digite o CPF ou CNPJ do cliente"} %>
+            </div>
+
+              <div class="form-group pt-2">
+                <%= form.label :phone, value: "Telefone:" %> 
+                <%= form.text_field :phone, {class: "form-control", placeholder: "Digite o telefone do cliente"} %>
+            </div>
+
+              <div class="form-group pt-2">
+                <%= form.label :address, value: "Endereço:" %> 
+                <%= form.text_field :address, {class: "form-control", placeholder: "Digite o endereço do cliente"} %>
+            </div>
+         
+
+            <div class="lead pt-5">
+                <%= form.submit "Concluir", class: "btn btn-primary" %>
+            </div>
+         <% end %>
