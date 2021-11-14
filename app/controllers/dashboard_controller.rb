@@ -4,7 +4,7 @@ class DashboardController < ApplicationController
     end
 
     def show
-    
+        
     end
 
     def client_report 

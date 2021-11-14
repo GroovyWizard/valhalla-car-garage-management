@@ -1,13 +1,51 @@
 class TasksController < ApplicationController
+    
+    def new 
+        @service = Service.find(params[:service_id])
+        @task = Task.new
+    end
+
     def create
         @service = Service.find(params[:service_id])
-        @task = @service.tasks.create(tasks_params)
+        @task = @service.tasks.create(task_params)
+        
+        if @task.valid?
+            flash[:success] = "Tarefa criada com sucesso"
+            redirect_to service_path(@service)
+        else
+            flash[:errors] = @task.errors.full_messages            
+            redirect_to service_path(@service)
+        end
+    end
+
+    def edit
+        @task = Task.find(params[:id])
+        @service = @task.service
+    end
+
+    def update
+        @task = Task.find(params[:id])
+        if @task.update(task_params)
+            redirect_to action: "show"
+        else
+            redirect_to action: "edit"
+        end
+    end
+
+    def show
+        @task = Task.find(params[:id])
+        @service  = Service.find(params[:service_id])
+    end
+    
+    def destroy
+        @service = Service.find(params[:service_id])
+        @task = @service.tasks.find(params[:id])
+        @task.destroy
         redirect_to service_path(@service)
     end
 
     private
-        def tasks_params
-            params.require(:tasks).permit(:title, :description, :status, :estimative)
+        def task_params
+            params.require(:task).permit(:title, :description, :status, :estimative, :service_id)
         end
 end
-w

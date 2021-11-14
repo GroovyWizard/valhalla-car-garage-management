@@ -1,0 +1,9 @@
+     <% if !!flash[:errors] %>
+        <div class="container mx-auto">
+            <div class="jumbotron h-50 text-white bg bg-danger">
+                <% flash[:errors].each do |e| %>
+                    <p><%= e %></p> 
+                    <% end %>
+            </div>
+        </div>
+      <% end %>

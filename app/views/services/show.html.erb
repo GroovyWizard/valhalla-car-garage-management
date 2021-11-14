@@ -1,6 +1,42 @@
-<div class="container mx-auto w-50 text-center pt-5">
+<div class="container mx-auto w-50 text-center pt-5 mb-5" >
     <h1 class="display-4">Serviço: <%= @service.title %> </h1>
     <h3 class="">  Veiculo: <%= @service.vehicle.model %> </h3>   
 </div>
 
-<div class="container mx-auto pt-5 mt-5 w-50">
+
+<div class="container mx-auto w-50 my-4">
+ <% if @service.status == false%>
+        <div class="card w-56 border border-primary text-center mx-auto my-4"> 
+                <div class="card-body">
+                    <div class="card-title">
+                        Cadastre uma nova tarefa
+                    </div>
+                    <%= link_to "Clique aqui", new_service_task_path(@service), class: "btn btn-primary" %>
+                    </div>
+            </div>
+    <% end %>
+   <h2 class="text-center p-2 mt-5"> Tarefas Pendentes: </h2>
+    <table>
+        <tbody>
+            <%= render "tasks/task-table" %>
+                <% @service.tasks.each do |task| %>
+                        <% if task.status == false %>
+                            <%= render "tasks/task", task: task %>
+                        <% end %>  
+                <% end %>
+         </tbody>
+      </table>
+
+    <h2 class="text-center p-2"> Tarefas Completas: </h2>
+        <table>
+        <tbody>
+            <%= render "tasks/task-table" %>
+                <% @service.tasks.each do |task| %>
+                        <% if task.status == true %>
+                            <%= render "tasks/task", task: task %>
+                        <% end %>  
+                <% end %>
+         </tbody>
+      </table>
+            
+</div>
