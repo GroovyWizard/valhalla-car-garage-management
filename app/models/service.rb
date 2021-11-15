@@ -6,9 +6,16 @@ class Service < ApplicationRecord
     validates :value, presence: true
     validates :vehicle_id, presence: true
   
-    def self.get_done_on_time
-        @service = Service.all
-        @on_time = @service.where(DateTime.parse('finish_date') < DateTime.parse('estimative'))
+    def get_tasks_on_time 
+        @on_time = self.tasks.where("finish_date <= estimative")
+    end
+
+    def self.get_tasks_overdue
+        @overdue = self.tasks.where("finish_date > estimative")
+    end
+
+    def count_tasks 
+        self.tasks.count
     end
 
   

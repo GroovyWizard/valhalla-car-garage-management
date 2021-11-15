@@ -5,6 +5,7 @@ class ClientsController < ApplicationController
 
     def show
         @client = Client.find(params[:id])
+        @vehicles = @client.vehicles
     end
 
     def new

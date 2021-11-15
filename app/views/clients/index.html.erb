@@ -18,7 +18,7 @@
                         <% @clients.each do |client|%>
                             <div class="col-lg-6"> 
                                 <%= link_to client.name, client%>
-                                <p class="text-normal fs-2 mb-4">Documento: <%= client.document %> </h2>
+                                <p class="text-normal mb-4">Documento: <span style="color: red"> <%= client.document %> </span> </h2>
                             </div>
                         <% end %>
                     <% end %>

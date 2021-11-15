@@ -1,7 +1,12 @@
 class VehiclesController < ApplicationController
 
     def index
-        @vehicles = Vehicle.all
+        @vehicles = Vehicle.paginate(page: params[:page], per_page: 10)
+    end
+
+    def show
+        @vehicle = Vehicle.find(params[:id])
+        @services = @vehicle.services
     end
 
     def new 

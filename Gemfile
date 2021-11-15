@@ -26,7 +26,10 @@ gem 'faker', :git => 'https://github.com/faker-ruby/faker.git', :branch => 'mast
 gem 'bootstrap-icons-helper'
 gem 'jquery-rails'
 gem 'will_paginate', '~> 3.3'
-
+gem 'cpf_faker', '~> 1.3'
+gem 'material_icons'
+gem 'font-awesome-rails'
+gem 'popper_js'
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
 

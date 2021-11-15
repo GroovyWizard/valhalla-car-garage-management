@@ -1,0 +1,72 @@
+<div class="container mx-auto">
+    <div class="jumbotron ">
+        <h1 class="text-center display-4 font-weight-bold"> Veículo: <%= @vehicle.model %> </h1>
+        <div class="row my-5 ">
+            <div class="col-6">
+                <ul class="">
+                <li class="" >
+                    <i class="bi bi-person-badge mr-3 mt-2" style="font-size: 40px"></i>
+                    <span class="font-italic h2" > Dono do Veículo: 
+                        <span class="text-primary"> <%= link_to @vehicle.client.name, @vehicle.client%> </span>
+                    </span>
+                </li>
+                <li class="" >
+                    <i class="bi bi-telephone mr-3 mt-2" style="font-size: 40px"></i>            
+                    <span class="font-italic h2" > Telefone do dono do Veículo: 
+                        <span class="text-primary"> <%= @vehicle.client.phone %>  </span>
+                    </span>
+                </li>
+                
+                </ul>
+            </div>
+
+            <div class="col-6">
+                <ul> 
+                <li class="" >
+                    <i class="fa fa-car mr-3 mt-2" style="font-size: 40px"></i>            
+                    <span class="font-italic h2" > Placa do Veículo: 
+                        <span class="text-primary"> <%= @vehicle.registration_plate %>  </span>
+                    </span>
+                </li>
+                <li class="">
+                    <i class="fa fa-calendar mr-3 mt-2" style="font-size: 40px"></i>
+                    <span class=" font-italic h2"> Data do cadastro: 
+                        <span class="text-primary"> <%= @vehicle.created_at.to_date.to_s %>  </span>
+                    </span>
+                </li>
+                
+                </ul>
+            </div>
+        </div>
+
+        <div class="services text-center">
+            <button class="btn btn-primary btn-lg" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                Serviços para este veiculo
+            </button>
+        
+            <div class="collapse" id="collapseExample">
+            <div class="card card-body">
+                <ul class="list-group">   
+                    <% @services.each do |service| %>
+                        <li class="list-group-item fw-bold"> 
+                            <%= link_to service.title, service%>
+                        </li>
+                    <% end %>
+                </ul>
+            </div>
+            </div>
+        </div>
+
+
+        <div class="row my-5 text-center">
+            <div class="col-12">
+                 <%= link_to 'Voltar', url_for(:back), class: "btn btn-lg btn-info my-2 mr-5" %> 
+                 <%= link_to "Editar", edit_vehicle_path(@vehicle), class: "btn btn-lg btn-warning my-2 mr-5" %>
+                 <%= link_to "Deletar", vehicle_path(@vehicle), class: "btn btn-lg btn-danger my-2 mr-5", 
+                                                                      method: :delete, 
+                                                                      data: { confirm: "Tem certeza que deseja deletar o veiculo " + @vehicle.model + " ?"}  %>
+            </div>
+        </div>
+    
+    </div>
+</div>
