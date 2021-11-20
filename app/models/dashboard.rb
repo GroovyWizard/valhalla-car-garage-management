@@ -1,12 +1,18 @@
 class Dashboard < ApplicationRecord
    
     def self.loyal_clients
-        Client
-            .left_joins(:vehicles)
-            .group(:id)
-            .order('COUNT(vehicles.id) DESC')
-            .limit(10)
+        @clients = Client.all
+        @loyal_clients = []
+        
+        for client in @clients do 
+            if client.loyal_client 
+                @loyal_clients.push client
+            end
+        end
+        @loyal_clients_count = @loyal_clients.count
+        return @loyal_clients
     end
+
     #Registered ThisMonth related methods
     def self.vehicles_registered_this_month
         Vehicle.from_this_month
