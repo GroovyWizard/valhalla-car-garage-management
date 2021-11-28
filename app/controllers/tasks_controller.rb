@@ -44,8 +44,16 @@ class TasksController < ApplicationController
         redirect_to service_path(@service)
     end
 
+    def finish_task
+        @task = Task.find(params[:id])
+        @service = Service.find(@task.service_id)
+        @task.update(status: true, finish_date: DateTime.now())
+        flash[:notice] = "Tarefa concluida!"
+        redirect_to service_task_path(@service)
+    end
+
     private
         def task_params
-            params.require(:task).permit(:title, :description, :status, :estimative, :service_id)
+            params.require(:task).permit(:title, :description, :status, :estimative, :service_id, :finish_date)
         end
 end

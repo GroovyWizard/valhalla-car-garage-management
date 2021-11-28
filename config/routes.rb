@@ -8,7 +8,14 @@ Rails.application.routes.draw do
    post '/clients/new' => 'clients#create'
 
    resources :services do   
-      resources :tasks
+      resources :tasks do
+      end
+   end
+
+   resources :tasks do 
+      member do 
+         get :finish_task
+      end
    end
 
    resources :services do 

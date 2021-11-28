@@ -5,11 +5,6 @@ class Service < ApplicationRecord
     validates :title, presence: true
     validates :value, presence: true
     validates :vehicle_id, presence: true
-  
-    def finish_service 
-        self.finish_date = 
-        self.status = true
-    end
 
     def get_tasks_on_time 
         @on_time = self.tasks.where("finish_date <= estimative")
