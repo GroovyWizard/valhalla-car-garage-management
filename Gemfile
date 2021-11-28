@@ -30,6 +30,14 @@ gem 'cpf_faker', '~> 1.3'
 gem 'material_icons'
 gem 'font-awesome-rails'
 gem 'popper_js'
+gem 'rubyzip', '>= 1.2.1'
+gem 'axlsx', git: 'https://github.com/randym/axlsx.git', ref: 'c8ac844'
+gem 'axlsx_rails'
+gem 'to_xls'
+gem "spreadsheet", "0.6.5.8"
+gem 'rspec-rails','3.8.2'
+gem 'sprockets', '~> 4.0'
+
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
 

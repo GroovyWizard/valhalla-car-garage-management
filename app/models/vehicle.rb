@@ -7,5 +7,15 @@ class Vehicle < ApplicationRecord
     
     validates :model, presence: true
     validates :registration_plate, presence: true 
+
+    def as_xls(options = {})
+        {
+            "Id" => id.to_s,
+            "Modelo" => model,
+            "Placa" => registration_plate,
+            "Data de criação" => created_at,
+            "Cliente" => client_id
+        }
+    end
     
 end

@@ -7,8 +7,14 @@ Rails.application.routes.draw do
    resources :clients
    post '/clients/new' => 'clients#create'
 
-   resources :services do
+   resources :services do   
       resources :tasks
+   end
+
+   resources :services do 
+      member do 
+         get :finish_service
+      end
    end
    
    resources :dashboard,
@@ -16,5 +22,5 @@ Rails.application.routes.draw do
    get '/dashboard/report/client' => 'dashboard#client_report', as: 'client_report'
    get '/dashboard/vehicle/client' => 'dashboard#vehicle_report', as: 'vehicle_report'
    get '/dashboard/service/client' => 'dashboard#service_report', as: 'service_report'
-
+   get '/dashboard/parser/vehicle' => 'dashboard#vehicle_excel_parser', as: 'vehicle_excel_parser'      
 end

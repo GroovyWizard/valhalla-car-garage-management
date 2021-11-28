@@ -14,19 +14,3 @@
       </tr>
     </thead>
     <tbody>
-        <tr class="text-center">
-            <th scope="row"></th>
-            <td> <%= service.title %></td>
-            <td> <%= service.estimative %></td>
-            <td> <%= service.value %></td>
-            <td> <%= service.vehicle.model %> </td>
-            <td> <%= service.vehicle.client.name %> </td>
-            <td> <%= link_to "Tarefas", service, class: "btn btn-primary" %></td> 
-            <td> <%= link_to "Deletar", service_path(service), class: "btn btn-md btn-danger my-2", 
-                                                                      method: :delete, 
-                                                                      data: { confirm: "Tem certeza que deseja deletar o serviço " + service.title + " ?"}  %> </td>
-            <td> <a href="" class="btn btn-info"> Editar </a> </td> 
-    
-        </tr>
-    </tbody>
-</table>

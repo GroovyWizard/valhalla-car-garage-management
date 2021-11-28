@@ -45,6 +45,13 @@ class ServicesController < ApplicationController
         redirect_to action: "index"
     end
 
+    def finish_service
+        @service = Service.find(params[:id])
+        @service.update(status: true, finish_date: DateTime.now())
+        flash[:notice] = "Serviço concluido!"
+        redirect_to service_path(@service)
+    end
+
     private
         def service_params
             params.require(:service).permit(:id, :title, :finish_date, :status, :estimative, :value, :vehicle_id)

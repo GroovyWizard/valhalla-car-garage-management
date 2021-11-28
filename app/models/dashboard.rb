@@ -1,5 +1,19 @@
 class Dashboard < ApplicationRecord
    
+    def self.featured_vehicles 
+        @vehicles = Vehicle.all
+        @featured_vehicles = []
+        
+        for vehicle in @vehicles do 
+            if vehicle.services.count > 1 
+                @featured_vehicles.push vehicle
+            end
+        end
+        
+
+        return @featured_vehicles.first(10)
+    end
+
     def self.loyal_clients
         @clients = Client.all
         @loyal_clients = []

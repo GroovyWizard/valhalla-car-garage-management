@@ -12,20 +12,29 @@
         
     <div class="container mx-auto pt-5 mb-5 w-50">
         <h2 class="text-center p-2 mt-5"> Serviços pendentes </h2>
-            <% @services.each do |service| %>
-                <% if service.status == false %>
-                    <%= render "services-table", service: service %>
-                <% end %>  
-            <% end %>
-
+        <table>
+            <tbody>
+                <%= render "services-table" %>
+                <% @services.each do |service| %>
+                    <% if service.status == false %>
+                        <%= render "services/service", service: service %>
+                    <% end %>  
+                <% end %>
+            </tbody>
+        </table>
 
         <h2 class="text-center p-2 mt-5"> Serviços finalizados</h2>
-             <% @services.each do |service| %>
-                <% if service.status == true %>
-                    <%= render "services-table", service: service %>
+            <table>
+                <tbody>
+                <%= render "services-table" %>
+                <% @services.each do |service| %>
+                    <% if service.status == true %>
+                       <%= render "services/service", service: service %>
+                    <% end %>  
                 <% end %>  
-            <% end %>  
-    </div>
+                </tbody>
+            </table>    
+        </div>
 
     
 

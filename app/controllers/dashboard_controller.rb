@@ -16,24 +16,25 @@ class DashboardController < ApplicationController
         
         @overdue_services = Dashboard.services_overdue.count
         @on_time_services = Dashboard.services_done_on_time.count
-       
     end
 
     def client_report 
         @clients = Client.all
-        @clients_this_month = Dashboard.clients_registered_this_month.count
+        @clients_this_month = Dashboard.clients_registered_this_month
         @loyal_clients = Dashboard.loyal_clients
         @loyal_clients_count = @loyal_clients.count
     end
 
     def vehicle_report
         @vehicles = Vehicle.all
+        @vehicles_this_month = Dashboard.vehicles_registered_this_month
+        @featured_vehicles = Dashboard.featured_vehicles
     end
 
     def service_report
         @services = Service.all
-        @on_time = Dashboard.get_done_on_time
-        @overdue = Dashboard.get_overdue
+        @overdue_services = Dashboard.services_overdue
+        @on_time_services = Dashboard.services_done_on_time
     end
     
 end
