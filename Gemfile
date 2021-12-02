@@ -37,8 +37,7 @@ gem 'to_xls'
 gem "spreadsheet", "0.6.5.8"
 gem 'rspec-rails','3.8.2'
 gem 'sprockets', '~> 4.0'
-
-# Use Active Storage variant
+gem 'jquery_mask_rails', '~> 0.1.0'# Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
 
 # Reduces boot times through caching; required in config/boot.rb

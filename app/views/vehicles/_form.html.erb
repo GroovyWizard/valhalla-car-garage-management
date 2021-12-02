@@ -5,7 +5,7 @@
             </div>
             <div class="form-group pt-2">
                 <%= form.label :registration_plate, value: "Placa:" %> 
-                <%= form.text_field :registration_plate, {class: "form-control", placeholder: "Escreva a placa"} %>
+                <%= form.text_field :registration_plate, {class: "form-control", placeholder: "Escreva a placa", id: "registration_plate"} %>
             </div>
             <div class="form-group pt-2">
                 <label for="client_id"> Escolha um cliente </label> <br>
@@ -16,4 +16,10 @@
                 <%= form.submit "Concluir", class: "btn btn-primary" %>
             </div>
          <% end %>
+
+         <script>
+            $(document).ready(function(){
+            $("#registration_plate").inputmask({mask: '***-****'});
+            });
+         </script>
   

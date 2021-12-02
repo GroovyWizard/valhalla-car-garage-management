@@ -18,5 +18,11 @@ class Service < ApplicationRecord
         self.tasks.count
     end
 
-  
+    def status_parsed
+        if status == true 
+            return "Concluida"
+        else 
+            return "Não concluida"
+        end
+    end
 end
