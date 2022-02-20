@@ -3,7 +3,7 @@
             <td> <strong> <%= task.title %> </strong></td>
             <td> <%= task.estimative %></td>
             <td> <%= link_to "Detalhes", [task.service, task], class: "btn btn-primary" %></td> 
-            <td> <a href="" class="btn btn-md btn-warning ">Editar</a> </td> 
+            <td> <%= link_to "Editar", [task.service, task], class: "btn btn-warning" %> </td> 
             <td> <%= link_to "Deletar", [task.service, task], class: "btn btn-md btn-danger", 
                                                                       method: :delete, 
                                                                       data: { confirm: "Tem certeza que deseja deletar a tarefa " + task.title + " ?"}  %> </td>           

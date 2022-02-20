@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :parts
    root "homepage#index"
    
    resources :vehicles

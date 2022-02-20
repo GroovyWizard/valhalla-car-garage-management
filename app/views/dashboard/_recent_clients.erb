@@ -1,6 +1,6 @@
 <div class="col-12 col-xl-8 mb-4 mb-lg-0">
     <div class="card">
-        <h5 class="card-header text-success">Clientes fieis</h5>
+        <h5 class="card-header">Ultimos clientes cadastrados</h5>
         <div class="card-body">
             <div class="table-responsive">
                 <table class="table">
@@ -8,26 +8,29 @@
                       <tr>
                         <th scope="col">Id</th>
                         <th scope="col">Nome</th>
-                        <th scope="col">Documento</th></th>
+                        <th scope="col">Documento</th>
                         <th scope="col">Telefone</th>
-                        <th scope="col">Data</th>
+                        <th scope="col">Endereço</th>
                         <th scope="col"></th>
                       </tr>
                     </thead>
                     <tbody>
-                      <% @loyal_clients.each do |client| %>
+                      <% @clients_recent.each do |client| %>
                         <tr>
                             <th scope="row"> <%= client.id %></th>
-                            <td><%= client.name%></td>
-                            <td><%= client.document %> </td>
+                            <td><%= client.name %> </td>
+                            <td><%= client.document %></td>
                             <td><%= client.phone %></td>
-                            <td><%= client.created_at.to_date %></td>
+                            <td><%= client.address %></td>
+
                             <td> <%= link_to "Ver", client, class: "btn btn-primary" %> </td>
                         </tr>
                       <% end %>
                     </tbody>
                   </table>
             </div>
+                  <a href="/clients" class="btn btn-block btn-primary">Ver todos</a>
+
             </div>
             </div>
         </div>

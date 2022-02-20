@@ -1,6 +1,6 @@
 class ServicesController < ApplicationController
     def index 
-        @services = Service.all
+        @services = Service.all.order('created_at DESC')
     end
 
     def show
@@ -14,12 +14,13 @@ class ServicesController < ApplicationController
 
     def create
         @service = Service.new(service_params)
-        
+    
         if @service.save
             redirect_to @service
-        else 
+        else
             redirect_to action: "new"
         end
+        
     end
 
     def edit

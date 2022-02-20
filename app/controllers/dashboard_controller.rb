@@ -10,6 +10,7 @@ class DashboardController < ApplicationController
         @vehicles = Vehicle.last(5).reverse
         @services = Service.last(5).reverse
         @clients = Client.all
+        @clients_recent = Client.last(5).reverse
 
         @clients_this_month = Dashboard.clients_registered_this_month.count
         @vehicles_this_month = Dashboard.vehicles_registered_this_month.count

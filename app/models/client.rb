@@ -1,5 +1,7 @@
 class Client < ApplicationRecord
-    has_many :vehicles
+    has_many :vehicles, dependent: :destroy
+    validates :name, presence:true
+    validates :document, presence:true, uniqueness:true
     scope :from_this_month, lambda { 
         where("clients.created_at > ? AND clients.created_at < ?", 
         Time.now.beginning_of_month, Time.now.end_of_month) }

@@ -5,6 +5,9 @@ class Service < ApplicationRecord
     validates :title, presence: true
     validates :value, presence: true
     validates :vehicle_id, presence: true
+    scope :from_this_month, lambda { 
+        where("services.created_at > ? AND services.created_at < ?", 
+        Time.now.beginning_of_month, Time.now.end_of_month) }
 
     def get_tasks_on_time 
         @on_time = self.tasks.where("finish_date <= estimative")

@@ -10,6 +10,5 @@ class Task < ApplicationRecord
         else 
             return "Não concluida"
         end
-    end
-   
+    end 
 end
