@@ -2,12 +2,10 @@
 
 one:
   name: MyString
-  value:
-  sold: MyString
-  boolean: MyString
+  description: MyString
+  value: 1.5
 
 two:
   name: MyString
-  value:
-  sold: MyString
-  boolean: MyString
+  description: MyString
+  value: 1.5
