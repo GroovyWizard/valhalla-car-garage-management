@@ -1,46 +1,49 @@
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
-    <div class="container bg-dark">
-      <a class="navbar-brand " href="/">
-        <%= image_tag("logo.png", size: "50x35") %>
-              </a>
-      <a class="navbar-nav mx-auto pt-3 f" href="/">
-        <p class="nav-link active text-start h3" >Valhalla Oficinas</p>
-      </a>
-    
-    
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-    
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav ms-auto">
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="/">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/clients">Clientes</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/vehicles">Veículos</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/services">Serviços</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/dashboard">Dashboard</a>
-          </li>
-          <div class="dropdown">
-          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Dropdown button
-          </button>
+  <div class="container bg-dark">
+    <a class="navbar-brand " href="/">
+      <%= image_tag("logo.png", size: "50x35") %>
+    </a>
+    <a class="navbar-nav mx-auto pt-3 f" href="/">
+      <p class="nav-link active text-start h3" >Valhalla Oficinas</p>
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="/">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/clients">Clientes</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/vehicles">Veículos</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/services">Serviços</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/dashboard">Dashboard</a>
+        </li>
+        <div class="dropdown ml-5">
+          <p class="navbar-text float-right">
+            <% if user_signed_in? %>
+              <strong><%= current_user.name %></strong> <%= current_user.parsed_role%>
+              <%= link_to 'Editar Perfil', edit_user_registration_path, :class => 'navbar-link' %> |
+              <%= link_to "Sair", destroy_user_session_path, method: :delete, :class => 'navbar-link'  %>
+            <% else %>
+              <%= link_to "Registre-se", new_user_registration_path, :class => 'navbar-link'  %> |
+              <%= link_to "Entrar", new_user_session_path, :class => 'navbar-link'  %>
+            <% end %>
+          </p>
           <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
             <a class="dropdown-item" href="#">Action</a>
             <a class="dropdown-item" href="#">Another action</a>
             <a class="dropdown-item" href="#">Something else here</a>
           </div>
-          </div>
-        </ul>
-      </div>
+        </div>
+      </ul>
     </div>
-  </nav> 
-
+  </div>
+</nav>
