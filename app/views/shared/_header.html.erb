@@ -1,17 +1,17 @@
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
   <div class="container bg-dark">
     <a class="navbar-brand " href="/">
-      <%= image_tag("logo.png", size: "50x35") %>
+      <%= image_tag("logo.png", size: "45x35") %>
     </a>
-    <a class="navbar-nav mx-auto pt-3 f" href="/">
-      <p class="nav-link active text-start h3" >Valhalla Oficinas</p>
+    <a class="navbar-nav ms-auto" href="/">
+      <p class="nav-link active h2" >Valhalla Oficinas</p>
     </a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav ms-auto">
-        <li class="nav-item">
+    <div class="collapse navbar-collapse my-2" id="navbarSupportedContent">
+      <ul class="navbar-nav ms-auto ">
+        <li claa class="dropdss="nav-item">
           <a class="nav-link active" aria-current="page" href="/">Home</a>
         </li>
         <li class="nav-item">
@@ -24,26 +24,26 @@
           <a class="nav-link" href="/services">Serviços</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/dashboard">Dashboard</a>
+          <a class="nav-link" href="/sales">Vendas</a>
         </li>
         <div class="dropdown ml-5">
-          <p class="navbar-text float-right">
+          <p class="navbar-text float-right small" style="">
             <% if user_signed_in? %>
-              <strong><%= current_user.name %></strong> <%= current_user.parsed_role%>
+              <strong><%= current_user.name %></strong>
+              <%if current_user.is_admin %>
+                <%= link_to "Dashboard" %>
+              <% end %> |
               <%= link_to 'Editar Perfil', edit_user_registration_path, :class => 'navbar-link' %> |
-              <%= link_to "Sair", destroy_user_session_path, method: :delete, :class => 'navbar-link'  %>
+              <%= link_to "Sair", destroy_user_session_path, method: :delete, :class => 'navbar-link'  %> 
             <% else %>
               <%= link_to "Registre-se", new_user_registration_path, :class => 'navbar-link'  %> |
               <%= link_to "Entrar", new_user_session_path, :class => 'navbar-link'  %>
             <% end %>
           </p>
-          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            <a class="dropdown-item" href="#">Action</a>
-            <a class="dropdown-item" href="#">Another action</a>
-            <a class="dropdown-item" href="#">Something else here</a>
-          </div>
         </div>
-      </ul>
+      </div>
     </div>
-  </div>
+  </ul>
+</div>
+</div>
 </nav>

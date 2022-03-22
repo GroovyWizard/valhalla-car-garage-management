@@ -12,5 +12,11 @@ class User < ApplicationRecord
       when "admin" then
         "Administrador" 
     end
+  end
+  
+  def is_admin
+    if self.role == "admin" or "owner"
+      return true
+    end
   end 
 end

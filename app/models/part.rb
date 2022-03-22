@@ -1,5 +1,6 @@
 class Part < ApplicationRecord
-    belongs_to :service     
+    belongs_to :service   
+    belongs_to :sale  
 
     validates :name, presence: true
     validates :value, presence: true
