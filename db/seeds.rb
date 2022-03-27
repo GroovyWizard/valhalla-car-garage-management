@@ -7,7 +7,6 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 
-
 1.times do 
     admin = User.new 
     admin.email = 'super@admin.com'
