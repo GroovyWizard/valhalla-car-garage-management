@@ -10,11 +10,6 @@ class Service < ApplicationRecord
         where("services.created_at > ? AND services.created_at < ?", 
         Time.now.beginning_of_month, Time.now.end_of_month) }
     
-    enum type: {
-        labor: 0,
-        sale: 1,
-    }
-
     def get_tasks_on_time 
         @on_time = self.tasks.where("finish_date <= estimative")
     end
@@ -34,4 +29,5 @@ class Service < ApplicationRecord
             return "Não concluida"
         end
     end
+
 end

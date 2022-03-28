@@ -46,7 +46,7 @@ ActiveRecord::Schema.define(version: 2022_03_28_015002) do
     t.datetime "updated_at", precision: 6, null: false
     t.integer "stock"
     t.integer "sale_id"
-    t.integer "service_id"
+    t.index ["sale_id"], name: "index_parts_on_sale_id"
   end
 
   create_table "sales", force: :cascade do |t|

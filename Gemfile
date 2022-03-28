@@ -32,6 +32,8 @@ gem 'devise'
 
 # ADDED BY ME
 gem 'material_icons'
+gem 'faker'
+gem 'cpf_faker', '~> 1.3'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

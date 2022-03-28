@@ -1,13 +1,17 @@
 class Part < ApplicationRecord
-    belongs_to :service   
-    belongs_to :sale 
+    belongs_to :sale, optional: true  
 
     validates :name, presence: true
     validates :value, presence: true
-    validates :sold, presence: true
-    validates :stock, presence: true
-   
+    
     after_initialize :set_defaults
+    after_save :update_sale_value
+
+    def update_sale_value
+        if self.sale 
+            self.sale.synchronize_total_value
+        end 
+    end
 
     def set_defaults
       self.value ||= 0.0

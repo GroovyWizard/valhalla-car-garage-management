@@ -4,10 +4,8 @@ one:
   name: MyString
   value:
   sold: MyString
-  boolean: MyString
 
 two:
   name: MyString
   value:
   sold: MyString
-  boolean: MyString
