@@ -3,8 +3,7 @@ class CreateParts < ActiveRecord::Migration[6.1]
     create_table :parts do |t|
       t.string :name
       t.float :value
-      t.string :sold
-      t.string :boolean
+      t.boolean :sold
 
       t.timestamps
     end
