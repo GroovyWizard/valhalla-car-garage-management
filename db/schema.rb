@@ -41,8 +41,7 @@ ActiveRecord::Schema.define(version: 2022_03_28_015002) do
   create_table "parts", force: :cascade do |t|
     t.string "name"
     t.float "value"
-    t.string "sold"
-    t.string "boolean"
+    t.boolean "sold"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "stock"
