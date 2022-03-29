@@ -14,9 +14,10 @@
 
 1. Clone the project
 2. Cd to the project directory
-3. Run `docker-compose up --build` 
-4. Run `docker-compose run web bundle install` 
-5. Run `docker-compose up -d`
+3. Run `make build` 
+4. Run `make up` 
+5. Run `make setup`
+6. Run `make gem-sync`
 
 
 
