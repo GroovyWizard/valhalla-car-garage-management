@@ -27,6 +27,10 @@ gem-sync:
 	@echo "Updating gems"
 	@docker exec valhalla bash -c "bundle install"
 
+run-test:
+	@echo "Running tests"
+	@docker exec valhalla bash -c "rails test"
+
 reset:
 	@echo "Resetting database"
 	@docker exec valhalla bash -c "rake db:reset"

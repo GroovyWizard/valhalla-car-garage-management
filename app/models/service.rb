@@ -1,5 +1,6 @@
 class Service < ApplicationRecord
     has_many :tasks, dependent: :destroy
+    has_one :sale
     belongs_to :vehicle
 
     validates :title, presence: true

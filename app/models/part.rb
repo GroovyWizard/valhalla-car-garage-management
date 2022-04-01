@@ -16,7 +16,6 @@ class Part < ApplicationRecord
     def set_defaults
       self.value ||= 0.0
       self.sold ||= false
-      self.stock ||= 0
     end
     
 

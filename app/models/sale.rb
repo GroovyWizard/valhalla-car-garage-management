@@ -1,5 +1,6 @@
 class Sale < ApplicationRecord
     has_many :parts
+    belongs_to :service, optional: true    
     
     after_initialize :set_defaults
     
