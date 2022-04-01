@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_03_28_015002) do
+ActiveRecord::Schema.define(version: 2022_04_01_005308) do
 
   create_table "clients", force: :cascade do |t|
     t.string "name"
@@ -44,7 +44,6 @@ ActiveRecord::Schema.define(version: 2022_03_28_015002) do
     t.boolean "sold"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "stock"
     t.integer "sale_id"
     t.index ["sale_id"], name: "index_parts_on_sale_id"
   end
