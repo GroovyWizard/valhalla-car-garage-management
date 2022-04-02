@@ -7,9 +7,9 @@ class OperationValueCalculatorTest < ActionDispatch::IntegrationTest
         @part2 = Part.create(name: "Part 2 test", value: 3.5)
        
         @sale = Sale.create(name: "Sale test", description: "bruh")
-        @part1.update(sale: @sale)
-        @part2.update(sale: @sale) 
-
+        SalePart.create(sale: @sale, part: @part1)
+        SalePart.create(sale: @sale, part: @part2)
+        
         @total_value = SaleValueUpdater.calculate_total_value(@sale)
        
         assert_equal 7.0, @total_value

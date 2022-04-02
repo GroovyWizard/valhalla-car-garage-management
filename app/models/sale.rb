@@ -1,5 +1,7 @@
 class Sale < ApplicationRecord
-    has_many :parts
+  has_many :sale_part  
+  has_many :parts, through: :sale_part
+   
     belongs_to :service, optional: true    
     
     after_initialize :set_defaults
@@ -9,6 +11,10 @@ class Sale < ApplicationRecord
     end
 
     def synchronize_total_value
-        self.value = SaleValueUpdater.calculate_total_value(self) 
+        if self.parts.count > 0 
+         self.value = SaleValueUpdater.calculate_total_value(self) 
+        else 
+          puts("Error")
+        end 
     end 
 end
