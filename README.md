@@ -4,7 +4,7 @@
 <h1 align='center'> Valhalla - Car Repair Shop </h1>
 
 
-<h2 align='center'> Valhalla is an Open Source app made in Ruby On Rails focused on Repair Shops, featuring Sales, Services and general Management features! </h2>
+<h2 align='center'> Valhalla is an Open Source app made in Ruby On Rails focused on Car Repair Shops, featuring Sales, Services and general Management features! </h2>
 
 ![2022-03-28-013851_1330x578_scrot](https://user-images.githubusercontent.com/78284549/160327556-83c1a098-50dc-4b50-a851-2d2c77cc360a.png)
 
