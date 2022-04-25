@@ -6,10 +6,7 @@
   <thead>
     <tr>
       <th>Name</th>
-      <th>,</th>
       <th>Value</th>
-      <th>Sold</th>
-      <th>Boolean</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -18,10 +15,7 @@
     <% @parts.each do |part| %>
       <tr>
         <td><%= part.name %></td>
-        <td><%= part., %></td>
         <td><%= part.value %></td>
-        <td><%= part.sold %></td>
-        <td><%= part.boolean %></td>
         <td><%= link_to 'Show', part %></td>
         <td><%= link_to 'Edit', edit_part_path(part) %></td>
         <td><%= link_to 'Destroy', part, method: :delete, data: { confirm: 'Are you sure?' } %></td>
