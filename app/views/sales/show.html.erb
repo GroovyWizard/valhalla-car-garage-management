@@ -1,19 +1,27 @@
 <p id="notice"><%= notice %></p>
-
 <p>
   <strong>Name:</strong>
   <%= @sale.name %>
 </p>
-
 <p>
   <strong>Description:</strong>
   <%= @sale.description %>
 </p>
-
 <p>
   <strong>Value:</strong>
   <%= @sale.value %>
 </p>
+
+<h2 class="text-center p-2"> Peças desta venda: </h2>
+<table>
+  <tbody>
+    <% @sale.parts.each do |part| %>
+      <% if part %>
+        <%= part.name %>
+      <% end %>
+    <% end %>
+  </tbody>
+</table>
 
 <%= link_to 'Edit', edit_sale_path(@sale) %> |
 <%= link_to 'Back', sales_path %>
