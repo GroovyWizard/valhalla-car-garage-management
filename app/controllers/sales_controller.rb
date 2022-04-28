@@ -13,7 +13,7 @@ class SalesController < ApplicationController
   # GET /sales/new
   def new
     @sale = Sale.new
-   
+    @parts = Part.all
   end
 
   # GET /sales/1/edit
@@ -23,7 +23,6 @@ class SalesController < ApplicationController
   # POST /sales or /sales.json
   def create
     @sale = Sale.new(sale_params)
-
     respond_to do |format|
       if @sale.save
         format.html { redirect_to sale_url(@sale), notice: "Sale was successfully created." }
@@ -66,6 +65,6 @@ class SalesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def sale_params
-      params.require(:sale).permit(:name, :description, :value)
+      params.require(:sale).permit(:name, :description, :value, part_ids: [])
     end
 end
