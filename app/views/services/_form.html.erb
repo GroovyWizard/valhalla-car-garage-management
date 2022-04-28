@@ -16,6 +16,7 @@
                 <label for="vehicle_id"> Selecione o veiculo referente ao serviço </label> <br>
                 <%= form.select :vehicle_id, @vehicles.collect{ |v| [v.model, v.id] }, {},  prompt: "Escolha um Veiculo", class: "form form-group form-control" %>
             </div>
+            
             <div class="form-group pt-2">
                 <%= form.label :status, value: "O serviço ja foi concluido?" %> 
                 <%= form.check_box :status%>            
