@@ -17,7 +17,7 @@ class Sale < ApplicationRecord
         if self.parts.count > 0 
          self.value = SaleValueUpdater.calculate_total_value(self) 
         else 
-          puts("Error")
+          puts("This sale has no parts.")
         end 
     end
     

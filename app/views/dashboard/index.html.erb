@@ -1,18 +1,19 @@
 <%= render "side-panel"%>
 
-  <main class="col-md-9 ml-sm-auto col-lg-10 px-md-4 py-4">
-                <h1 class="h2">Dashboard Geral</h1>
-                <p>Nesta página você poderá inspecionar alguns dados administrativos gerais </p>
-                  <%= render 'featured' %>
-                <div class="row">
-                  <%= render "recent-services" %>
-                </div>
-                <div class="row">
-                  <%= render "recent-vehicles" %>
-                </div>
-                <div class="row">
-                  <%= render "recent_clients" %>
-                </div>
-            </main>
-        </div>
-    </div>
+<div class="container my-5">
+  <h2>Dashboard Geral</h2>
+  <p>Nesta página você poderá inspecionar alguns dados administrativos gerais </p>
+  <%= render 'featured' %>
+  <div class="row my-5">
+    <%= render "recent-services" %>
+  </div>
+  <div class="row my-5">
+    <%= render "recent-vehicles" %>
+  </div>
+  <div class="row my-5">
+    <%= render "recent_clients" %>
+  </div>
+</div>
+</div>
+</div>
+

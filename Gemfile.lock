@@ -191,6 +191,8 @@ GEM
       activesupport (>= 5.2)
       sprockets (>= 3.0.0)
     sqlite3 (1.4.2)
+    tailwindcss-rails (2.0.8-x86_64-linux)
+      railties (>= 6.0.0)
     thor (1.2.1)
     tilt (2.0.10)
     turbolinks (5.2.1)
@@ -242,6 +244,7 @@ DEPENDENCIES
   selenium-webdriver (>= 4.0.0.rc1)
   spring
   sqlite3 (~> 1.4)
+  tailwindcss-rails (~> 2.0)
   turbolinks (~> 5)
   tzinfo-data
   web-console (>= 4.1.0)
@@ -253,4 +256,4 @@ RUBY VERSION
    ruby 3.0.3p157
 
 BUNDLED WITH
-   2.3.11
+   2.3.12
