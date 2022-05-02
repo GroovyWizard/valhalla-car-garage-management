@@ -26,3 +26,9 @@ end
     Client.create!(name: name, document: document, phone: phone, address: address )
 end
 
+50.times do 
+    model = Faker::Vehicle.model
+    registration_plate = Faker::Vehicle.vin
+    client_id = 1
+    Vehicle.create!(model: model, registration_plate: registration_plate, client_id: client_id)
+end
