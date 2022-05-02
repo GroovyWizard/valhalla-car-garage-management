@@ -28,7 +28,7 @@ end
 
 50.times do 
     model = Faker::Vehicle.model
-    registration_plate = Faker::Vehicle.vin
+    registration_plate = Faker::Vehicle.license_plate
     client_id = 1
     Vehicle.create!(model: model, registration_plate: registration_plate, client_id: client_id)
 end
