@@ -18,7 +18,7 @@
 end
 
 
-10.times do 
+50.times do 
     name = Faker::Name.name
     document = Faker::CPF.pretty
     phone = Faker::PhoneNumber.area_code #=> "201"

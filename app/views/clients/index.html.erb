@@ -12,20 +12,16 @@
     </div>
         <h2 class="text-center mx-auto pt-5 pb-2"> Todos os clientes cadastrados: </h2>
         <div class="container mx-auto"> 
-            <div class="jumbotron mx-auto my-4 border border-dark mx-auto">
-                <div class="row">        
-                    <% @clients.each_slice(25) do |clients|%>
+            <div class="jumbotron mx-auto my-4 border border-dark">
+                <div class="row mx-auto">        
                         <% @clients.each do |client|%>
-                            <div class="col-lg-6"> 
+                            <div class="col-lg-4"> 
                                 <%= link_to client.name, client%>
                                 <p class="text-normal mb-4">Documento: <span style="color: red"> <%= client.document %> </span> </h2>
                             </div>
                         <% end %>
-                    <% end %>
                 </div>
-                <div class="digg_pagination">
-                    <%= will_paginate @clients, :container => false %>
-                </div>
+                    <%= paginate @clients  %>
             </div>
         </div>
     </div>
