@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_05_03_233705) do
+ActiveRecord::Schema.define(version: 2022_05_04_015938) do
 
   create_table "clients", force: :cascade do |t|
     t.string "name"
@@ -24,6 +24,7 @@ ActiveRecord::Schema.define(version: 2022_05_03_233705) do
   create_table "dashboards", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.decimal "comission_percentage"
   end
 
   create_table "installs", force: :cascade do |t|
@@ -59,7 +60,7 @@ ActiveRecord::Schema.define(version: 2022_05_03_233705) do
   create_table "sales", force: :cascade do |t|
     t.string "name"
     t.string "description"
-    t.decimal "value"
+    t.decimal "value", precision: 3, scale: 2
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "service_id"
