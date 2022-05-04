@@ -12,11 +12,9 @@ class DashboardController < ApplicationController
         @clients = Client.all
         @clients_recent = Client.last(5).reverse
 
-        @clients_this_month = Dashboard.clients_registered_this_month.count
-        @vehicles_this_month = Dashboard.vehicles_registered_this_month.count
-        
+        @sale_value_this_month = 300
+        @total_sales_this_month = Dashboard.total_sales_this_month 
         @overdue_services = Dashboard.services_overdue.count
-        @on_time_services = Dashboard.services_done_on_time.count
     end
 
     def client_report 

@@ -12,6 +12,18 @@
   <%= @sale.value %>
 </p>
 
+<% if @sale.service %>
+<p> 
+  <strong> Serviço associado a venda:</strong>
+  <%= link_to @sale.service.title, service_path(@sale.service.id) %>
+</p>
+<% elsif @sale.client %>
+<p> 
+  <strong> Cliente associado a venda:</strong>
+  <%= link_to @sale.client.name, client_path(@sale.client.id) %>
+</p>
+<% end %>
+
 <h2 class="text-center p-2"> Peças desta venda: </h2>
 <table>
   <tbody>

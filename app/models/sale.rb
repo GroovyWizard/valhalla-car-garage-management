@@ -7,8 +7,14 @@ class Sale < ApplicationRecord
     
     after_initialize :set_defaults
     after_initialize :received_part_ids
+    after_initialize :received_relation_with_parent_model
     after_initialize :synchronize_total_value 
     
+    scope :from_this_month, lambda { 
+      where("sales.created_at > ? AND sales.created_at < ?", 
+      Time.now.beginning_of_month, Time.now.end_of_month) }
+
+
     def set_defaults
       self.value ||= 0.0
     end
@@ -26,5 +32,13 @@ class Sale < ApplicationRecord
         self.part_ids << Part.where(id: [part_ids])
       end 
     end
-
+    
+    def received_relation_with_parent_model
+      if self.service_id != "Selecione" && self.service_id  
+        self.service = Service.find(service_id)
+      elsif self.client_id != "Selecione" && self.client_id 
+        self.client = Client.find(client_id)
+      end 
+    end
+    
 end

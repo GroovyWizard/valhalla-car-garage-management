@@ -36,6 +36,21 @@ class Dashboard < ApplicationRecord
         Client.from_this_month
     end
 
+    def self.total_sales_this_month 
+        @sales = Sale.from_this_month
+        @total = 0
+
+        for sale in @sales do 
+            @total += sale.value  
+        end 
+
+        return @total 
+    end 
+
+    def self.sale_value_this_month
+        Sale.from_this_month
+    end
+
     #On-Time or Overdue related methods
     def self.services_done_on_time
         @on_time = Service.where("finish_date <= estimative")
@@ -61,5 +76,6 @@ class Dashboard < ApplicationRecord
     def self.task_quantity 
         @task_quantity = Task.count
     end
+
 
 end

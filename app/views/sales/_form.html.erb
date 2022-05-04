@@ -1,7 +1,7 @@
 <%= form_with(model: sale) do |form| %>
 <% if sale.errors.any? %>
 <div id="error_explanation">
-  <h2><%= pluralize(sale.errors.count, "error") %> prohibited this sale from being saved:</h2>
+  <h2> Erros: <%= pluralize(sale.errors.count, "error") %>  </h2>
   <ul>
     <% sale.errors.each do |error| %>
     <li><%= error.full_message %></li>
@@ -44,14 +44,15 @@
   <div class="form-group pt-2" id="client_form" style="visibility: hidden">
     <%= form.label :client_id, value: "Cliente" %>
     <%= form.select(:client_id, Client.all.collect {|p| [ p.name, p.id ] }, 
-                                                   { }, 
+                                                   { :prompt => "Selecione"}, 
                                                    { :multiple => false, :size => 1, :class => "form-select" }) %>
   </div>
 
+  <label for=""> Serviço:</label>
   <div class="form-group pt-2" id="service_form" style="visibility: hidden">
-    <%= form.label :service_id, value: "Serviço" %>
     <%= form.select(:service_id, Service.all.collect {|p| [ p.title, p.id ] }, 
-                                                   { },                                                    { :multiple => false, :size => 1, :class => "form-select" }) %>
+                                                   { :prompt => "Selecione"},
+                                                   { :multiple => false, :size => 1, :class => "form-select" }) %>
   </div>
 </div>
 
@@ -59,7 +60,7 @@
 <div class="form-group py-2">
   <%= form.select(:part_ids, @parts.collect {|p| [ p.name, p.id ] }, 
                                                    { },
-                                                   { :multiple => true, :class => "form-select" }                                               ) %>
+                                                   { :multiple => true, :class => "form-select" }) %>
 </div>
 
 
