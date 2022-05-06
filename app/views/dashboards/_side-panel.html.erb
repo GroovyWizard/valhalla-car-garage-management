@@ -8,21 +8,22 @@
                 <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
                     <li class="nav-item">
                         <a href="#" class="nav-link align-middle px-0">
-                            <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline">Dashboard</span>
+                            <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline"><%= link_to "Dashboard", dashboards_path %></span>
                         </a>
                     </li>
                     <li>
                         <a href="#submenu1" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
-                            <i class="fs-4 bi-people-fill"></i> <span class="ms-1 d-none d-sm-inline">Clientes</span> </a>
+                            <i class="fs-4 bi-people-fill"></i> <span class="ms-1 d-none d-sm-inline">  <%= link_to "Clientes", client_report_path %> </span>
+                        </a></span> </a>
                         
                     </li>
                     <li>
                         <a href="#" class="nav-link px-0 align-middle">
-                            <i class="fs-4 bi-minecart"></i> <span class="ms-1 d-none d-sm-inline">Veiculos</span></a>
+                            <i class="fs-4 bi-minecart"></i> <span class="ms-1 d-none d-sm-inline"><%= link_to "Veiculos", vehicle_report_path %> </span></a>
                     </li>
                     <li>
                         <a href="#submenu2" data-bs-toggle="collapse" class="nav-link px-0 align-middle ">
-                            <i class="fs-4 bi-hammer"></i> <span class="ms-1 d-none d-sm-inline"> Serviços</span></a>
+                            <i class="fs-4 bi-hammer"></i> <span class="ms-1 d-none d-sm-inline">  <%= link_to "Serviços", service_report_path %> </span></a>
                     </li>
                     <li>
                         <a href="#submenu2" data-bs-toggle="collapse" class="nav-link px-0 align-middle ">
@@ -35,7 +36,7 @@
                     </li>
                     <li>
                         <a href="#" class="nav-link px-0 align-middle">
-                            <i class="fs-4 bi-gear-fill"></i><span class="ms-1 d-none d-sm-inline">Configurações</span> </a>
+                            <i class="fs-4 bi-gear-fill"></i><span class="ms-1 d-none d-sm-inline">  <%= link_to "Configuraçoes", dashboard_path(@dashboard) %></span> </a>
                     </li>
                         </ul>
                 <hr>

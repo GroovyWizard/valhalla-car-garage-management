@@ -1,5 +1,14 @@
 class Dashboard < ApplicationRecord
-   
+    
+    before_save :override_model
+
+    def override_model
+        @first = Dashboard.first
+        if Dashboard.all.count >= 1
+            @first.update_column(:comission_percentage, self.comission_percentage)
+        end 
+    end 
+
     def self.featured_vehicles 
         @vehicles = Vehicle.all
         @featured_vehicles = []

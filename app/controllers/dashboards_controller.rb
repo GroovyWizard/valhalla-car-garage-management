@@ -1,4 +1,4 @@
-class DashboardController < ApplicationController
+class DashboardsController < ApplicationController
      before_action :set_helper_dates
      
      def set_helper_dates
@@ -7,6 +7,7 @@ class DashboardController < ApplicationController
      end
     
      def index
+        @dashboard = Dashboard.first
         @vehicles = Vehicle.last(5).reverse
         @services = Service.last(5).reverse
         @clients = Client.all
@@ -35,5 +36,28 @@ class DashboardController < ApplicationController
         @overdue_services = Dashboard.services_overdue
         @on_time_services = Dashboard.services_done_on_time
     end
+
+    def create 
+       @dashboard = Dashboard.new(dashboard_params)
+       
+       if @dashboard.save 
+            redirect_to action: "index"
+       else 
+            render :new 
+       end 
+    end 
+
+    def new 
+        @dashboard = Dashboard.new
+    end
+    
+    def show
+        @dashboard = Dashboard.first 
+    end
+
+    private  
+        def dashboard_params
+            params.require(:dashboard).permit(:comission_percentage)
+        end 
     
 end
