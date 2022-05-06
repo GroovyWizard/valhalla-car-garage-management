@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_05_04_015938) do
+ActiveRecord::Schema.define(version: 2022_05_06_011555) do
 
   create_table "clients", force: :cascade do |t|
     t.string "name"
@@ -66,6 +66,7 @@ ActiveRecord::Schema.define(version: 2022_05_04_015938) do
     t.integer "service_id"
     t.integer "client_id"
     t.boolean "finished"
+    t.decimal "comission_value"
     t.index ["client_id"], name: "index_sales_on_client_id"
     t.index ["service_id"], name: "index_sales_on_service_id"
   end
