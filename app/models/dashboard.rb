@@ -1,12 +1,8 @@
 class Dashboard < ApplicationRecord
-    
-    before_save :override_model
+    validates :comission_percentage, numericality: { less_than_or_equal_to: 100,  only_integer: true } 
 
-    def override_model
-        @first = Dashboard.first
-        if Dashboard.all.count >= 1
-            @first.update_column(:comission_percentage, self.comission_percentage)
-        end 
+    def self.comission 
+        return Dashboard.first.comission_percentage
     end 
 
     def self.featured_vehicles 

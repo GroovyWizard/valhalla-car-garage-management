@@ -37,6 +37,11 @@ reset:
 	@docker exec valhalla bash -c "rails db:migrate"
 	@docker exec valhalla bash -c "rails db:seed"
 
+migrate: 
+	@echo "Migrating"
+	@docker exec valhalla bash -c "rails db:migrate"
+
+
 npm-sync:
 	@echo "Installing npm packages"
 	@docker exec valhalla bash -c "npm install"

@@ -5,10 +5,12 @@ class DashboardTest < ActiveSupport::TestCase
   #   assert true
   # end
 
-  test "override model" do 
+ test "dashboard should not save if comission is greater than 100" do
+    @dash = Dashboard.create(comission_percentage: 190)
     
-    @first = Dashboard.create(comission_percentage: 12.4)
-    @second = Dashboard.create(comission_percentage: 67.2)
-    assert Dashboard.first.comission_percentage == @second.comission_percentage
-  end 
-end
+    assert_equal false, @dash.save
+ end
+ 
+ 
+
+end  

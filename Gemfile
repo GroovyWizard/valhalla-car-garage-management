@@ -23,6 +23,7 @@ gem 'bootsnap', '>= 1.4.4', require: false
 gem 'devise'
 
 # START ADDED BY ME
+gem 'simple_form'
 gem 'material_icons'
 gem 'faker'
 gem 'cpf_faker', '~> 1.3'

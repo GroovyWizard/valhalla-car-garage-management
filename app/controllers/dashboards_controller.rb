@@ -37,24 +37,27 @@ class DashboardsController < ApplicationController
         @on_time_services = Dashboard.services_done_on_time
     end
 
-    def create 
-       @dashboard = Dashboard.new(dashboard_params)
-       
-       if @dashboard.save 
-            redirect_to action: "index"
-       else 
-            render :new 
-       end 
-    end 
-
-    def new 
-        @dashboard = Dashboard.new
+    def edit 
+        @dashboard = Dashboard.first 
     end
     
     def show
+        @comission_raw  = Dashboard.first.comission_percentage
+        @comission = @comission_raw/100.0 
         @dashboard = Dashboard.first 
     end
 
+    def update 
+        @dashboard = Dashboard.first
+       
+        if @dashboard.update(dashboard_params)
+             redirect_to @dashboard
+        else 
+             render :edit 
+        end 
+    end 
+
+   
     private  
         def dashboard_params
             params.require(:dashboard).permit(:comission_percentage)

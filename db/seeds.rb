@@ -17,6 +17,11 @@
     admin.save()
 end
 
+1.times do 
+    dashboard = Dashboard.new 
+    dashboard.comission_percentage = 10
+    dashboard.save()
+end 
 
 50.times do 
     name = Faker::Name.name

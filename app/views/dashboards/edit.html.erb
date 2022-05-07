@@ -1,0 +1,10 @@
+<%= render "side-panel" %>
+<main class="container">
+  <h1> Alterar Configuração de Porcentagem da Comissão</h1>
+
+  <%= simple_form_for @dashboard do |f| %>
+    <%= f.input :comission_percentage, value: "Comissão" %>
+    <%= f.button :submit, class: "btn btn-primary" %>
+  <% end %>
+
+</main>

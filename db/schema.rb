@@ -24,7 +24,7 @@ ActiveRecord::Schema.define(version: 2022_05_06_011555) do
   create_table "dashboards", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.decimal "comission_percentage"
+    t.integer "comission_percentage"
   end
 
   create_table "installs", force: :cascade do |t|

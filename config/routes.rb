@@ -29,10 +29,7 @@ Rails.application.routes.draw do
    end
    
    resources :dashboards
-   get '/dashboard/report/client' => 'dashboard#client_report', as: 'client_report'
-   get '/dashboard/vehicle/client' => 'dashboard#vehicle_report', as: 'vehicle_report'
-   get '/dashboard/service/client' => 'dashboard#service_report', as: 'service_report'
-   get '/dashboard/parser/vehicle' => 'dashboard#vehicle_excel_parser', as: 'vehicle_excel_parser'      
- 
-
+   get '/dashboards/report/client' => 'dashboards#client_report', as: 'client_report'
+   get '/dashboards/vehicle/client' => 'dashboards#vehicle_report', as: 'vehicle_report'
+   get '/dashboards/service/client' => 'dashboards#service_report', as: 'service_report'
 end
