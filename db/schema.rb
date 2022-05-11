@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_05_06_011555) do
+ActiveRecord::Schema.define(version: 2022_05_11_193038) do
 
   create_table "clients", force: :cascade do |t|
     t.string "name"
@@ -67,8 +67,10 @@ ActiveRecord::Schema.define(version: 2022_05_06_011555) do
     t.integer "client_id"
     t.boolean "finished"
     t.decimal "comission_value"
+    t.integer "user_id"
     t.index ["client_id"], name: "index_sales_on_client_id"
     t.index ["service_id"], name: "index_sales_on_service_id"
+    t.index ["user_id"], name: "index_sales_on_user_id"
   end
 
   create_table "services", force: :cascade do |t|

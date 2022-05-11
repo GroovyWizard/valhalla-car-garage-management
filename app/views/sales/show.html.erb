@@ -1,4 +1,9 @@
 <p id="notice"><%= notice %></p>
+
+<p>
+  <strong> Feito por: </strong>
+  <%= @sale.user.name %>
+</p>
 <p>
   <strong>Name:</strong>
   <%= @sale.name %>
@@ -8,8 +13,13 @@
   <%= @sale.description %>
 </p>
 <p>
-  <strong>Value:</strong>
+  <strong>Valor:</strong>
   <%= @sale.value %>
+</p>
+
+<p> 
+  <strong> Valor da Comissão: </strong>
+  <%= @sale.comission_value %>
 </p>
 
 <% if @sale.service %>
@@ -35,5 +45,8 @@
   </tbody>
 </table>
 
+<p>
+  <strong class="display-4"> Valor total: <%= @sale.comission_value + @sale.value %> </strong>
+</p>
 <%= link_to 'Edit', edit_sale_path(@sale) %> |
 <%= link_to 'Back', sales_path %>

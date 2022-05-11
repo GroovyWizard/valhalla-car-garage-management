@@ -4,7 +4,8 @@ class Sale < ApplicationRecord
     
     belongs_to :client, optional: true
     belongs_to :service, optional: true    
-    
+    belongs_to :user 
+
     after_initialize :set_defaults
     after_initialize :received_part_ids
     after_initialize :received_relation_with_parent_model
