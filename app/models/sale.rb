@@ -10,7 +10,7 @@ class Sale < ApplicationRecord
     after_initialize :received_part_ids
     after_initialize :received_relation_with_parent_model
     after_initialize :synchronize_total_value 
-    
+    before_save :infer_sale_name 
     scope :from_this_month, lambda { 
       where("sales.created_at > ? AND sales.created_at < ?", 
       Time.now.beginning_of_month, Time.now.end_of_month) }
@@ -23,8 +23,6 @@ class Sale < ApplicationRecord
     def synchronize_total_value
         if self.parts.count > 0 
          self.value = SaleValueUpdater.calculate_total_value(self) 
-        else 
-          puts("This sale has no parts.")
         end 
     end
     
@@ -42,4 +40,9 @@ class Sale < ApplicationRecord
       end 
     end
     
+    def infer_sale_name 
+      @date = Date.today 
+      @sale_for_who = self.client ? self.client.name : self.service.name
+      self.name = 'Orçamento para ' + @sale_for_who + ' - ' + @date.to_s  
+    end
 end
