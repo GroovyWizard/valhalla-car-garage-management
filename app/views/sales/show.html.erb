@@ -48,5 +48,9 @@
 <p>
   <strong class="display-4"> Valor total: <%= @sale.comission_value + @sale.value %> </strong>
 </p>
+
+<%= link_to 'GERAR PDF', sale_path(@sale, format: :pdf), class: 'btn btn-primary' %>
+
+
 <%= link_to 'Edit', edit_sale_path(@sale) %> |
 <%= link_to 'Back', sales_path %>

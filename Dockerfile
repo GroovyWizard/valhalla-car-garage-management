@@ -12,6 +12,7 @@ RUN gem update && gem install rails && gem install bundler
 ADD . /valhalla
 WORKDIR /valhalla
 RUN bundle install
+RUN rails webpacker:install
 EXPOSE 3000
 
 CMD ["bash"]
