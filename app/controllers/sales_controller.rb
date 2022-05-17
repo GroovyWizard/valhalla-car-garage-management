@@ -8,8 +8,6 @@ class SalesController < ApplicationController
 
   # GET /sales/1 or /sales/1.json
   def show
-    
-
     respond_to do |format|
         format.html
         format.pdf do
@@ -33,6 +31,7 @@ end
 
   # GET /sales/1/edit
   def edit
+    @parts = Part.all
   end
 
   # POST /sales or /sales.json

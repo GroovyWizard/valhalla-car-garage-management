@@ -45,4 +45,9 @@ class Sale < ApplicationRecord
       @sale_for_who = self.client ? self.client.name : self.service.name
       self.name = 'Orçamento para ' + @sale_for_who + ' - ' + @date.to_s  
     end
+
+    def get_total_value 
+      @total_value = self.value + self.comission_value
+      return @total_value
+    end 
 end
