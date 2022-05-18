@@ -5,6 +5,17 @@ class SaleTest < ActiveSupport::TestCase
   #   assert true
   # end
 
+  test "comission value should be correctly calculated based on the parameter set by the admin inside dashboard" do 
+    Dashboard.create(id:1, comission_percentage: 10)
+    @client = Client.create(name: 'josefumi', document: 'shahsjajhs'  )
+    @user = User.create(name: 'josi', password: 'ronalde' )
+    @sale = Sale.create(name: "Test sale", client: @client, user: @user)
+    @part2 = Part.create(name: "Test part2", value: 80.0)
+    @sale_part_join = SalePart.create(sale: @sale, part: @part2)
+    @final_sale = Sale.find(@sale.id).comission_value
+    assert_equal 8.0,  @final_sale
+  end 
+
   test "sale value should be changed when sale object is updated" do
     @client = Client.create(name: 'josefumi', document: 'shahsjajhs'  )
     @user = User.create(name: 'josi', password: 'ronalde' )
@@ -27,7 +38,7 @@ class SaleTest < ActiveSupport::TestCase
     @user = User.create(name: 'josi', password: 'ronalde' )
     @client = Client.create(name: 'josefumi', document: 'shahsjajhs'  )
     @sale = Sale.create(client: @client, user: @user) 
-    assert_equal 'Orçamento para josefumi - 2022-05-11',  @sale.name
+    assert_equal true, @sale.name.start_with?('Orçamento para josefumi - 2022-05-11') 
   end
 
 end

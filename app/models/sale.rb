@@ -10,6 +10,7 @@ class Sale < ApplicationRecord
     after_initialize :received_part_ids
     after_initialize :received_relation_with_parent_model
     after_initialize :synchronize_total_value 
+    after_initialize :calculate_comission 
     before_save :infer_sale_name 
     scope :from_this_month, lambda { 
       where("sales.created_at > ? AND sales.created_at < ?", 
@@ -19,6 +20,11 @@ class Sale < ApplicationRecord
     def set_defaults
       self.value ||= 0.0
     end
+    
+    def calculate_comission  
+        comission_percentage = Dashboard.comission ? Dashboard.comission : 0.0 
+        self.comission_value = comission_percentage / 100.0 * self.value
+    end 
 
     def synchronize_total_value
         if self.parts.count > 0 
