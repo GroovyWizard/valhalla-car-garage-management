@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+  has_many :sales 
+
   enum role: {owner: 0, worker: 1, admin: 2 } 
   
   devise :database_authenticatable, :registerable,

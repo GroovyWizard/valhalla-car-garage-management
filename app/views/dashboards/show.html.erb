@@ -1,7 +1,7 @@
 <%= render "side-panel" %>
 
 <main class="Container">
-    <h1> Paramêtros configuráveis </h1>
+    <h1> Parâmetros configuráveis </h1>
     <p> Nesta página você poderá acessar configurações de regras de negócio, regidas pelo Administrador </p>
     <h2> Insira aqui a porcentagem de comissão que será empregada nos orçamentos </h2>
     <div class="row my-4">
@@ -9,7 +9,7 @@
             <div class="card text-center">
                 <h5 class="card-header" style="font-size: 18px"> Porcentagem de Comissão  </h5>
                 <div class="card-body">
-                    <h5 class="card-title"><%= @comission %></h5>
+                    <h5 class="card-title"><%= @comission * 100 %> % </h5>
                     <%= link_to "Alterar", edit_dashboard_path(@dashboard), class: "btn btn-lg btn-warning my-2 mr-5" %>
                 </div>
             </div>
