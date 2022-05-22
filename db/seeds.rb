@@ -24,7 +24,7 @@ end
 end 
 
 50.times do 
-    name = Faker::Name.name
+    name = Faker::Games::WorldOfWarcraft.hero
     document = Faker::CPF.pretty
     phone = Faker::PhoneNumber.area_code #=> "201"
     address = Faker::Address.full_address

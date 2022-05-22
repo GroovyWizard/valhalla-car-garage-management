@@ -13,7 +13,7 @@ class DashboardsController < ApplicationController
         @clients = Client.all
         @clients_recent = Client.last(5).reverse
 
-        @sale_value_this_month = 300
+        @sale_value_this_month = Dashboard.comission_value_this_month
         @total_sales_this_month = Dashboard.total_sales_this_month 
         @overdue_services = Dashboard.services_overdue.count
     end

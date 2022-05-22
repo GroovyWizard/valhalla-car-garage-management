@@ -1,7 +1,7 @@
 <div class="row my-4">
                     <div class="col-12 col-md-6 col-lg-3 mb-4 mb-lg-0">
                         <div class="card text-center">
-                            <h5 class="card-header" style="font-size: 18px">Valor Total de Orçamentos deste mes (TODO) </h5>
+                            <h5 class="card-header" style="font-size: 18px">Valor Total de Orçamentos deste mes </h5>
                             <div class="card-body">
                               <h5 class="card-title"> R$ <%= @total_sales_this_month %></h5>
                               <p class="card-text fw-bold"><%= @month_first_day %> -- <%= @month_last_day %></p>
@@ -20,11 +20,23 @@
                     </div>
                     <div class="col-12 col-md-6 mb-4 mb-lg-0 col-lg-3">
                         <div class="card text-center">
-                            <h5 class="card-header">Serviços concluidos no prazo</h5>
+                            <h5 class="card-header">Serviços concluidos no prazo este mes</h5>
                             <div class="card-body">
-                              <h5 class="card-title"><%= @on_time_services %></h5>
+                              <h5 class="card-title"><%= @on_time_services ||= 0 %></h5>
                               <p class="card-text fw-bold"><%= @month_first_day %> -- <%= @month_last_day %></p>
                             </div>
                         </div>
                     </div>
                 </div>
+
+<div class='row my-4'>
+                    <div class="col-12 col-md-12 w-75 mb-4 align-items-center">
+                        <div class="card text-center border border-danger">
+                            <h5 class="card-header border border-danger" style="font-size: 18px"> Porcentagem da Comissão de Orçamento </h5>
+                            <div class="card-body">
+                              <h5 class="card-title fw-bold"> <%= Dashboard.comission %> % </h5>
+                              <a class='btn btn-danger' href='/dashboards/1'> Configurar  </a>
+                            </div>
+                          </div>
+                    </div>
+</div>
