@@ -52,8 +52,11 @@ class Sale < ApplicationRecord
       self.name = 'Orçamento para ' + @sale_for_who + ' - ' + @date.to_s  
     end
 
-    def get_total_value 
-      @total_value = self.value + self.comission_value
+    def get_total_value
+      
+      
+      @total_value = self.comission_value + self.value + (self.service ? self.service.value : 0 ) 
+      
       return @total_value
     end 
 end

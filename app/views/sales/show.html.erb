@@ -53,7 +53,7 @@
 </table>
 
 <p>
-  <strong class="display-4"> Valor total: <%= @sale.comission_value + @sale.value + (@sale.service ? @sale.service.value : 0 )%> </strong>
+  <strong class="display-4"> Valor total: <%= @sale.get_total_value() %> </strong>
 </p>
 
 
