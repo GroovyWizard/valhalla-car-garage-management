@@ -23,6 +23,13 @@
 </p>
 
 <% if @sale.service %>
+  <p>
+    Valor da mão de obra: 
+    <%= @sale.service.value %>
+  </p>
+<% end %>
+
+<% if @sale.service %>
 <p> 
   <strong> Serviço associado a venda:</strong>
   <%= link_to @sale.service.title, service_path(@sale.service.id) %>
@@ -46,8 +53,9 @@
 </table>
 
 <p>
-  <strong class="display-4"> Valor total: <%= @sale.comission_value + @sale.value %> </strong>
+  <strong class="display-4"> Valor total: <%= @sale.comission_value + @sale.value + (@sale.service ? @sale.service.value : 0 )%> </strong>
 </p>
+
 
 <%= link_to 'GERAR PDF', sale_path(@sale, format: :pdf), class: 'btn btn-primary' %>
 

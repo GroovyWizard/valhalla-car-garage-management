@@ -48,7 +48,7 @@ class Sale < ApplicationRecord
     
     def infer_sale_name 
       @date = Date.today 
-      @sale_for_who = self.client ? self.client.name : self.service.name
+      @sale_for_who = self.client ? self.client.name : self.service.title
       self.name = 'Orçamento para ' + @sale_for_who + ' - ' + @date.to_s  
     end
 
