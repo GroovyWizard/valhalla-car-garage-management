@@ -51,9 +51,9 @@
 
 <label for=""> Peças:</label>
 <div class="form-group py-2">
-  <%= form.select(:part_ids, @parts.collect {|p| [ p.name, p.id ] }, 
+  <%= form.select(:part_ids, @parts.collect {|p| [ p.name + " -  R$ " + p.value.to_s + " - " + p.model ,  p.id ] }, 
                                                    { },
-                                                   { :multiple => true, :class => "form-select" }) %>
+                                                   { :multiple => true,  :class => "form-select border border-dark p-5" }) %>
 </div>
 
 <label for=""> Valor Total Estimado: </label>
@@ -69,7 +69,7 @@
   var clientVisibility;
   var client = document.getElementById('client')
   var service = document.getElementById('service')
-
+  $('select').selectpicker();
   function changeVisibility() {
     document.getElementById('service_form').style.visibility = serviceVisibility;
     document.getElementById('client_form').style.visibility = clientVisibility;
