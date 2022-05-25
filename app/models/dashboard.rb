@@ -53,7 +53,7 @@ class Dashboard < ApplicationRecord
   end
 
   def self.clients_registered_this_month
-    Client.from_this_month
+    Client.from_this_month.limit(10).reverse()
   end
 
   def self.total_sales_this_month

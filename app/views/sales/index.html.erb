@@ -17,16 +17,36 @@
 </table>
 
 
-<%= link_to 'New Sale', new_sale_path %>
+<%= link_to "New Sale", new_sale_path %>
 
 
 <script type="text/javascript">
   $(document).ready( function() {
+           var jsondata;
+           getdata();
+           function getdata(){
+              const getPeople = async () => {
+               const data = await fetch('http://127.0.0.1:3000/sales.json', {
+                  method: 'GET',
+                  headers: {
+                      'Content-Type': 'application/json',                                  
+                  }
+               });
+               await initialiseTable()
+               };
+             getPeople();
+           }
+
+  });
+
+      function initialiseTable(){
+ 
   $('#sales-datatable').dataTable({
       "processing": true,
       "serverSide": true,
+      "bDestroy": true,
       "ajax": {
-        "url": $('#sales').data('source')
+      "url": $('#sales-datatable').data('source')
       },
       "pagingType": "full_numbers",
       "columns": [
@@ -37,6 +57,6 @@
         {"data": "created_at"}
       ]
     });
+      }
 
-        });
 </script>

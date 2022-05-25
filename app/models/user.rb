@@ -28,7 +28,6 @@ class User < ApplicationRecord
       .left_joins(:sales)
       .group(:id)
       .order("COUNT(sales.id) DESC")
-
     return @users_by_sale
   end
 

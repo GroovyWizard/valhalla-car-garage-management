@@ -23,6 +23,7 @@ class Sale < ApplicationRecord
 
     def set_defaults
       self.value ||= 0.0
+      self.finished ||= false
     end
     
     def calculate_comission  
@@ -62,6 +63,9 @@ class Sale < ApplicationRecord
       return @total_value
     end 
 
+    def parsed_finished
+      return self.finished == false ? "Aberto" : "Encerrado"
+    end 
     
     def created_at_normalized
         return Date.parse(self.created_at.to_s)

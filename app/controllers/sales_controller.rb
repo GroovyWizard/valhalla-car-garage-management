@@ -76,6 +76,14 @@ end
     end
   end
 
+  def finish_sale
+        @sale = Sale.find(params[:id])
+        @sale.update(finished: true, finish_date: DateTime.now())
+        flash[:notice] = "Orçamento encerrado com sucesso!"
+        redirect_to sale_path(@sale)
+  end
+
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_sale
