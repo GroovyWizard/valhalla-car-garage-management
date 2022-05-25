@@ -38,7 +38,7 @@ class SaleTest < ActiveSupport::TestCase
     @user = User.create(name: 'josi', password: 'ronalde' )
     @client = Client.create(name: 'josefumi', document: 'shahsjajhs'  )
     @sale = Sale.create(client: @client, user: @user) 
-    assert_equal true, @sale.name.start_with?('Orçamento para josefumi - 2022-05-11') 
+    assert_equal true, @sale.name.start_with?('Orçamento para josefumi') 
   end
 
   test 'sale should have the correct total value when it has a service' do 
