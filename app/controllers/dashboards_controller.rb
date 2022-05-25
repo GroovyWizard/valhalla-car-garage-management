@@ -37,6 +37,16 @@ class DashboardsController < ApplicationController
         @on_time_services = Dashboard.services_done_on_time
     end
 
+    def sale_report 
+        @sales = Sale.all 
+    end 
+
+    def user_report 
+        @users = User.all 
+        @users_by_sale = User.users_by_sale 
+        return @users_by_sale ? @users_by_sale.length > 1 : [@users_by_sale]
+    end 
+
     def edit 
         @dashboard = Dashboard.first 
     end

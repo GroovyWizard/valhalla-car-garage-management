@@ -32,4 +32,6 @@ Rails.application.routes.draw do
    get '/dashboards/report/client' => 'dashboards#client_report', as: 'client_report'
    get '/dashboards/vehicle/client' => 'dashboards#vehicle_report', as: 'vehicle_report'
    get '/dashboards/service/client' => 'dashboards#service_report', as: 'service_report'
+   get '/dashboards/sales/client' => 'dashboards#sale_report', as: 'sale_report'
+   get '/dashboards/report/user' => 'dashboards#user_report', as: 'user_report'
 end

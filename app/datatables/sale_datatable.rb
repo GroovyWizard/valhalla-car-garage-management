@@ -9,9 +9,7 @@ class SaleDatatable < AjaxDatatablesRails::ActiveRecord
     }
   end
   
-  def get_raw_records
-    Sale.all
-  end
+  
 
   def data
     records.map do |record|
@@ -24,6 +22,10 @@ class SaleDatatable < AjaxDatatablesRails::ActiveRecord
         DT_RowId: record.id,
       }
     end
+  end
+
+  def get_raw_records
+    Sale.all
   end
 
   

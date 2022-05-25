@@ -62,9 +62,9 @@ class Sale < ApplicationRecord
       return @total_value
     end 
 
+    
     def created_at_normalized
-      return Date.parse(self.created_at.to_s)
+        return Date.parse(self.created_at.to_s)
     end 
-
    
 end
