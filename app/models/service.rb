@@ -31,4 +31,8 @@ class Service < ApplicationRecord
         end
     end
 
+    def identification_string
+        return "Servico ( ID: "+  self.id.to_s + " ) " + self.title
+    end 
+
 end

@@ -53,10 +53,10 @@ class Sale < ApplicationRecord
     end
 
     def get_total_value
-      
-      
       @total_value = self.comission_value + self.value + (self.service ? self.service.value : 0 ) 
       
       return @total_value
     end 
+
+   
 end

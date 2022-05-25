@@ -3,7 +3,10 @@ class SalesController < ApplicationController
 
   # GET /sales or /sales.json
   def index
-    @sales = Sale.all
+    respond_to do |format|
+      format.html 
+      format.json { render json: SaleDatatable.new(params) }
+    end 
   end
 
   # GET /sales/1 or /sales/1.json
@@ -13,7 +16,7 @@ class SalesController < ApplicationController
         format.pdf do
             render pdf: "Invoice No. ",
             page_size: 'A4',
-            template: "sales/show.html.erb",
+            template: "sales/pdf.html.erb",
             layout: "pdf.html.erb",
             orientation: "Landscape",
             lowquality: true,
