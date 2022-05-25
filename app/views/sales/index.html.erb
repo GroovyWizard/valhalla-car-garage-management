@@ -9,13 +9,12 @@
       <th>Titulo</th>
       <th>Descricao</th>
       <th>Valor Total</th>
+      <th>Data de Crição</th>
     </tr>
   </thead>
   <tbody>
   </tbody>
 </table>
-
-
 
 
 <%= link_to 'New Sale', new_sale_path %>
@@ -35,6 +34,7 @@
         {"data": "name"},
         {"data": "description"},
         {"data": "value"},
+        {"data": "created_at"}
       ]
     });
 

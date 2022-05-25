@@ -5,6 +5,7 @@ class SaleDatatable < AjaxDatatablesRails::ActiveRecord
       name: { source: "Sale.name", searchable: true, orderable: true },
       description: { source: "Sale.description",  searchable: true, orderable: true },
       value: { source: "Sale.value" , orderable: true },
+      created_at: { source: "Sale.created_at", orderable:true, searchable:true}
     }
   end
   
@@ -19,6 +20,7 @@ class SaleDatatable < AjaxDatatablesRails::ActiveRecord
         name: record.decorate.link_to,
         description: record.description,
         value: record.get_total_value,
+        created_at: record.created_at_normalized,
         DT_RowId: record.id,
       }
     end
