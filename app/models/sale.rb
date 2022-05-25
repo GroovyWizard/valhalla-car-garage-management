@@ -1,4 +1,8 @@
+require "time"
+require "date"
+
 class Sale < ApplicationRecord
+    
     has_many :sale_part  
     has_many :parts, through: :sale_part
     
@@ -53,10 +57,14 @@ class Sale < ApplicationRecord
     end
 
     def get_total_value
-      
-      
       @total_value = self.comission_value + self.value + (self.service ? self.service.value : 0 ) 
       
       return @total_value
     end 
+
+    def created_at_normalized
+      return Date.parse(self.created_at.to_s)
+    end 
+
+   
 end

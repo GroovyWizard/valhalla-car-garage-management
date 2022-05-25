@@ -1,0 +1,45 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong> Colaborador que efetuou o orcamento: </strong>
+  <%= @sale.user.name %>
+</p>
+<p>
+  <strong>Identificacao Geral:</strong>
+  <%= @sale.name %>
+</p>
+<p>
+  <strong>Observacoes:</strong>
+  <%= @sale.description %>
+</p>
+
+<% if @sale.service %>
+ <p>
+    Valor da mao de obra (Servico): 
+    <%= @sale.service.value %>
+  </p>
+<p> 
+  <strong> Serviço associado ao orcamento:</strong>
+  <%= link_to @sale.service.identification_string, service_path(@sale.service.id) %>
+</p>
+<% elsif @sale.client %>
+<p> 
+  <strong> Cliente associado a venda:</strong>
+  <%= link_to @sale.client.name, client_path(@sale.client.id) %>
+</p>
+<% end %>
+
+<h2 class="text-center p-2"> Pecas desta venda: </h2>
+<table>
+  <tbody>
+    <% @sale.parts.each do |part| %>
+      <% if part %>
+        <%= part.name %>
+      <% end %>
+    <% end %>
+  </tbody>
+</table>
+
+<p>
+  <strong class="display-4"> Valor Total: <%= @sale.get_total_value %> </strong>
+</p>

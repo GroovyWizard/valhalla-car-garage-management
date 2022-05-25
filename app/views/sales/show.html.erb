@@ -1,5 +1,5 @@
 <p id="notice"><%= notice %></p>
-
+<h2 class="text-center"> Visualizar Orçamento  </h2>
 <p>
   <strong> Feito por: </strong>
   <%= @sale.user.name %>
@@ -13,7 +13,7 @@
   <%= @sale.description %>
 </p>
 <p>
-  <strong>Valor:</strong>
+  <strong>Valor das peças:</strong>
   <%= @sale.value %>
 </p>
 
@@ -42,23 +42,45 @@
 <% end %>
 
 <h2 class="text-center p-2"> Peças desta venda: </h2>
-<table>
+<table class="table">
+  <thead> 
+    <tr>
+      <th scope="col"> # </th>
+      <th scope="col"> Nome </th>
+      <th scope="col"> Modelo  </th>
+      <th scope="col"> Valor </th>
+    </tr>
+  </thead>
   <tbody>
     <% @sale.parts.each do |part| %>
+      <tr>
       <% if part %>
-        <%= part.name %>
+
+        <td>
+          <%= part.id %>
+        </td>
+        <td>
+          <%= link_to part.name, part_path(part) %>
+        </td>
+        <td>
+          <%= part.model %>
+        </td>
+        <td>
+          <%= part.value %>
+        </td>
       <% end %>
+      </tr>
     <% end %>
   </tbody>
 </table>
 
 <p>
-  <strong class="display-4"> Valor total: <%= @sale.get_total_value() %> </strong>
+  <strong class="display-4 text-danger"> Valor total: <%= @sale.get_total_value() %> </strong>
 </p>
 
-
-<%= link_to 'GERAR PDF', sale_path(@sale, format: :pdf), class: 'btn btn-primary' %>
-
-
-<%= link_to 'Edit', edit_sale_path(@sale) %> |
-<%= link_to 'Back', sales_path %>
+ <%= link_to sale_path(@sale, format: :pdf) do  %> 
+  <i class="bi bi-filetype-pdf " style="font-size: 40px"></i>
+ <% end %> |
+<%= link_to "Deletar", sale_path(@sale), method: :delete%> |
+<%= link_to 'Editar', edit_sale_path(@sale) %> |
+<%= link_to 'Voltar', sales_path %> |
