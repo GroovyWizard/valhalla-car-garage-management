@@ -6,8 +6,8 @@ jobs:
    
     steps:
       - uses: actions/checkout@v1
-      - name: Setup Ruby
-        uses: actions/setup-ruby@v1
+      - name: Ruby Setup
+        uses: ruby/setup-ruby@v1
         with:
           ruby-version: 3.0.3
       - uses: borales/actions-yarn@v2.3.0
