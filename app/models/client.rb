@@ -1,5 +1,6 @@
 class Client < ApplicationRecord
     has_many :vehicles, dependent: :destroy
+    has_many :sales 
     validates :name, presence:true
     validates :document, presence:true, uniqueness:true
     scope :from_this_month, lambda { 

@@ -1,7 +1,8 @@
 class VehiclesController < ApplicationController
 
     def index
-        @vehicles = Vehicle.order('created_at DESC').paginate(page: params[:page], per_page: 10)
+        @vehicles = Vehicle.order('created_at DESC').page params[:page]
+        
     end
 
     def show

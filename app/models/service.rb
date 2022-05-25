@@ -2,7 +2,7 @@ class Service < ApplicationRecord
     has_many :tasks, dependent: :destroy
     has_one :sale
     belongs_to :vehicle
-
+    
     validates :title, presence: true
     validates :value, presence: true
     validates :vehicle_id, presence: true
@@ -30,5 +30,9 @@ class Service < ApplicationRecord
             return "Não concluida"
         end
     end
+
+    def identification_string
+        return "Servico ( ID: "+  self.id.to_s + " ) " + self.title
+    end 
 
 end

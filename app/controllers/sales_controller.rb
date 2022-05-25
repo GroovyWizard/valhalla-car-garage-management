@@ -3,12 +3,28 @@ class SalesController < ApplicationController
 
   # GET /sales or /sales.json
   def index
-    @sales = Sale.all
+    respond_to do |format|
+      format.html 
+      format.json { render json: SaleDatatable.new(params) }
+    end 
   end
 
   # GET /sales/1 or /sales/1.json
   def show
-  end
+    respond_to do |format|
+        format.html
+        format.pdf do
+            render pdf: "Invoice No. ",
+            page_size: 'A4',
+            template: "sales/pdf.html.erb",
+            layout: "pdf.html.erb",
+            orientation: "Landscape",
+            lowquality: true,
+            zoom: 1,
+            dpi: 75
+        end
+    end
+end
 
   # GET /sales/new
   def new
@@ -18,11 +34,14 @@ class SalesController < ApplicationController
 
   # GET /sales/1/edit
   def edit
+    @parts = Part.all
   end
 
   # POST /sales or /sales.json
   def create
     @sale = Sale.new(sale_params)
+    @user = current_user
+    @sale.user_id = @user.id 
     respond_to do |format|
       if @sale.save
         format.html { redirect_to sale_url(@sale), notice: "Sale was successfully created." }
@@ -65,6 +84,6 @@ class SalesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def sale_params
-      params.require(:sale).permit(:name, :description, :value, part_ids: [])
+      params.require(:sale).permit(:name, :description, :value, :comission_value, :service_id, :client_id, :user_id, part_ids: [])
     end
 end

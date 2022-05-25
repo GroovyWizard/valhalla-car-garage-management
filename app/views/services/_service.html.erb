@@ -5,6 +5,7 @@
             <td> <%= service.value %></td>
             <td> <%= service.vehicle.model %> </td>
             <td> <%= service.vehicle.client.name %> </td>
+            <td> <%= link_to 'Orçamento', sale_path(service.sale) %>  </td>
             <td> <%= link_to "Tarefas", service, class: "btn btn-md btn-primary my-2" %></td> 
             <td> <%= link_to "Deletar", service_path(service), class: "btn btn-md btn-danger my-2", 
                                                                       method: :delete, 

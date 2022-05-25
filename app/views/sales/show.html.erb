@@ -1,4 +1,9 @@
 <p id="notice"><%= notice %></p>
+<h2 class="text-center"> Visualizar Orçamento  </h2>
+<p>
+  <strong> Feito por: </strong>
+  <%= @sale.user.name %>
+</p>
 <p>
   <strong>Name:</strong>
   <%= @sale.name %>
@@ -8,20 +13,74 @@
   <%= @sale.description %>
 </p>
 <p>
-  <strong>Value:</strong>
+  <strong>Valor das peças:</strong>
   <%= @sale.value %>
 </p>
 
+<p> 
+  <strong> Valor da Comissão: </strong>
+  <%= @sale.comission_value %>
+</p>
+
+<% if @sale.service %>
+  <p>
+    Valor da mão de obra: 
+    <%= @sale.service.value %>
+  </p>
+<% end %>
+
+<% if @sale.service %>
+<p> 
+  <strong> Serviço associado a venda:</strong>
+  <%= link_to @sale.service.title, service_path(@sale.service.id) %>
+</p>
+<% elsif @sale.client %>
+<p> 
+  <strong> Cliente associado a venda:</strong>
+  <%= link_to @sale.client.name, client_path(@sale.client.id) %>
+</p>
+<% end %>
+
 <h2 class="text-center p-2"> Peças desta venda: </h2>
-<table>
+<table class="table">
+  <thead> 
+    <tr>
+      <th scope="col"> # </th>
+      <th scope="col"> Nome </th>
+      <th scope="col"> Modelo  </th>
+      <th scope="col"> Valor </th>
+    </tr>
+  </thead>
   <tbody>
     <% @sale.parts.each do |part| %>
+      <tr>
       <% if part %>
-        <%= part.name %>
+
+        <td>
+          <%= part.id %>
+        </td>
+        <td>
+          <%= link_to part.name, part_path(part) %>
+        </td>
+        <td>
+          <%= part.model %>
+        </td>
+        <td>
+          <%= part.value %>
+        </td>
       <% end %>
+      </tr>
     <% end %>
   </tbody>
 </table>
 
-<%= link_to 'Edit', edit_sale_path(@sale) %> |
-<%= link_to 'Back', sales_path %>
+<p>
+  <strong class="display-4 text-danger"> Valor total: <%= @sale.get_total_value() %> </strong>
+</p>
+
+ <%= link_to sale_path(@sale, format: :pdf) do  %> 
+  <i class="bi bi-filetype-pdf " style="font-size: 40px"></i>
+ <% end %> |
+<%= link_to "Deletar", sale_path(@sale), method: :delete%> |
+<%= link_to 'Editar', edit_sale_path(@sale) %> |
+<%= link_to 'Voltar', sales_path %> |

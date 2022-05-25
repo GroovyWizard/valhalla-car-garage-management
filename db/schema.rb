@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_04_28_021224) do
+ActiveRecord::Schema.define(version: 2022_05_18_003516) do
 
   create_table "clients", force: :cascade do |t|
     t.string "name"
@@ -24,6 +24,7 @@ ActiveRecord::Schema.define(version: 2022_04_28_021224) do
   create_table "dashboards", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "comission_percentage"
   end
 
   create_table "installs", force: :cascade do |t|
@@ -43,6 +44,7 @@ ActiveRecord::Schema.define(version: 2022_04_28_021224) do
     t.float "value"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "model"
   end
 
   create_table "sale_parts", force: :cascade do |t|
@@ -58,13 +60,17 @@ ActiveRecord::Schema.define(version: 2022_04_28_021224) do
   create_table "sales", force: :cascade do |t|
     t.string "name"
     t.string "description"
-    t.float "value"
+    t.decimal "value", precision: 3, scale: 2
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "service_id"
     t.integer "client_id"
+    t.boolean "finished"
+    t.decimal "comission_value", precision: 3, scale: 2
+    t.integer "user_id"
     t.index ["client_id"], name: "index_sales_on_client_id"
     t.index ["service_id"], name: "index_sales_on_service_id"
+    t.index ["user_id"], name: "index_sales_on_user_id"
   end
 
   create_table "services", force: :cascade do |t|

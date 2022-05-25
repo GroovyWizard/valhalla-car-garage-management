@@ -1,6 +1,11 @@
 /*
 *= require material_icons
 */
+
+ @font-face {
+    font-family: 'norse';
+    src: url('norse.otf');
+    }  
 .digg_pagination {
     background: white;
     cursor: default;

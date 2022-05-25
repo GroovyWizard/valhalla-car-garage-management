@@ -1,28 +1,76 @@
-<div class="dropdown mx-auto">
-  <button class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    <i class="material-icons"> account_circle </i>
-  </button>
-  <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-    <div class="dropdown">
+<style>
+  .dropbtn {
+    background-color: gray;
+    color: white;
+    padding: 12px;
+    font-size: 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    border: 2px black;
+  }
+  
+  .dropdown-user {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .dropdown-content-user {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 240px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+  }
+  
+  .dropdown-content-user button {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+  }
+  
+  .dropdown-content-user button:hover {background-color: #f1f1f1}
+  
+  .dropdown-user:hover .dropdown-content-user {
+    display: block;
+  }
+  
+  .dropdown-user:hover .dropbtn {
+    background-color: orange;
+  }
+  </style>
+
+
+
+<div class="dropdown-user">
+    <p> 
+      <button class="dropbtn">
+        <i class="material-icons">account_circle</i>
+      </button>
+    </p>
+    <div class="dropdown-content-user">
       <% if user_signed_in? %>
-        <strong class="dropdown-item"> Usuário: <%= current_user.name %> (<%= current_user.parsed_role%>) </strong>
-        <p class="dropdown-item">
-          <%if current_user.is_admin %>
-            <%= link_to "Dashboard" %>
-            <br>
-          <% end %>
-          <%= link_to 'Editar Perfil', edit_user_registration_path, :class => 'navbar-link' %>
-          <br>
-          <%= link_to "Sair", destroy_user_session_path, method: :delete, :class => 'navbar-link'  %>
-        </p>
-      <% else %>
-        <div class="dropdown-divider"> </div>
-        <p class="dropdown-item">
+      <strong class="text-black"> <%= current_user.name %> (<%= current_user.parsed_role %>) </strong>
+      <button class="dropdown-item" >
+        <% if current_user.is_admin %>
+           <a href="/dashboards" > Dashboard  </a> 
+        <% end %>
+      </button>
+      <button class="dropdown-item">
+        <%= link_to 'Editar Perfil', edit_user_registration_path %>
+      </button>
+      <button class="dropdown-item">
+        <%= link_to "Sair", destroy_user_session_path, method: :delete %>
+      </button>
+    <% else %>
+      <div class="dropdown-divider"> </div>
+        <button class="dropdown-item">
           <%= link_to "Registre-se", new_user_registration_path, :class => 'navbar-link'  %>
+        </button>
+        <button class="dropdown-item">
           <%= link_to "Entrar", new_user_session_path, :class => 'navbar-link'  %>
-        </p>
-      <% end %>
+        </button>
+    <% end %>
     </div>
-  </div>
-</div>
-</div>
+  </div> 

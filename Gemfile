@@ -23,10 +23,16 @@ gem 'bootsnap', '>= 1.4.4', require: false
 gem 'devise'
 
 # START ADDED BY ME
+gem 'jquery-rails'
+gem 'simple_form'
 gem 'material_icons'
 gem 'faker'
 gem 'cpf_faker', '~> 1.3'
-gem 'will_paginate', '~> 3.3.0'
+gem 'kaminari'
+gem 'wicked_pdf'
+gem 'wkhtmltopdf-binary'
+gem 'ajax-datatables-rails'
+gem 'draper'
 # END 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

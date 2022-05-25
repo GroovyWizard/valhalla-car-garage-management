@@ -9,6 +9,7 @@ class Part < ApplicationRecord
 
     def set_defaults
       self.value ||= 0.0
+      self.model ||= "Genérico" 
     end
     
 end 

@@ -1,0 +1,36 @@
+<div class="col-12 col-xl-8 mb-4 mb-lg-0">
+    <div class="card">
+        <h5 class="card-header text-primary">Serviços finalizados no prazo</h5>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                        <th scope="col">Id</th>
+                        <th scope="col">Titulo</th>
+                        <th scope="col">Status</th></th>
+                        <th scope="col">Valor</th>
+                        <th scope="col">Estimativa</th>
+                        <th scope="col">Data de finalização</th>
+                        <th scope="col"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% @on_time_services.each do |service| %>
+                        <tr>
+                            <th scope="row"> <%= service.id %></th>
+                            <td><%= service.title%></td>
+                            <td><%= service.status_parsed %> </td>
+                            <td><%= service.value %></td>
+                            <td><%= service.estimative %></td>
+                            <td><%= service.finish_date %></td>
+                            <td> <%= link_to "Ver", service, class: "btn btn-primary" %> </td>
+                        </tr>
+                        <% end %>
+                    </tbody>
+                    </table>
+            </div>
+                   
+            </div>
+            </div>
+        </div>

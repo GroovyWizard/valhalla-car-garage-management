@@ -1,0 +1,35 @@
+<div class="col-12 col-xl-8 mb-4 mb-lg-0">
+    <div class="card">
+        <h5 class="card-header">Ultimos serviços cadastrados</h5>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                      <tr>
+                        <th scope="col">Id</th>
+                        <th scope="col">Serviço</th>
+                        <th scope="col">Veiculo</th>
+                        <th scope="col">Valor</th>
+                        <th scope="col">Data</th>
+                        <th scope="col"></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <% @services.each do |service| %>
+                        <tr>
+                            <th scope="row"> <%= service.id %></th>
+                            <td><%= service.title%></td>
+                            <td><%= service.vehicle.model %> </td>
+                            <td><%= service.value %></td>
+                            <td><%= service.created_at.to_date %></td>
+                            <td> <%= link_to "Ver", service, class: "btn btn-primary" %> </td>
+                        </tr>
+                      <% end %>
+                    </tbody>
+                  </table>
+            </div>
+                  <a href="/services" class="btn btn-block btn-primary">Ver todos</a>
+
+            </div>
+            </div>
+        </div>

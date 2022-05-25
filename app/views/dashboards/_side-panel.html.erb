@@ -1,0 +1,44 @@
+<div class="container-fluid ">
+    <div class="row flex-nowrap">
+        <div class="col-auto  col-xl-3 px-sm-2 px-0 bg-light border border-black">
+            <div class="d-flex flex-column align-items-center align-items-sm-start px-5 text-white min-vh-100">
+                <a href="/" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+                    <span class="fs-5 d-none d-sm-inline">Menu</span>
+                </a>
+                <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
+                    <li class="nav-item">
+                        <a href="#" class=" align-middle px-0">
+                            <i class="fs-5 bi-house"></i> <%= link_to "Dashboard", dashboards_path %>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#submenu1" data-bs-toggle="collapse" class=" px-0 align-middle">
+                            <i class="fs-4 bi-people-fill"></i> <span class="ms-1 d-none d-sm-inline">  <%= link_to "Clientes", client_report_path %> </span>
+                        </a></span> </a>
+                        
+                    </li>
+                    <li>
+                        <a href="#" class=" px-0 align-middle">
+                            <i class="fs-4 bi-minecart"></i> <span class="ms-1 d-none d-sm-inline"><%= link_to "Veiculos", vehicle_report_path %> </span></a>
+                    </li>
+                    <li>
+                        <a href="#submenu2" data-bs-toggle="collapse" class=" px-0 align-middle ">
+                            <i class="fs-4 bi-hammer"></i> <span class="ms-1 d-none d-sm-inline">  <%= link_to "Serviços", service_report_path %> </span></a>
+                    </li>
+                    <li>
+                        <a href="#submenu2" data-bs-toggle="collapse" class=" px-0 align-middle ">
+                            <i class="fs-4 bi-nut "></i> <span class="ms-1 d-none d-sm-inline"> Peças</span></a>
+                    </li>
+                    
+                    <li>
+                        <a href="#" class=" px-0 align-middle">
+                            <i class="fs-4 bi-receipt"></i> <span class="ms-1 d-none d-sm-inline">Orçamentos</span> </a>
+                    </li>
+                    <li>
+                        <a href="#" class=" px-0 align-middle">
+                            <i class="fs-4 bi-gear-fill"></i><span class="ms-1 d-none d-sm-inline">  <%= link_to "Configuraçoes", dashboard_path(Dashboard.first) %></span> </a>
+                    </li>
+                        </ul>
+                <hr>
+            </div>
+        </div>
