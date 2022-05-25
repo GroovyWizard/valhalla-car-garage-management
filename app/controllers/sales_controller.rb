@@ -78,8 +78,12 @@ end
 
   def finish_sale
         @sale = Sale.find(params[:id])
-        @sale.update(finished: true, finish_date: DateTime.now())
-        flash[:notice] = "Orçamento encerrado com sucesso!"
+        @result = Sale.finish_sale(@sale)
+        if @result 
+          flash[:notice] = "Orçamento encerrado com sucesso!"
+        else 
+          flash[:notice] = "Falha no encerramento."
+        end
         redirect_to sale_path(@sale)
   end
 

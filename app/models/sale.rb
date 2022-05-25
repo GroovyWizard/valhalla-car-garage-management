@@ -70,5 +70,9 @@ class Sale < ApplicationRecord
     def created_at_normalized
         return Date.parse(self.created_at.to_s)
     end 
+
+    def self.finish_sale(sale)
+      return sale.update(finished: true) ? true : false
+    end 
    
 end
