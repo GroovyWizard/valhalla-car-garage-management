@@ -1,6 +1,6 @@
 body{height: 900px;}
 header {
-	background: black;
+	background-image: url("https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fimages.wallpapersden.com%2Fimage%2Fdownload%2Fassassins-creed-valhalla-winter_bGprbmiUmZqaraWkpJRmbmdlrWZlbWU.jpg&f=1&nofb=1");
 	text-align: center;
 	width: 100%;
 	height: auto;
@@ -8,16 +8,18 @@ header {
 	background-attachment: fixed;
 	position: relative;
 	overflow: hidden;
-	border-radius: 0 0 85% 85% / 30%;
 }
 header .overlay{
 	width: 100%;
 	height: 100%;
-	padding: 50px;
-	color: #FFF;
+	padding-bottom: 50px;
+	padding-top: 50px;
+	color: white;
 	text-shadow: 1px 1px 1px #333;
-  	background-image: url("https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fpngimg.com%2Fuploads%2Fviking%2Fviking_PNG112.png&f=1&nofb=1");
+  	background-image: url("https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fstatic.fjcdn.com%2Fcomments%2FI%2Bve%2Balways%2Bnoticed%2Ba%2Bmassive%2Bproblem%2Bwith%2Bthe%2BThor%2Bmovie%2B_25bc7c68fbebbf4eda9a6b94888d2880.png&f=1&nofb=1");
     background-repeat: no-repeat, repeat;
+	background-position: left bottom;
+	  background-size: 400px 400px;
 	
 }
 

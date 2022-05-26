@@ -3,16 +3,20 @@
 
 <head>
     <%= wicked_pdf_stylesheet_link_tag "pdf" %>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
     <title>Valhalla Oficinas - PDF </title>
 </head>
 
 <body>
 
     <header>
-        <div class="overlay">
-            <h1>Valhalla Oficinas</h1>
-            <h3>ORCAMENTO FINALIZADO</h3>
-
+        <div  class="overlay">
+            <h1 style="text-shadow: 8px 8px  black;">Valhalla Oficinas</h1>
+            <% if @sale.finished %>
+                <h2 style="background-color: green">ORÇAMENTO FINALIZADO E APROVADO</h2>
+            <% else %>
+                <h2 style="background-color: red;">ORÇAMENTO NÃO FINALIZADO</h2>
+            <% end %>
         </div>
     </header>
 

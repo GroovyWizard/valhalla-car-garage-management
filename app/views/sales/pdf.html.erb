@@ -1,45 +1,55 @@
 <p id="notice"><%= notice %></p>
 
+<% if !@sale.finished  %>
+  <h3 style="color: red; text-align: center;"> ATENÇÃO ORÇAMENTO NÃO FINALIZADO POR NOSSO COLABORADOR 
+  SUJEITO A ALTERAÇÕES ATÉ CONFIRMAÇÃO !</h3>
+ 
+<% end %>
+
+
+<p style="text-align: center">
+  <strong style="font-size: 40px"> Valor Total a Pagar: R$ <%= @sale.get_total_value %> </strong>
+</p>
+
+
 <p>
-  <strong> Colaborador que efetuou o orcamento: </strong>
-  <%= @sale.user.name %>
+  <strong> Colaborador que efetuou o orçamento: </strong>
+  <%= @sale.user.name %> <strong style="color: blue"> ID: <%= @sale.user.id %> </strong>
 </p>
 <p>
-  <strong>Identificacao Geral:</strong>
+  <strong>Identificação Geral:</strong>
   <%= @sale.name %>
 </p>
 <p>
-  <strong>Observacoes:</strong>
+  <strong>Observações:</strong>
   <%= @sale.description %>
 </p>
 
 <% if @sale.service %>
  <p>
-    Valor da mao de obra (Servico): 
-    <%= @sale.service.value %>
+    Valor da mão de obra (Serviço): 
+    R$ <%= @sale.service.value %>
   </p>
 <p> 
-  <strong> Serviço associado ao orcamento:</strong>
+  <strong> Serviço associado ao orçamento:</strong>
   <%= link_to @sale.service.identification_string, service_path(@sale.service.id) %>
 </p>
 <% elsif @sale.client %>
 <p> 
-  <strong> Cliente associado a venda:</strong>
+  <strong> Nome do cliente:</strong>
   <%= link_to @sale.client.name, client_path(@sale.client.id) %>
 </p>
 <% end %>
 
-<h2 class="text-center p-2"> Pecas desta venda: </h2>
+<h2 class="text-center p-2"> Peças desta orçamento: </h2>
 <table>
   <tbody>
     <% @sale.parts.each do |part| %>
       <% if part %>
         <%= part.name %>
+        R$ <%= part.value %>
       <% end %>
     <% end %>
   </tbody>
 </table>
 
-<p>
-  <strong class="display-4"> Valor Total: <%= @sale.get_total_value %> </strong>
-</p>
