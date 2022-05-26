@@ -31,7 +31,7 @@ class User < ApplicationRecord
     return @users_by_sale
   end
 
-    def created_at_normalized
-        return Date.parse(self.created_at.to_s)
-    end 
+  def created_at_normalized
+    return Date.parse(self.created_at.to_s)
+  end
 end
