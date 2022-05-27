@@ -1,31 +1,9 @@
-<%= form_with(model: part) do |form| %>
-  <% if part.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(part.errors.count, "error") %> prohibited this part from being saved:</h2>
-
-      <ul>
-        <% part.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
-    </div>
+  <%= simple_form_for @part do |f| %>
+    <%= f.input :name, value: "Nome da peça" %>
+    <%= f.input :model, value: "Modelo da peça" %>
+    <%= f.input :provider_name, value: "Fornecedor" %>
+    <%= f.input :value, value: "Valor" %>
+    <%= f.button :submit, class: "btn btn-primary" %>
   <% end %>
 
-  <div class="field">
-    <%= form.label :name %>
-    <%= form.text_field :name %>
-  </div>
 
-  <div class="field">
-    <%= form.label :value %>
-    <%= form.text_field :value %>
-  </div>
-
-  <div class>
-    <%= form.label :model %> 
-    <%= form.text_field :model %>
-  </div>
-  <div class="actions">
-    <%= form.submit %>
-  </div>
-<% end %>
