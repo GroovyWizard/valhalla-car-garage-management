@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :providers
   devise_for :users
   devise_for :installs
   

@@ -64,7 +64,7 @@ class Sale < ApplicationRecord
     end 
 
     def parsed_finished
-      return self.finished == false ? "Aberto" : "Encerrado"
+      return self.finished == false ? "Ainda não aprovado" : "Aprovado"
     end 
     
     def created_at_normalized

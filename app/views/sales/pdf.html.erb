@@ -12,8 +12,8 @@
 </p>
 
 
-<p>
-  <strong> Colaborador que efetuou o orçamento: </strong>
+<p class="text-center">
+  <strong class="text-primary"> Colaborador que efetuou o orçamento: </strong>
   <%= @sale.user.name %> <strong style="color: blue"> ID: <%= @sale.user.id %> </strong>
 </p>
 <p>
@@ -41,15 +41,38 @@
 </p>
 <% end %>
 
-<h2 class="text-center p-2"> Peças desta orçamento: </h2>
-<table>
-  <tbody>
-    <% @sale.parts.each do |part| %>
-      <% if part %>
-        <%= part.name %>
-        R$ <%= part.value %>
+
+ <h2 class="text-center p-2"> Peças deste orçamento: </h2>
+  <table class="table">
+    <thead> 
+      <tr>
+        <th scope="col"> # </th>
+        <th scope="col"> Nome </th>
+        <th scope="col"> Modelo  </th>
+        <th scope="col"> Valor </th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @sale.parts.each do |part| %>
+        <tr>
+        <% if part %>
+
+          <td>
+            <%= part.id %>
+          </td>
+          <td>
+            <%= link_to part.name %>
+          </td>
+          <td>
+            <%= part.model %>
+          </td>
+          <td>
+            <%= part.value %>
+          </td>
+        <% end %>
+        </tr>
       <% end %>
-    <% end %>
-  </tbody>
-</table>
+    </tbody>
+  </table>
+
 

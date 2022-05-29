@@ -34,6 +34,7 @@ end
 
   # GET /sales/1/edit
   def edit
+    @edit = true
     @parts = Part.all
   end
 
@@ -71,7 +72,7 @@ end
     @sale.destroy
 
     respond_to do |format|
-      format.html { redirect_to sales_url, notice: "Sale was successfully destroyed." }
+      format.html { redirect_to sales_url, notice: "Orçamento deletado." }
       format.json { head :no_content }
     end
   end
@@ -80,9 +81,9 @@ end
         @sale = Sale.find(params[:id])
         @result = Sale.finish_sale(@sale)
         if @result 
-          flash[:notice] = "Orçamento encerrado com sucesso!"
+          flash[:notice] = "Orçamento aprovado e encerrado com sucesso!"
         else 
-          flash[:notice] = "Falha no encerramento."
+          flash[:notice] = "Falha na aprovação e encerramento, tente novamente."
         end
         redirect_to sale_path(@sale)
   end

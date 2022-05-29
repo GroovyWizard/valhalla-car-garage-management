@@ -6,6 +6,7 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
+Faker::Config.locale = 'pt-BR'
 
 1.times do 
     admin = User.new 
@@ -24,7 +25,7 @@ end
 end 
 
 10.times do 
-    name = Faker::Games::WorldOfWarcraft.hero
+    name = Faker::Name.name
     document = Faker::CPF.pretty
     phone = Faker::PhoneNumber.area_code #=> "201"
     address = Faker::Address.full_address

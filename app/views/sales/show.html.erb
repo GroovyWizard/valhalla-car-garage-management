@@ -3,10 +3,10 @@
   <h2 class="text-center"> Visualizar <%= @sale.name %> </h2>
 
   <% if !@sale.finished %>
-    <button class="btn btn-danger text-center my-4 "> Encerrar </button>
-    <%= link_to "Encerrar orçamento", finish_sale_sale_path(@sale), class: "btn-lg btn-danger text-center" %>
+    <%= link_to "Aprovar orçamento", finish_sale_sale_path(@sale), class: "btn-lg btn-success text-center" %>
+    <%= link_to "Cancelar orçamento", finish_sale_sale_path(@sale), class: "btn-lg btn-danger text-center" %>
   <% else %>
-    <h3> Orçamento encerrado </h3>
+    <h3> Orçamento aprovado e finalizado </h3>
   <% end %>
 
 

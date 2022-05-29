@@ -1,6 +1,6 @@
 class ClientsController < ApplicationController
     def index
-        @clients = Client.page params[:page]
+        @clients = Client.order(created_at: :desc).page params[:page]
     end
 
     def show
