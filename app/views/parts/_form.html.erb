@@ -1,7 +1,7 @@
   <%= simple_form_for @part do |f| %>
     <%= f.input :name, value: "Nome da peça" %>
     <%= f.input :model, value: "Modelo da peça" %>
-    <%= f.input :provider_name, value: "Fornecedor" %>
+    <%= f.association :provider %>
     <%= f.input :value, value: "Valor" %>
     <%= f.button :submit, 'Cadastrar peça', class: "btn btn-primary" %>
   <% end %>

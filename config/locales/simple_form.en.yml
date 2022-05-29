@@ -1,4 +1,4 @@
-en:
+pt-BR:
   simple_form:
     "yes": 'Sim'
     "no": 'Não'
@@ -12,7 +12,7 @@ en:
       defaults:
         model: 'Modelo'
         value: 'Valor'
-        provider_name: 'Nome  do Fornecedor'
+        provider: 'Escolha um Fornecedor'
         name: 'Nome'
         create_part: 'Botão'
     
