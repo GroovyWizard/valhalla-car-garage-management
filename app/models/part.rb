@@ -1,6 +1,7 @@
 class Part < ApplicationRecord
     has_many :sale_part
     has_many :sales, through: :sale_part 
+    belongs_to :provider
 
     validates :name, presence: true
     validates :value, presence: true
