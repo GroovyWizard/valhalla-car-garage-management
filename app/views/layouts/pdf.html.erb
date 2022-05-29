@@ -12,14 +12,26 @@
 <body>
 
     <header>
-        <div  class="overlay">
-            <h1 style="text-shadow: 8px 8px  black;">Valhalla Oficinas</h1>
-            <% if @sale.finished %>
-                <h2 style="background-color: green">ORÇAMENTO FINALIZADO E APROVADO</h2>
-            <% else %>
-                <h2 style="background-color: red;">ORÇAMENTO NÃO FINALIZADO</h2>
-            <% end %>
-        </div>
+        <% if @sale %>
+            <div  class="overlay">
+                <h1 style="text-shadow: 8px 8px  black;">Valhalla Oficinas</h1>
+                <% if @sale.finished %>
+                    <h2 style="background-color: green">ORÇAMENTO FINALIZADO E APROVADO</h2>
+                <% else %>
+                    <h2 style="background-color: red;">ORÇAMENTO NÃO FINALIZADO</h2>
+                <% end %>
+            </div>
+        <% elsif @service %>
+            <div class="overlay">
+                <h1 style="text-shadow: 8px 8px  black;">Valhalla Oficinas</h1>
+                <% if @service.status %>
+                    <h2 style="background-color: green">SERVIÇO FINALIZADO </h2>
+                <% else %>
+                    <h2 style="background-color: red;">SERVIÇO NÃO FINALIZADO</h2>
+                <% end %>
+            </div>
+
+        <% end %>
     </header>
 
 
