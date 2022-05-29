@@ -87,6 +87,17 @@ end
         end
         redirect_to sale_path(@sale)
   end
+  
+  def cancel_sale
+        @sale = Sale.find(params[:id])
+        @result = @sale.cancel_sale
+        if @result 
+          flash[:notice] = "Orçamento cancelado e encerrado com sucesso!"
+        else 
+          flash[:notice] = "Falha no cancelamento e encerramento, tente novamente."
+        end
+        redirect_to sale_path(@sale)
+  end
 
 
   private

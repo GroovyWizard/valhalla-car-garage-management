@@ -1,6 +1,6 @@
 <div class="container mx-auto w-50 text-center pt-5 mb-5" >
     <h1 class="display-4">Serviço: <%= @service.title %> </h1>
-    <h1> Valor: <%= @service.value %> </h1>
+    <h1> Valor da mão de obra: <%= @service.value %> </h1>
     <h3 class="">  Veiculo: <%= @service.vehicle.model %> </h3>   
     <h3 class="">
         <% if @sale %>
@@ -12,7 +12,7 @@
 <div class="container mx-auto w-50 my-4">
  <% if @service.status == false%>
         <div class="container mx-auto text-center my-5">
-            <%= link_to "Concluir serviço", finish_service_service_path(@service), class: "btn-lg btn-danger text-center" %>
+            <%= link_to "Concluir serviço", finish_service_service_path(@service), class: "btn-lg btn-success text-center" %>
         </div>
 
         <div class="card w-56 border border-primary text-center mx-auto my-4"> 

@@ -1,5 +1,7 @@
 <p id="notice"><%= notice %></p>
 
+
+<div class="container text-center mx-auto border border-dark" >
 <% if !@sale.finished  %>
   <h3 style="color: red; text-align: center;"> ATENÇÃO ORÇAMENTO NÃO FINALIZADO POR NOSSO COLABORADOR 
   SUJEITO A ALTERAÇÕES ATÉ CONFIRMAÇÃO !</h3>
@@ -8,7 +10,7 @@
 
 
 <p style="text-align: center">
-  <strong style="font-size: 40px"> Valor Total a Pagar: R$ <%= @sale.get_total_value %> </strong>
+  <strong class="text-danger" style="font-size: 40px"> Valor Total a Pagar: R$ <%= @sale.get_total_value %> </strong>
 </p>
 
 
@@ -37,7 +39,7 @@
 <% elsif @sale.client %>
 <p> 
   <strong> Nome do cliente:</strong>
-  <%= link_to @sale.client.name, client_path(@sale.client.id) %>
+  <%= @sale.client.name %>
 </p>
 <% end %>
 
@@ -74,5 +76,5 @@
       <% end %>
     </tbody>
   </table>
-
+</div>
 

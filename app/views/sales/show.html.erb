@@ -4,7 +4,8 @@
 
   <% if !@sale.finished %>
     <%= link_to "Aprovar orçamento", finish_sale_sale_path(@sale), class: "btn-lg btn-success text-center" %>
-    <%= link_to "Cancelar orçamento", finish_sale_sale_path(@sale), class: "btn-lg btn-danger text-center" %>
+  <% elsif @sale.finished == nil%>
+    <h3> Orçamento cancelado a pedido do cliente.</h3>
   <% else %>
     <h3> Orçamento aprovado e finalizado </h3>
   <% end %>

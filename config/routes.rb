@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   resources :sales do
    member do  
       get :finish_sale
+      get :cancel_sale
    end
   end 
 

@@ -64,7 +64,14 @@ class Sale < ApplicationRecord
     end 
 
     def parsed_finished
-      return self.finished == false ? "Ainda não aprovado" : "Aprovado"
+      case self.finished 
+      when nil 
+         "Cancelado a pedido do cliente" 
+      when true 
+        "Orçamento Aprovado"
+      when false 
+        "Orçamento ainda não Aprovado"
+      end
     end 
     
     def created_at_normalized
@@ -74,5 +81,11 @@ class Sale < ApplicationRecord
     def self.finish_sale(sale)
       return sale.update(finished: true) ? true : false
     end 
+
+    def cancel_sale
+      return self.update(finished: nil) ? true : false
+    end 
+
+
    
 end
