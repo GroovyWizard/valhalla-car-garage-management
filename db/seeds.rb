@@ -9,6 +9,15 @@
 Faker::Config.locale = 'pt-BR'
 
 1.times do 
+    Provider.where(:name => 'Fornecedor Local').first_or_create(
+        :name => "Fornecedor Local",
+        :cnpj => "Local",
+        :phone => "Local",
+        :address => "Local",
+    )
+end 
+
+1.times do 
     admin = User.new 
     admin.email = 'super@admin.com'
     admin.role = 0

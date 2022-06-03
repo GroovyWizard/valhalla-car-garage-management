@@ -3,7 +3,10 @@ class PartsController < ApplicationController
 
   # GET /parts or /parts.json
   def index
-    @parts = Part.all
+   respond_to do |format|
+      format.html
+      format.json { render json: PartDatatable.new(params) }
+   end 
   end
 
   # GET /parts/1 or /parts/1.json

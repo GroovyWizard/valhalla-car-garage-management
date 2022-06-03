@@ -1,0 +1,4 @@
+make: Entering directory '/home/skeletor/Workspace/ruby/valhalla-car-repair-shop'
+docker-compose build 
+make: Leaving directory '/home/skeletor/Workspace/ruby/valhalla-car-repair-shop'
+ 

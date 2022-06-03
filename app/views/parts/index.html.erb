@@ -1,28 +1,72 @@
 <p id="notice"><%= notice %></p>
+
 <h1>Peças</h1>
-<table>
+
+<table id="parts-datatable" class="table table-striped table-bordered" style="width:100%" data-source="<%= parts_path(format: :json) %>">
   <thead>
     <tr>
+      <th>ID</th>
       <th>Nome</th>
       <th>Valor</th>
       <th>Modelo</th>
-      <th colspan="3"></th>
+      <th>Nome do Fornecedor</th>
+      <th>Data do Cadastro</th>
+      <th>Editar</th>
+      <th>Deletar</th>
     </tr>
   </thead>
-<pre>
   <tbody>
-    <% @parts.each do |part| %>
-      <tr>
-        <td><%= part.name %></td>
-        <td><%= part.value %></td>
-        <td><%= part.model %> </td>
-        <td><%= link_to 'Show', part %></td>
-        <td><%= link_to 'Edit', edit_part_path(part) %></td>
-        <td><%= link_to 'Destroy', part, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
   </tbody>
 </table>
-</pre>
-  <br>
-  <%= link_to 'New Part', new_part_path %>
+
+
+<%= link_to "New Part", new_part_path %>
+
+
+<script type="text/javascript">
+  $(document).ready( function() {
+           var jsondata;
+           getdata();
+           function getdata(){
+              const getParts = async () => {
+               const data = await fetch('http://127.0.0.1:3000/parts.json', {
+                  method: 'GET',
+                  headers: {
+                      'Content-Type': 'application/json',                                  
+                  }
+               });
+               initialiseTable()
+               };
+             getParts();
+           }
+
+  });
+
+      function initialiseTable(){
+      $('#parts-datatable').dataTable({
+          "processing": true,
+          "serverSide": true,
+          "bDestroy": true,
+          "ajax": {
+          "url": $('#parts-datatable').data('source')
+          },
+          "pagingType": "full_numbers",
+          "columns": [
+            {"data": "id"},
+            {"data": "name"},
+            {"data": "value"},
+            {"data": "model"},
+            {"data": "provider_id"},
+            {"data": "created_at"},
+            {"data": "edit"},
+            {"data": "delete"},
+          ]
+        });
+      }
+
+</script>
+
+
+
+
+

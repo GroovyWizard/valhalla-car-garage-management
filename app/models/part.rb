@@ -1,7 +1,7 @@
 class Part < ApplicationRecord
     has_many :sale_part
     has_many :sales, through: :sale_part 
-    belongs_to :provider, optional: true
+    belongs_to :provider
 
     validates :name, presence: true
     validates :value, presence: true
@@ -11,6 +11,7 @@ class Part < ApplicationRecord
     def set_defaults
       self.value ||= 0.0
       self.model ||= "Genérico" 
+      self.provider ||= Provider.where(name: "Fornecedor Local").first
     end
     
 end 

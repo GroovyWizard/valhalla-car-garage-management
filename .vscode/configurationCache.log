@@ -1,0 +1,1 @@
+{"buildTargets":["build","down","gem-sync","migrate","npm-sync","reset","run-test","seed","setup","sh","up","up-int"],"launchTargets":[],"customConfigurationProvider":{"workspaceBrowse":{"browsePath":[],"compilerArgs":[]},"fileIndex":[]}}
