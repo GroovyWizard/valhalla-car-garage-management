@@ -1,3 +1,5 @@
+require "./app/modules/date_parser"
+
 class SaleDatatable < AjaxDatatablesRails::ActiveRecord
   def view_columns
     @view_columns ||= {
@@ -22,7 +24,7 @@ class SaleDatatable < AjaxDatatablesRails::ActiveRecord
         name: record.decorate.link_to,
         description: record.description,
         value: record.get_total_value,
-        created_at: record.created_at_normalized,
+        created_at: DateParser.readable_full_date(record.created_at),
         finished: record.parsed_finished,
         edit: record.decorate.edit,
         delete: record.decorate.delete,

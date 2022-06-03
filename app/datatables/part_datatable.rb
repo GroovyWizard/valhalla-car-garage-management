@@ -1,3 +1,5 @@
+require "./app/modules/date_parser"
+
 class PartDatatable < AjaxDatatablesRails::ActiveRecord
   def view_columns
     @view_columns ||= {
@@ -20,7 +22,7 @@ class PartDatatable < AjaxDatatablesRails::ActiveRecord
         value: record.value,
         model: record.model,
         provider_id: record.provider.name,
-        created_at: record.created_at,
+        created_at: DateParser.readable_full_date(record.created_at),
         edit: record.decorate.edit,
         delete: record.decorate.delete,
         DT_RowId: record.id,
