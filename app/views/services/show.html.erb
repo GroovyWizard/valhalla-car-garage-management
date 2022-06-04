@@ -28,21 +28,26 @@
 
 
 
- <% if !flash[:notice] %>
+ <% if flash[:notice] or @service.status %>
     <div class="container mx-auto w-75 text-center ">
-            <div class="jumbotron mx-auto border border-primary">
-                <h1>Parabéns!</h1>
-                <h2 class="mb-4 text-success"> Serviço concluido com sucesso :)</h2>
-                <%= image_tag "technoviking.gif", class: "border border-dark" %>                
+            <div class="jumbotron mx-auto py-5 border border-primary">
+                <h2 class="text-success"> Serviço concluido</h2>
+                <% if flash[:notice] %>
+                    <%= image_tag "technoviking.gif", class: "mb-4 border border-dark" %>                
+                    <% else %>
+                    <h2 class="text-success"> Baixe o pdf </h2>
+                <% end %>
+                
+                <br>
+                
                 <% if @sale%>
-                    <br>
                     <%= link_to sale_path(@sale, format: :pdf) do  %> 
-                        <i class="bi bi-filetype-pdf " style="font-size: 40px"> Baixe o pdf</i>
+                        <i class="bi bi-filetype-pdf " style="font-size: 40px"></i>
                     <% end %>
                 
                 <% else %>
                     <%= link_to service_path(@service, format: :pdf) do  %> 
-                        <i class="bi bi-filetype-pdf " style="font-size: 40px"> Baixe o pdf</i>
+                        <i class="bi bi-filetype-pdf  " style="font-size: 40px"> </i>
                     <% end %>
                 <% end %>
 
