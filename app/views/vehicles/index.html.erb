@@ -13,9 +13,7 @@
 
 
 
-<div class="container mx-auto w-50 text-center pt-5">
-    <h1 class="text-center">Veículos</h1>
-
+<div class="container mx-auto w-50 text-center">
     <div class="card w-56 border border-primary text-center mx-auto mt-5">
         <div class="card-body">
             <div class="card-title">
@@ -26,17 +24,33 @@
     </div>
 </div>
 <h2 class="text-center mx-auto pt-5 pb-2"> Todos os Veículos cadastrados: </h2>
-<div class="container border border p-5">
-        <div class="row justify-content-center mx-4">
-            <% @vehicles.each do |vehicle|%>
-            <div class="col-lg-4">
-                <%= link_to vehicle.model, vehicle%>
-                <p class="text-normal mb-4">Placa: <span style="color: red"> <%= vehicle.registration_plate %></span>
-            </div>
-            <% end %>
-        </div>
-        <div class="digg_pagination mt-4">
-            <%= paginate @vehicles %>
+<div class="container border border-dark p-5 text-center ">
+
+
+    
+    <table class="table">
+  <thead>
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">Nome</th>
+      <th scope="col">Placa </th>
+    </tr>
+  </thead>
+  <tbody>
+    
+    <% @vehicles.each do |vehicle| %>    
+        <tr>
+        <td> <%= vehicle.id %> </td>
+        <td> <%= link_to vehicle.model, vehicle %></td>
+        <td> <%= vehicle.registration_plate %> </td>
+        </tr>
+    <% end %>
+    </tbody>
+    </table>
+        <div class="digg_pagination text-center mt-4">
+            <%= paginate @vehicles  %>
+
         </div>
     </div>
-</div>
+    </div>
+
