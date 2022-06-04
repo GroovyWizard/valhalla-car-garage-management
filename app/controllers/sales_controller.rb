@@ -34,6 +34,7 @@ end
 
   # GET /sales/1/edit
   def edit
+    @edit = true
     @parts = Part.all
   end
 
@@ -71,10 +72,33 @@ end
     @sale.destroy
 
     respond_to do |format|
-      format.html { redirect_to sales_url, notice: "Sale was successfully destroyed." }
+      format.html { redirect_to sales_url, notice: "Orçamento deletado." }
       format.json { head :no_content }
     end
   end
+
+  def finish_sale
+        @sale = Sale.find(params[:id])
+        @result = Sale.finish_sale(@sale)
+        if @result 
+          flash[:notice] = "Orçamento aprovado e encerrado com sucesso!"
+        else 
+          flash[:notice] = "Falha na aprovação e encerramento, tente novamente."
+        end
+        redirect_to sale_path(@sale)
+  end
+  
+  def cancel_sale
+        @sale = Sale.find(params[:id])
+        @result = @sale.cancel_sale
+        if @result 
+          flash[:notice] = "Orçamento cancelado e encerrado com sucesso!"
+        else 
+          flash[:notice] = "Falha no cancelamento e encerramento, tente novamente."
+        end
+        redirect_to sale_path(@sale)
+  end
+
 
   private
     # Use callbacks to share common setup or constraints between actions.

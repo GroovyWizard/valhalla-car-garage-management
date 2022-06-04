@@ -2,6 +2,9 @@
 <html>
 
 <head>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8" >
     <%= wicked_pdf_stylesheet_link_tag "pdf" %>
     <title>Valhalla Oficinas - PDF </title>
 </head>
@@ -9,11 +12,26 @@
 <body>
 
     <header>
-        <div class="overlay">
-            <h1>Valhalla Oficinas</h1>
-            <h3>ORCAMENTO FINALIZADO</h3>
+        <% if @sale %>
+            <div  class="overlay">
+                <h1 style="text-shadow: 8px 8px  black;">Valhalla Oficinas</h1>
+                <% if @sale.finished %>
+                    <h2 style="background-color: green">ORÇAMENTO FINALIZADO E APROVADO</h2>
+                <% else %>
+                    <h2 style="background-color: red;">ORÇAMENTO NÃO FINALIZADO</h2>
+                <% end %>
+            </div>
+        <% elsif @service %>
+            <div class="overlay">
+                <h1 style="text-shadow: 8px 8px  black;">Valhalla Oficinas</h1>
+                <% if @service.status %>
+                    <h2 style="background-color: green">SERVIÇO FINALIZADO </h2>
+                <% else %>
+                    <h2 style="background-color: red;">SERVIÇO NÃO FINALIZADO</h2>
+                <% end %>
+            </div>
 
-        </div>
+        <% end %>
     </header>
 
 

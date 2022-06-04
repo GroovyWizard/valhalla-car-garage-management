@@ -11,9 +11,7 @@
         }
     </style>
 
-    <div class="container mx-auto w-50 text-center pt-5">
-        <h1 class="text-center">Clientes</h1>
-
+    <div class="container mx-auto w-50 text-center">
         <div class="card w-56 border border-primary text-center mx-auto mt-5">
             <div class="card-body">
                 <div class="card-title">
@@ -24,18 +22,35 @@
         </div>
     </div>
     <h2 class="text-center mx-auto pt-5 pb-2"> Todos os clientes cadastrados: </h2>
-    <div class="container border border p-5 ">
-        <div class="row justify-content-center mx-4">
-            <% @clients.each do |client|%>
-            <div class="col-lg-4">
-                <%= link_to client.name, client%>
-                <p class="text-normal mb-4">Documento: <span style="color: red"> <%= client.document %> </span> </h2>
-            </div>
-            <% end %>
-        </div>
-        <div class="digg_pagination mt-4">
+    
+    
+    <div class="container border border-dark p-5 text-center ">
+
+
+    
+    <table class="table">
+  <thead>
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">Nome</th>
+      <th scope="col">CPF / CNPJ </th>
+    </tr>
+  </thead>
+  <tbody>
+    
+    <% @clients.each do |client| %>    
+        <tr>
+        <td> <%= link_to client.id %> </td>
+        <td> <%= link_to client.name, client %></td>
+        <td> <%= client.document %> </td>
+        </tr>
+    <% end %>
+    </tbody>
+    </table>
+        <div class="digg_pagination text-center mt-4">
             <%= paginate @clients  %>
 
         </div>
     </div>
     </div>
+

@@ -8,7 +8,7 @@
                 <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
                     <li class="nav-item">
                         <a href="#" class=" align-middle px-0">
-                            <i class="fs-5 bi-house"></i> <%= link_to "Dashboard", dashboards_path %>
+                            <i class="fs-4 bi-house"></i> <%= link_to "Dashboard", dashboards_path %>
                         </a>
                     </li>
                     <li>
@@ -32,8 +32,19 @@
                     
                     <li>
                         <a href="#" class=" px-0 align-middle">
-                            <i class="fs-4 bi-receipt"></i> <span class="ms-1 d-none d-sm-inline">Orçamentos</span> </a>
+                            <i class="fs-4 bi-receipt"></i> <span class="ms-1 d-none d-sm-inline"> 
+                            <%= link_to "Orçamentos", sale_report_path %>
+                            </span> </a>
                     </li>
+
+                       
+                    <li>
+                        <a href="#" class=" px-0 align-middle">
+                            <i class="fs-4 bi bi-person-workspace"></i> <span class="ms-1 d-none d-sm-inline"> 
+                            <%= link_to "Funcionários", user_report_path %>
+                            </span> </a>
+                    </li>
+
                     <li>
                         <a href="#" class=" px-0 align-middle">
                             <i class="fs-4 bi-gear-fill"></i><span class="ms-1 d-none d-sm-inline">  <%= link_to "Configuraçoes", dashboard_path(Dashboard.first) %></span> </a>

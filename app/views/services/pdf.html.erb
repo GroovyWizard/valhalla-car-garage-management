@@ -1,0 +1,43 @@
+<h1> Valor da mão de obra: <%= @service.value %> </h1>
+
+
+<h2 class="text-center p-2"> Tarefas realizadas neste serviço: </h2>
+  <table class="table">
+    <thead> 
+      <tr>
+        <th scope="col"> # </th>
+        <th scope="col"> Nome </th>
+        <th scope="col"> Modelo  </th>
+        <th scope="col"> Valor </th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @service.tasks.each do |part| %>
+        <tr>
+        <% if part %>
+          <td>
+            <%= part.id %>
+          </td>
+          <td>
+            <%= part.title %>
+          </td>
+          <td>
+            <%= part.description %>
+          </td>
+          <td>
+            <%= part.status %>
+          </td>
+          <td>
+            <%= part.estimative %>
+          </td>
+          <td> 
+            <%= part.finish_date %>
+          </td>
+        <% end %>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+
+  

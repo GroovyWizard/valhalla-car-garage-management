@@ -23,6 +23,7 @@ class Sale < ApplicationRecord
 
     def set_defaults
       self.value ||= 0.0
+      self.finished ||= false
     end
     
     def calculate_comission  
@@ -62,9 +63,29 @@ class Sale < ApplicationRecord
       return @total_value
     end 
 
-    def created_at_normalized
-      return Date.parse(self.created_at.to_s)
+    def parsed_finished
+      case self.finished 
+      when nil 
+         "Cancelado a pedido do cliente" 
+      when true 
+        "Orçamento Aprovado"
+      when false 
+        "Orçamento ainda não Aprovado"
+      end
     end 
+    
+    def created_at_normalized
+        return Date.parse(self.created_at.to_s)
+    end 
+
+    def self.finish_sale(sale)
+      return sale.update(finished: true) ? true : false
+    end 
+
+    def cancel_sale
+      return self.update(finished: nil) ? true : false
+    end 
+
 
    
 end

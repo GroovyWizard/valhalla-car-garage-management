@@ -1,7 +1,7 @@
         <%= form_for [@service, @service.tasks.build] do |form| %>               
                <div class="form-group pt-2">
                     <%= form.label :title %>
-                    <%= form.text_field :title, {class: "form-control", placeholder: "Escreva o titulo"} %>
+                    <%= form.text_field :title, class: "form-control", id: 'autocomplete12', placeholder: "Escreva o titulo" %>
                </div>
 
                <div class="form-group pt-2">
@@ -23,4 +23,10 @@
                 <%= form.submit "Concluir", class: "btn btn-primary" %>
               </div>
         <% end %>
+<%= form_tag(tasks_path, method: 'get', class: "form-inline") do %>
+  <div id= "search-data" class="form-search search-data" data-skills="<%= @tasks.to_json %>">
+  </div>
+<% end %>
 
+
+    

@@ -1,0 +1,29 @@
+<div class="row my-4">
+  <div class="col-12 col-md-6 col-lg-3 mb-4 mb-lg-0d">
+    <div class="card text-center">
+      <h5 class="card-header" style="font-size: 18px">Orçamentos feitos neste mes </h5>
+      <div class="card-body">
+        <h5 class="card-title"> <%= Sale.from_this_month.count %> </h5>
+        <p class="card-text fw-bold"><%= @month_first_day %> -- <%= @month_last_day %></p>
+      </div>
+    </div>
+  </div>
+  <div class="col-12 col-md-6 mb-4 mb-lg-0 col-lg-3">
+    <div class="card text-center">
+      <h5 class="card-header" style="font-size: 18px"> Valor de comissão este mes </h5>
+      <div class="card-body">
+        <h5 class="card-title"> <%= Dashboard.comission_value_this_month %> </h5>
+        <p class="card-text fw-bold"><%= @month_first_day %> -- <%= @month_last_day %></p>
+      </div>
+    </div>
+  </div>
+  <div class="col-12 col-md-6 mb-4 mb-lg-0 col-lg-3">
+    <div class="card text-center">
+      <h5 class="card-header" style="font-size: 18px"> Valor total em orçamentos este mes</h5>
+      <div class="card-body">
+        <h5 class="card-title"> <%= Dashboard.total_sales_this_month %> </h5>
+        <p class="card-text fw-bold"><%= @month_first_day %> -- <%= @month_last_day %></p>
+      </div>
+    </div>
+  </div>
+</div>

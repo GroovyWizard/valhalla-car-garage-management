@@ -1,6 +1,6 @@
 <div class="container mx-auto w-50 text-center pt-5 mb-5" >
     <h1 class="display-4">Serviço: <%= @service.title %> </h1>
-    <h1> Valor: <%= @service.value %> </h1>
+    <h1> Valor da mão de obra: <%= @service.value %> </h1>
     <h3 class="">  Veiculo: <%= @service.vehicle.model %> </h3>   
     <h3 class="">
         <% if @sale %>
@@ -12,7 +12,7 @@
 <div class="container mx-auto w-50 my-4">
  <% if @service.status == false%>
         <div class="container mx-auto text-center my-5">
-            <%= link_to "Concluir serviço", finish_service_service_path(@service), class: "btn-lg btn-danger text-center" %>
+            <%= link_to "Concluir serviço", finish_service_service_path(@service), class: "btn-lg btn-success text-center" %>
         </div>
 
         <div class="card w-56 border border-primary text-center mx-auto my-4"> 
@@ -28,12 +28,29 @@
 
 
 
- <% if flash[:notice] %>
+ <% if flash[:notice] or @service.status %>
     <div class="container mx-auto w-75 text-center ">
-            <div class="jumbotron mx-auto border border-primary">
-                <h1>Parabéns!</h1>
-                <h2 class="mb-4 text-success"> Serviço concluido com sucesso :)</h2>
-                <%= image_tag "technoviking.gif", class: "border border-dark" %>                
+            <div class="jumbotron mx-auto py-5 border border-primary">
+                <h2 class="text-success"> Serviço concluido</h2>
+                <% if flash[:notice] %>
+                    <%= image_tag "technoviking.gif", class: "mb-4 border border-dark" %>                
+                    <% else %>
+                    <h2 class="text-success"> Baixe o pdf </h2>
+                <% end %>
+                
+                <br>
+                
+                <% if @sale%>
+                    <%= link_to sale_path(@sale, format: :pdf) do  %> 
+                        <i class="bi bi-filetype-pdf " style="font-size: 40px"></i>
+                    <% end %>
+                
+                <% else %>
+                    <%= link_to service_path(@service, format: :pdf) do  %> 
+                        <i class="bi bi-filetype-pdf  " style="font-size: 40px"> </i>
+                    <% end %>
+                <% end %>
+
             </div>
     </div>
  <% end %>

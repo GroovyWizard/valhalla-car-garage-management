@@ -6,9 +6,23 @@ class ServicesController < ApplicationController
     def show
         @service = Service.find(params[:id])
         @sale = @service.sale ||= nil 
+        respond_to do |format|
+            format.html
+            format.pdf do
+                render pdf: "Invoice No. ",
+                page_size: 'A4',
+                template: "services/pdf.html.erb",
+                layout: "pdf.html.erb",
+                orientation: "Landscape",
+                lowquality: true,
+                zoom: 1,
+                dpi: 75
+            end
+        end
     end
 
     def new
+        @services = Service.pluck(:title).sort
         @service = Service.new
         @vehicles = Vehicle.all
     end

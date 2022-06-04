@@ -26,5 +26,14 @@ class Client < ApplicationRecord
         end
     end
 
+  def self.clients_by_sale
+    @clients_by_sale = Client 
+        .left_joins(:sales)
+        .group(:id)
+        .order("COUNT(sales.id) DESC")
+    
+    return @clients_by_sale
+  end 
+
 
 end

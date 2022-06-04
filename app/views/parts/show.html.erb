@@ -10,6 +10,13 @@
   <%= @part.value %>
 </p>
 
+<% if @part.provider %>
+  <p>
+    <strong>Fornecedor:</strong>
+    <%= @part.provider.name %>
+  </p>
+<% end %>
+
 <p>
   <strong>Modelo da peça:</strong>
   <%= @part.model %>

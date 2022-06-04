@@ -9,7 +9,11 @@
       <th>Titulo</th>
       <th>Descricao</th>
       <th>Valor Total</th>
-      <th>Data de Crição</th>
+      <th>Data de Criação</th>
+      <th>Aprovado</th>
+      <th>Editar</th>
+      <th>Deletar</th>
+      <th>PDF</th>
     </tr>
   </thead>
   <tbody>
@@ -17,16 +21,36 @@
 </table>
 
 
-<%= link_to 'New Sale', new_sale_path %>
+<%= link_to "New Sale", new_sale_path %>
 
 
 <script type="text/javascript">
   $(document).ready( function() {
+           var jsondata;
+           getdata();
+           function getdata(){
+              const getPeople = async () => {
+               const data = await fetch('http://127.0.0.1:3000/sales.json', {
+                  method: 'GET',
+                  headers: {
+                      'Content-Type': 'application/json',                                  
+                  }
+               });
+               await initialiseTable()
+               };
+             getPeople();
+           }
+
+  });
+
+      function initialiseTable(){
+ 
   $('#sales-datatable').dataTable({
       "processing": true,
       "serverSide": true,
+      "bDestroy": true,
       "ajax": {
-        "url": $('#sales').data('source')
+      "url": $('#sales-datatable').data('source')
       },
       "pagingType": "full_numbers",
       "columns": [
@@ -34,9 +58,14 @@
         {"data": "name"},
         {"data": "description"},
         {"data": "value"},
-        {"data": "created_at"}
+        {"data": "created_at"},
+        {"data": "finished"},
+        {"data": "edit"},
+        {"data": "delete"},
+        {"data": "pdf"},
+
       ]
     });
+      }
 
-        });
 </script>
