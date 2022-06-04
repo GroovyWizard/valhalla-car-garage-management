@@ -1,6 +1,10 @@
 class TasksController < ApplicationController
+    def index 
+        @tasks = Task.all.to_json
+    end 
     
     def new 
+        @tasks = Task.pluck(:title).sort
         @service = Service.find(params[:service_id])
         @task = Task.new
     end

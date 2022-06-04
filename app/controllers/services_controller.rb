@@ -22,6 +22,7 @@ class ServicesController < ApplicationController
     end
 
     def new
+        @services = Service.pluck(:title).sort
         @service = Service.new
         @vehicles = Vehicle.all
     end

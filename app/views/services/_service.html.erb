@@ -8,6 +8,10 @@
             <td> <%= service.sale ? service.sale.value + service.sale.comission_value : "Não possui" %> </td>
             <td> <%= service.sale ? service.sale.get_total_value : service.value %> </td>
             <td> <%= service.sale ? (link_to 'Ver', sale_path(service.sale)) : "Não possui" %>  </td>
+            <td> <%= link_to ( service.sale ? sale_path(service.sale.id, format: :pdf) :
+                                service_path(service, format: :pdf) ) do  %> 
+                        <i class="bi bi-filetype-pdf " style="font-size: 20px"></i>
+                    <% end %>  </td>
             <td> <%= link_to "Tarefas", service, class: "btn btn-md btn-primary my-2" %></td> 
             <td> <%= link_to "Deletar", service_path(service), class: "btn btn-md btn-danger my-2", 
                                                                       method: :delete, 

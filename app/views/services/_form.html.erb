@@ -2,7 +2,7 @@
         <%= form_with model: service do |form|%>            
             <div class="form-group pt-2">
                 <%= form.label :title, value: "Titulo:" %> 
-                <%= form.text_field :title, {class: "form-control", placeholder: "Digite o titulo do serviço"} %>
+                <%= form.text_field :title, {id: "autocomplete12", class: "form-control", placeholder: "Digite o titulo do serviço"} %>
             </div>
              <div class="form-group pt-2">
                 <%= form.label :estimative, value: "Estimativa:" %> 
@@ -26,3 +26,8 @@
             </div>
          <% end %>
   
+<%= form_tag(services_path, method: 'get', class: "form-inline") do %>
+  <div id= "search-data" class="form-search search-data" data-skills="<%= @services.to_json %>">
+  </div>
+<% end %>
+

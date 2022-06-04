@@ -10,6 +10,7 @@ import Turbolinks from "turbolinks"
 import * as ActiveStorage from "@rails/activestorage"
 import "channels"
 import 'bootstrap-icons/font/bootstrap-icons.css'
+import { autocompleteSearch } from '../components/autocomplete';
 Rails.start()
 Turbolinks.start()
 ActiveStorage.start()
@@ -20,3 +21,9 @@ document.addEventListener("turbolinks:load", function() {
         $('[data-toggle="popover"]').popover()
     })
 })
+
+var loader = setInterval(function () {
+            if(document.readyState !== "complete") return;
+            clearInterval(loader);
+            autocompleteSearch();
+         }, 300);
