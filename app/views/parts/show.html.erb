@@ -22,6 +22,10 @@
   <%= @part.model %>
 </p>
 
+<h1> Contido nos orçamentos: </h1>
+<% @part.sales.each do |sale| %>
+  <%= link_to sale.name %> <br>
+<% end %>
 
 <%= link_to 'Edit', edit_part_path(@part) %> |
 <%= link_to 'Back', parts_path %>

@@ -22,6 +22,11 @@ class Part < ApplicationRecord
       return false 
     end 
 
+    def readable_sales_count
+      sales_count = self.sales.count
+      return sales_count == 0 || sales_count > 1 ? sales_count.to_s + " Vezes" : sales_count.to_s + " Vez"
+    end 
+
     def self.parts_by_sale_amount
       Part.all.each do |part| 
         puts part.sales.count, "here"

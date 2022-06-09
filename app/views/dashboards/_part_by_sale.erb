@@ -20,7 +20,7 @@
                         <th scope="row"> <%= part.provider.id %></th>
                         <td><%= part.model%></td>
                         <td><%= part.provider.name %> </td>
-                        <td><%= part.sales.count %></td>
+                        <td><%= part.readable_sales_count %> </td>
                         <td><%= part.provider.created_at.to_date %></td>
                         <td> <%= link_to "Ver", part, class: "btn btn-primary" %> </td>
                     </tr>
