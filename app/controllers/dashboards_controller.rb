@@ -43,6 +43,10 @@ class DashboardsController < ApplicationController
     @on_time_services = Dashboard.services_done_on_time
   end
 
+  def part_report 
+    @part_by_sale = Part.parts_by_sale_amount
+  end 
+
   def sale_report
     @sales = Sale.all
   end

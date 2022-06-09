@@ -13,5 +13,14 @@ class PartTest < ActiveSupport::TestCase
     assert_not_nil incomplete_part.provider
 
   end 
+  
+  test "Part has_sale should return false if Part has no sale" do 
+    part_without_sale = Part.create(name: "liquid snake")
+    assert_equal part_without_sale.has_sale, false
+  end 
+  
+  test "Part sales count should bring the part with more Sales first" do 
+    
+  end 
 
 end

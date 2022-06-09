@@ -1,6 +1,4 @@
 make all --print-data-base --no-builtin-variables --no-builtin-rules --question
-make: *** No rule to make target 'all'.  Stop.
-
 # GNU Make 4.3
 # Built for x86_64-pc-linux-gnu
 # Copyright (C) 1988-2020 Free Software Foundation, Inc.
@@ -8,7 +6,7 @@ make: *** No rule to make target 'all'.  Stop.
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Fri Jun  3 22:35:09 2022
+# Make data base, printed on Wed Jun  8 22:17:20 2022
 
 # Variables
 
@@ -19,9 +17,9 @@ LC_ALL = C
 # environment
 NO_AT_BRIDGE = 1
 # environment
-I3SOCK = /run/user/1000/i3/ipc-socket.646
+I3SOCK = /run/user/1000/i3/ipc-socket.1233
 # environment
-VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-3b606a84-dc38-45ae-af99-a165fe61266d.sock
+VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-e89fa480-ac38-440e-8e91-ac9ebb5af341.sock
 # environment
 VSCODE_CWD = /home/skeletor
 # default
@@ -81,7 +79,7 @@ MAKEFILE_LIST := Makefile
 # environment
 VSCODE_VERBOSE_LOGGING = true
 # environment
-VSCODE_PID = 1841
+VSCODE_PID = 1939
 # environment
 XDG_SESSION_TYPE = x11
 # automatic
@@ -292,6 +290,9 @@ migrate:
 up-int:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
+ 
+make: *** No rule to make target 'all'.  Stop.
+
 #  File has not been updated.
 #  recipe to execute (from 'Makefile', line 8):
 	@docker-compose up
@@ -319,7 +320,6 @@ down:
 	@docker-compose down
 
 # files hash-table stats:
- 
 # Load=16/1024=2%, Rehash=0, Collisions=0/26=0%
 # VPATH Search Paths
 
@@ -333,6 +333,6 @@ down:
 # strcache performance: lookups = 69 / hit rate = 23%
 # hash-table stats:
 # Load=53/8192=1%, Rehash=0, Collisions=0/69=0%
-# Finished Make data base on Fri Jun  3 22:35:09 2022
+# Finished Make data base on Wed Jun  8 22:17:20 2022
 
  

@@ -1,0 +1,35 @@
+<div class="col-12 col-xl-8 mb-4 mb-lg-0">
+<div class="card">
+    <h5 class="card-header text-primary">Ranking de peças mais pedidas em orçamentos </h5>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">Id</th>
+                    <th scope="col">Nome</th>
+                    <th scope="col">Documento</th></th>
+                    <th scope="col">Telefone</th>
+                    <th scope="col">Peças</th>
+                    <th scope="col">Data</th>
+                    <th scope="col"></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% @part_by_sale.each do |part| %>
+                    <tr>
+                        <th scope="row"> <%= part.provider.id %></th>
+                        <td><%= part.provider.name%></td>
+                        <td><%= part.provider.cnpj %> </td>
+                        <td><%= part.provider.address %></td>
+                        <td><%= part.provider.created_at.to_date %></td>
+                        <td> <%= link_to "Ver", part.provider, class: "btn btn-primary" %> </td>
+                    </tr>
+                  <% end %>
+                </tbody>
+              </table>
+        </div>
+          
+        </div>
+        </div>
+    </div>
