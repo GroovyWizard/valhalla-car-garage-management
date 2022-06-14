@@ -23,7 +23,13 @@
     </div>
     <h2 class="text-center mx-auto pt-5 pb-2"> Todos os clientes cadastrados: </h2>
     
-    
+    <div class="mt-5 text-center">
+        <h4> Procurar por nome: </h4>
+        <%= form_tag(clients_path, method: :get) do %>
+            <%= text_field_tag(:search, params[:search]) %>
+            <%= submit_tag ("Procurar")%>
+        <% end %>
+    </div>
     <div class="container border border-dark p-5 text-center ">
 
 

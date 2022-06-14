@@ -35,5 +35,14 @@ class Client < ApplicationRecord
     return @clients_by_sale
   end 
 
+  def self.search(search)
+    if search 
+        @result = Client.where("name LIKE ?", "%" + search + "%")
+        puts(@result, "here")
+        return @result ? @result : Client.all
+    else 
+        return Client.all 
+    end  
+  end 
 
 end
