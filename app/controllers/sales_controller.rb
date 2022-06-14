@@ -108,6 +108,6 @@ end
 
     # Only allow a list of trusted parameters through.
     def sale_params
-      params.require(:sale).permit(:name, :description, :value, :comission_value, :service_id, :client_id, :user_id, part_ids: [])
+      params.require(:sale).permit(:start_date, :end_date, :name, :description, :value, :comission_value, :service_id, :client_id, :user_id, part_ids: [])
     end
 end

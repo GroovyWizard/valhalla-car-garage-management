@@ -43,12 +43,17 @@ class DashboardsController < ApplicationController
     @on_time_services = Dashboard.services_done_on_time
   end
 
-  def part_report 
+  def part_report
     @part_by_sale = Part.parts_by_sale_amount
-  end 
+  end
 
   def sale_report
     @sales = Sale.all
+    @sale_value_by_period = Sale.value_by_period(
+      params[:start_date], params[:end_date]
+    )
+    puts(@sale_value_by_period, "hereee")
+
   end
 
   def user_report
