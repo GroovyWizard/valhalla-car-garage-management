@@ -1,0 +1,993 @@
+BEGIN TRANSACTION;
+CREATE TABLE IF NOT EXISTS "clients" (
+	"id"	integer NOT NULL,
+	"name"	varchar,
+	"document"	varchar,
+	"phone"	varchar,
+	"address"	varchar,
+	"created_at"	datetime(6) NOT NULL,
+	"updated_at"	datetime(6) NOT NULL,
+	PRIMARY KEY("id" AUTOINCREMENT)
+);
+CREATE TABLE IF NOT EXISTS "vehicles" (
+	"id"	integer NOT NULL,
+	"model"	varchar DEFAULT NULL,
+	"registration_plate"	varchar DEFAULT NULL,
+	"created_at"	datetime(6) NOT NULL,
+	"updated_at"	datetime(6) NOT NULL,
+	"client_id"	integer DEFAULT NULL,
+	CONSTRAINT "fk_rails_71757241f0" FOREIGN KEY("client_id") REFERENCES "clients"("id"),
+	PRIMARY KEY("id")
+);
+CREATE TABLE IF NOT EXISTS "tasks" (
+	"id"	integer NOT NULL,
+	"title"	varchar,
+	"description"	text,
+	"status"	boolean,
+	"estimative"	date,
+	"created_at"	datetime(6) NOT NULL,
+	"updated_at"	datetime(6) NOT NULL,
+	"service_id"	integer,
+	"finish_date"	date,
+	PRIMARY KEY("id" AUTOINCREMENT)
+);
+CREATE TABLE IF NOT EXISTS "dashboards" (
+	"id"	integer NOT NULL,
+	"created_at"	datetime(6) NOT NULL,
+	"updated_at"	datetime(6) NOT NULL,
+	"comission_percentage"	integer,
+	PRIMARY KEY("id" AUTOINCREMENT)
+);
+CREATE TABLE IF NOT EXISTS "services" (
+	"id"	integer NOT NULL,
+	"title"	varchar DEFAULT NULL,
+	"status"	boolean DEFAULT NULL,
+	"estimative"	date DEFAULT NULL,
+	"value"	float DEFAULT NULL,
+	"created_at"	datetime(6) NOT NULL,
+	"updated_at"	datetime(6) NOT NULL,
+	"vehicle_id"	integer DEFAULT NULL,
+	"finish_date"	date DEFAULT NULL,
+	PRIMARY KEY("id")
+);
+CREATE TABLE IF NOT EXISTS "users" (
+	"id"	integer NOT NULL,
+	"email"	varchar NOT NULL DEFAULT '',
+	"encrypted_password"	varchar NOT NULL DEFAULT '',
+	"reset_password_token"	varchar,
+	"reset_password_sent_at"	datetime,
+	"remember_created_at"	datetime,
+	"created_at"	datetime(6) NOT NULL,
+	"updated_at"	datetime(6) NOT NULL,
+	"role"	integer,
+	"name"	varchar,
+	PRIMARY KEY("id" AUTOINCREMENT)
+);
+CREATE TABLE IF NOT EXISTS "sale_parts" (
+	"id"	integer NOT NULL,
+	"sale_id"	integer,
+	"part_id"	integer,
+	"part_value"	float,
+	"created_at"	datetime(6) NOT NULL,
+	"updated_at"	datetime(6) NOT NULL,
+	PRIMARY KEY("id" AUTOINCREMENT)
+);
+CREATE TABLE IF NOT EXISTS "sales" (
+	"id"	integer NOT NULL,
+	"name"	varchar DEFAULT NULL,
+	"description"	varchar DEFAULT NULL,
+	"value"	decimal(3, 2) DEFAULT NULL,
+	"created_at"	datetime(6) NOT NULL,
+	"updated_at"	datetime(6) NOT NULL,
+	"service_id"	integer DEFAULT NULL,
+	"client_id"	integer DEFAULT NULL,
+	"finished"	boolean DEFAULT NULL,
+	"comission_value"	decimal(3, 2) DEFAULT NULL,
+	"user_id"	integer DEFAULT NULL,
+	PRIMARY KEY("id")
+);
+CREATE TABLE IF NOT EXISTS "providers" (
+	"id"	integer NOT NULL,
+	"name"	varchar,
+	"cnpj"	varchar,
+	"address"	varchar,
+	"phone"	varchar,
+	"created_at"	datetime(6) NOT NULL,
+	"updated_at"	datetime(6) NOT NULL,
+	PRIMARY KEY("id" AUTOINCREMENT)
+);
+CREATE TABLE IF NOT EXISTS "parts" (
+	"id"	integer NOT NULL,
+	"name"	varchar DEFAULT NULL,
+	"value"	float DEFAULT NULL,
+	"created_at"	datetime(6) NOT NULL,
+	"updated_at"	datetime(6) NOT NULL,
+	"model"	varchar DEFAULT NULL,
+	"provider_id"	integer DEFAULT NULL,
+	PRIMARY KEY("id")
+);
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (1,'Neoma Schinner','170.523.272-87',NULL,'986 Lemke Ridge, Walshburgh, OK 07960','2022-05-15 23:08:04.041467','2022-05-15 23:08:04.041467');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (2,'Season Brown','540.873.128-60',NULL,'Apt. 440 64319 Swift Knolls, Leannonchester, NM 84688-6466','2022-05-15 23:08:04.051627','2022-05-15 23:08:04.051627');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (3,'The Hon. Angelic Harber','271.899.603-09',NULL,'Apt. 652 888 O''Kon Forest, Sheldonfort, VA 97913','2022-05-15 23:08:04.061791','2022-05-15 23:08:04.061791');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (4,'Stephani Nader','501.406.971-10',NULL,'8307 Petronila Plain, Bartonfurt, DE 41844','2022-05-15 23:08:04.073123','2022-05-15 23:08:04.073123');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (5,'Dr. Grant Morissette','714.410.938-34',NULL,'5416 Wolff Ports, Martinstad, MO 13366','2022-05-15 23:08:04.082840','2022-05-15 23:08:04.082840');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (6,'Roy Schowalter II','219.901.451-75',NULL,'Apt. 718 84704 Devon Green, Lake Mellisa, NC 32653','2022-05-15 23:08:04.092722','2022-05-15 23:08:04.092722');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (7,'Miss Xavier McDermott','897.263.399-28',NULL,'Apt. 586 4231 Nader Valley, Lake Otto, MO 92084','2022-05-15 23:08:04.102294','2022-05-15 23:08:04.102294');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (8,'Florida Heller','140.080.467-12',NULL,'9856 Alton Mount, Gottliebtown, AK 82753-0272','2022-05-15 23:08:04.111893','2022-05-15 23:08:04.111893');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (9,'Eusebio Bergstrom','733.137.292-07',NULL,'Suite 324 75308 DuBuque Ranch, Ryanborough, MD 79967','2022-05-15 23:08:04.121250','2022-05-15 23:08:04.121250');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (10,'Loyd Russel','040.453.988-21',NULL,'242 Thomas Junction, West Annabelle, DE 25939-1937','2022-05-15 23:08:04.130913','2022-05-15 23:08:04.130913');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (11,'Benton Stracke MD','458.383.892-14',NULL,'7730 Gottlieb Mountain, Janaestad, UT 61382-7393','2022-05-15 23:08:04.140210','2022-05-15 23:08:04.140210');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (12,'Mark Wolff','480.535.114-49',NULL,'7881 Swift Valley, Port Denverport, KS 47758-0410','2022-05-15 23:08:04.150314','2022-05-15 23:08:04.150314');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (13,'Connie Crooks VM','088.158.186-00',NULL,'Apt. 921 19143 Marvin Plains, Lake Berenice, RI 16812-6963','2022-05-15 23:08:04.162723','2022-05-15 23:08:04.162723');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (14,'Quinn Prohaska Jr.','113.346.551-03',NULL,'55030 Frami Walks, New Emileland, NJ 79750-1049','2022-05-15 23:08:04.172661','2022-05-15 23:08:04.172661');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (15,'Merle Price','132.483.221-52',NULL,'566 Hassan Ports, Juanbury, NV 10591-3424','2022-05-15 23:08:04.182647','2022-05-15 23:08:04.182647');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (16,'Assunta Rodriguez','689.704.145-92',NULL,'Apt. 776 8725 Kelly Crossing, North Larry, MA 20057','2022-05-15 23:08:04.192617','2022-05-15 23:08:04.192617');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (17,'Cathy Fritsch','274.427.169-11',NULL,'Apt. 185 5989 Mueller Lake, South Loraleechester, AL 84686','2022-05-15 23:08:04.202858','2022-05-15 23:08:04.202858');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (18,'Johnnie Bayer','204.579.223-46',NULL,'2689 Leannon River, Kovacekport, IL 79553','2022-05-15 23:08:04.212641','2022-05-15 23:08:04.212641');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (19,'Everett Wintheiser','987.227.744-32',NULL,'Suite 856 365 Heidenreich Stravenue, Louellashire, DE 43840-2540','2022-05-15 23:08:04.230248','2022-05-15 23:08:04.230248');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (20,'Nada Pacocha Esq.','931.755.606-01',NULL,'9062 Titus Summit, Nitzschemouth, MD 73983-3895','2022-05-15 23:08:04.250393','2022-05-15 23:08:04.250393');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (21,'Jamison Champlin','281.005.652-87',NULL,'Suite 595 627 Winnie Fork, Lake Trulabury, PA 60703','2022-05-15 23:08:04.263289','2022-05-15 23:08:04.263289');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (22,'Jerry Harvey DDS','972.388.412-74',NULL,'Apt. 383 4504 Jake Estates, West Georgemouth, WI 00012-3825','2022-05-15 23:08:04.274539','2022-05-15 23:08:04.274539');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (23,'Marin McCullough','189.221.665-50',NULL,'194 Kunze Circle, West Wilbertmouth, WA 17502','2022-05-15 23:08:04.283741','2022-05-15 23:08:04.283741');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (24,'Una Schmidt','026.265.612-40',NULL,'98693 Deon Route, Rempelmouth, NE 96444-5128','2022-05-15 23:08:04.293651','2022-05-15 23:08:04.293651');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (25,'Sen. Noble Marquardt','245.283.942-60',NULL,'Suite 805 2835 Gottlieb River, Port Gaye, WV 41835-6153','2022-05-15 23:08:04.314345','2022-05-15 23:08:04.314345');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (26,'Mayola Yost','549.699.450-04',NULL,'Apt. 480 519 Daisy Grove, South Ervinborough, MS 05480','2022-05-15 23:08:04.325441','2022-05-15 23:08:04.325441');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (27,'Elisha Leffler Esq.','784.688.584-71',NULL,'Suite 525 680 Albert Glens, South Heidi, WY 63080-9278','2022-05-15 23:08:04.336254','2022-05-15 23:08:04.336254');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (28,'Mickie Ferry','764.343.288-00',NULL,'3708 Corey Knolls, West Ethyl, ME 40219-5693','2022-05-15 23:08:04.346613','2022-05-15 23:08:04.346613');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (29,'Miss Leesa Bergnaum','009.696.969-57',NULL,'90998 Keely Port, Wintheiserland, OR 27344-3615','2022-05-15 23:08:04.356912','2022-05-15 23:08:04.356912');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (30,'Keneth Ryan','781.636.239-00',NULL,'Apt. 423 9237 Wade Curve, Bradtkeside, OK 70621','2022-05-15 23:08:04.371591','2022-05-15 23:08:04.371591');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (31,'Rhett Walsh Sr.','812.861.099-65',NULL,'Apt. 219 91011 Kerri Alley, Leuschkefort, MS 01687','2022-05-15 23:08:04.384180','2022-05-15 23:08:04.384180');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (32,'Kaycee Weimann','744.693.251-12',NULL,'8814 Kovacek Groves, West Yongshire, WI 49161','2022-05-15 23:08:04.397385','2022-05-15 23:08:04.397385');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (33,'Emmie Hintz DVM','648.614.491-20',NULL,'2002 Schuppe Gardens, Brittnyborough, AL 97593','2022-05-15 23:08:04.409329','2022-05-15 23:08:04.409329');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (34,'Leonard Swaniawski','965.600.688-70',NULL,'83354 Chung Place, Doylefort, RI 79416-0979','2022-05-15 23:08:04.419782','2022-05-15 23:08:04.419782');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (35,'Gilbert Gorczany','929.866.188-63',NULL,'23742 Gino Mountains, North Onita, NJ 50926','2022-05-15 23:08:04.430093','2022-05-15 23:08:04.430093');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (36,'Corrie Koelpin','133.904.926-07',NULL,'8469 Lueilwitz Views, Lake Katherin, MO 20005','2022-05-15 23:08:04.440688','2022-05-15 23:08:04.440688');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (37,'Deangelo Rolfson','138.788.251-10',NULL,'295 Borer Road, West Tatummouth, WV 43977-1329','2022-05-15 23:08:04.450523','2022-05-15 23:08:04.450523');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (38,'Earl Mraz CPA','745.593.763-60',NULL,'Apt. 782 57661 Lina Rapids, Lunahaven, MO 71525','2022-05-15 23:08:04.463375','2022-05-15 23:08:04.463375');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (39,'Antoinette Crona II','247.199.846-14',NULL,'501 Rocco Mills, Kathlineview, AZ 26832','2022-05-15 23:08:04.476402','2022-05-15 23:08:04.476402');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (40,'Peggy Kassulke JD','902.170.721-78',NULL,'Suite 359 10904 Zboncak Shore, West Nestor, CT 13827-3086','2022-05-15 23:08:04.486868','2022-05-15 23:08:04.486868');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (41,'Jacelyn Ferry','158.965.330-04',NULL,'919 O''Conner Ports, Windlerfort, SC 34015','2022-05-15 23:08:04.497006','2022-05-15 23:08:04.497006');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (42,'Lucas Blanda','896.192.008-10',NULL,'Apt. 575 5157 Tonie Tunnel, New Keenan, OH 61155','2022-05-15 23:08:04.507127','2022-05-15 23:08:04.507127');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (43,'Mohammad Lubowitz','007.802.555-93',NULL,'Suite 931 222 Grady Creek, Florindaburgh, SC 37585','2022-05-15 23:08:04.519779','2022-05-15 23:08:04.519779');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (44,'Mr. Yvette Robel','837.301.348-25',NULL,'7162 Bosco Port, West Loreleimouth, CT 58180','2022-05-15 23:08:04.530077','2022-05-15 23:08:04.530077');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (45,'Shantell Block','916.607.449-54',NULL,'3331 Trena Path, Port Darwinhaven, MT 42195','2022-05-15 23:08:04.541489','2022-05-15 23:08:04.541489');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (46,'Tommie Williamson','062.673.302-22',NULL,'33793 Purdy Court, West Marleen, NH 19549','2022-05-15 23:08:04.553645','2022-05-15 23:08:04.553645');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (47,'Gilberto Monahan','147.597.099-40',NULL,'62165 Bernardo Prairie, East Martina, NJ 92958-3389','2022-05-15 23:08:04.564075','2022-05-15 23:08:04.564075');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (48,'Jessica Kertzmann','897.204.571-39',NULL,'Apt. 133 187 Schneider Summit, West Odellshire, IA 66208-7616','2022-05-15 23:08:04.574449','2022-05-15 23:08:04.574449');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (49,'Otis Marquardt','363.403.630-32',NULL,'7609 Corkery Mills, Bruenmouth, IA 17471','2022-05-15 23:08:04.593875','2022-05-15 23:08:04.593875');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (50,'Reggie Hansen II','335.093.503-67',NULL,'Apt. 687 727 Kozey Stravenue, Audrybury, MN 62589-0787','2022-05-15 23:08:04.614457','2022-05-15 23:08:04.614457');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (51,'Garona Halforcen','027.931.978-90',NULL,'Apt. 988 974 Macy Land, Herminiaberg, NH 37020','2022-05-22 22:12:47.813675','2022-05-22 22:12:47.813675');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (52,'Archimonde','279.242.127-44',NULL,'Suite 348 8253 Shawanna Creek, Hermistonmouth, MO 33123','2022-05-22 22:12:47.823576','2022-05-22 22:12:47.823576');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (53,'Arthas Menthil','253.281.737-24',NULL,'12797 Odilia Fork, Lilianafort, SC 59730','2022-05-22 22:12:47.833760','2022-05-22 22:12:47.833760');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (54,'Brann Bronzebeard','438.438.838-15',NULL,'2084 Clint Harbor, Galenburgh, VT 77358','2022-05-22 22:12:47.845023','2022-05-22 22:12:47.845023');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (55,'Muradin Bronzebeard','845.670.956-50',NULL,'68893 Lesch Pass, Denesikfurt, OK 54459','2022-05-22 22:12:47.856097','2022-05-22 22:12:47.856097');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (56,'Brann Bronzebeard','465.852.230-63',NULL,'81484 Von Cape, Glovermouth, OH 70427-1192','2022-05-22 22:12:47.867288','2022-05-22 22:12:47.867288');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (57,'Kael''thas Sunstrider','795.672.218-71',NULL,'Suite 211 3317 Rogahn Corner, Haneshire, AL 69873','2022-05-22 22:12:47.879293','2022-05-22 22:12:47.879293');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (58,'Uther the Lightbringer','817.252.809-49',NULL,'Apt. 402 26210 Hermiston Plains, West Leestad, UT 91740','2022-05-22 22:12:47.892641','2022-05-22 22:12:47.892641');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (59,'Mannoroth','653.076.989-76',NULL,'Apt. 292 398 Goyette Lodge, Ellischester, KS 31650','2022-05-22 22:12:47.906254','2022-05-22 22:12:47.906254');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (60,'Kil''jaeden','948.507.573-16',NULL,'7696 Jill Expressway, South Modesto, MA 34613-6595','2022-05-22 22:12:47.918217','2022-05-22 22:12:47.918217');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (61,'Blackhand','582.536.591-56',NULL,'Apt. 261 47010 Marcellus Turnpike, Port Moises, MI 69093-6868','2022-05-22 22:12:47.933656','2022-05-22 22:12:47.933656');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (62,'Mannoroth','838.063.842-58',NULL,'Apt. 146 1209 Jackie Motorway, South Keiko, CA 54122-8255','2022-05-22 22:12:47.945925','2022-05-22 22:12:47.945925');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (63,'Garona Halforcen','979.490.025-73',NULL,'1391 Hoeger Falls, Port Ressiemouth, MS 52375-1146','2022-05-22 22:12:47.959172','2022-05-22 22:12:47.959172');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (64,'Mal''Ganis','041.598.350-90',NULL,'Apt. 216 296 Boyce Locks, Botsfordbury, WI 54155','2022-05-22 22:12:47.969736','2022-05-22 22:12:47.969736');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (65,'Balnazzar','983.312.374-04',NULL,'576 Nader Keys, Sharleneville, TN 10100-4945','2022-05-22 22:12:47.980746','2022-05-22 22:12:47.980746');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (66,'Varian Wrynn','880.764.475-42',NULL,'931 Norris Gardens, Meridethstad, IA 69347-8254','2022-05-22 22:12:47.991703','2022-05-22 22:12:47.991703');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (67,'King Llane Wrynn','093.098.983-05',NULL,'Suite 334 569 Nigel Village, Virgiliochester, NJ 33917','2022-05-22 22:12:48.002296','2022-05-22 22:12:48.002296');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (68,'Bolvar Fordragon','862.507.179-19',NULL,'71240 Torp Track, East Loris, WV 57775','2022-05-22 22:12:48.013399','2022-05-22 22:12:48.013399');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (69,'Medivh','881.033.301-24',NULL,'7565 Little Ridge, Orlandoland, WI 28502','2022-05-22 22:12:48.023476','2022-05-22 22:12:48.023476');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (70,'Balnazzar','624.478.321-25',NULL,'143 Angela Manors, Hoppeside, TN 83449','2022-05-22 22:12:48.033653','2022-05-22 22:12:48.033653');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (71,'Balnazzar','801.432.322-07',NULL,'608 Betty Wells, East Kenishaberg, UT 98439-2618','2022-05-22 22:12:48.046970','2022-05-22 22:12:48.046970');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (72,'Gul''dan','039.074.923-07',NULL,'Suite 986 13219 Bartoletti Coves, Faheyland, NY 57248','2022-05-22 22:12:48.059302','2022-05-22 22:12:48.059302');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (73,'Ner''zhul','025.048.654-73',NULL,'21339 Veum Hollow, Bergeborough, FL 80912','2022-05-22 22:12:48.070425','2022-05-22 22:12:48.070425');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (74,'Magtheridon','081.141.535-04',NULL,'808 Bertie Harbors, East Quincytown, SC 44760-3296','2022-05-22 22:12:48.083256','2022-05-22 22:12:48.083256');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (75,'Muradin Bronzebeard','016.764.258-88',NULL,'Suite 758 8545 Valentine Camp, Lake Napoleon, WI 44464-7318','2022-05-22 22:12:48.094592','2022-05-22 22:12:48.094592');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (76,'Gul''dan','424.940.163-47',NULL,'54490 Considine Center, Lake Brittany, NH 22918','2022-05-22 22:12:48.114889','2022-05-22 22:12:48.114889');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (77,'Garona Halforcen','009.588.415-78',NULL,'Apt. 102 760 Mitchell River, Lubahaven, PA 89801','2022-05-22 22:12:48.128224','2022-05-22 22:12:48.128224');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (78,'Illidan Stormrage','427.871.798-94',NULL,'547 Shelton Forest, Hegmannborough, MI 36042-7860','2022-05-22 22:12:48.140174','2022-05-22 22:12:48.140174');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (79,'Millhouse Manastorm','105.943.676-03',NULL,'523 Carley Pike, Dietrichstad, OR 81513-0061','2022-05-22 22:12:48.150159','2022-05-22 22:12:48.150159');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (80,'Antonidas','937.912.304-33',NULL,'7736 Kreiger Points, Florancemouth, AL 74681','2022-05-22 22:12:48.162249','2022-05-22 22:12:48.162249');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (81,'King Llane Wrynn','379.718.488-38',NULL,'Apt. 357 997 Adolph Village, Bertramton, NC 17986-3032','2022-05-22 22:12:48.173099','2022-05-22 22:12:48.173099');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (82,'Gul''dan','386.103.722-00',NULL,'Suite 535 300 Corkery Drive, Creminshire, TX 44340','2022-05-22 22:12:48.182995','2022-05-22 22:12:48.182995');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (83,'Varian Wrynn','168.988.215-80',NULL,'912 Volkman Ford, New Hans, MD 99080','2022-05-22 22:12:48.193408','2022-05-22 22:12:48.193408');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (84,'Uther the Lightbringer','141.990.780-88',NULL,'Apt. 273 9109 O''Kon Prairie, New Rosiomouth, UT 10874-1727','2022-05-22 22:12:48.204485','2022-05-22 22:12:48.204485');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (85,'Kil''jaeden','325.036.027-97',NULL,'Suite 764 776 Charla Green, Gulgowskiland, ME 63127','2022-05-22 22:12:48.215303','2022-05-22 22:12:48.215303');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (86,'Uther the Lightbringer','411.289.492-96',NULL,'Apt. 630 4640 Shauna Ferry, Alisetown, WA 55739-3616','2022-05-22 22:12:48.227703','2022-05-22 22:12:48.227703');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (87,'Anduin Lothar','892.067.174-56',NULL,'Suite 740 1785 Ezekiel Ramp, Hodkiewiczchester, MT 37458-7661','2022-05-22 22:12:48.238125','2022-05-22 22:12:48.238125');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (88,'Gul''dan','745.102.001-02',NULL,'672 Cummerata Court, East Albertaberg, MS 11325','2022-05-22 22:12:48.248512','2022-05-22 22:12:48.248512');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (89,'Magtheridon','265.898.880-00',NULL,'39695 Carol Key, East Enochmouth, AK 25157','2022-05-22 22:12:48.258304','2022-05-22 22:12:48.258304');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (90,'Uther the Lightbringer','730.814.161-67',NULL,'286 Toy Rapids, Kirlinfort, IL 10527-6881','2022-05-22 22:12:48.271051','2022-05-22 22:12:48.271051');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (91,'Illidan Stormrage','041.177.288-06',NULL,'883 Cummings Prairie, Schowalterfort, RI 62912-4805','2022-05-22 22:12:48.282876','2022-05-22 22:12:48.282876');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (92,'Lady Taria','140.777.793-91',NULL,'6559 Hansen Views, North Kirstinchester, ID 31995','2022-05-22 22:12:48.293011','2022-05-22 22:12:48.293011');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (93,'Magtheridon','165.219.918-76',NULL,'6509 Lehner Hollow, Karlton, RI 31962','2022-05-22 22:12:48.302774','2022-05-22 22:12:48.302774');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (94,'Khadgar','582.581.536-84',NULL,'Suite 887 7403 Wiza Radial, Lake Violette, VT 90774','2022-05-22 22:12:48.312497','2022-05-22 22:12:48.312497');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (95,'Jaina Proudmoore','282.837.247-20',NULL,'873 Dion Oval, North Contessaview, OK 38108','2022-05-22 22:12:48.322321','2022-05-22 22:12:48.322321');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (96,'Bolvar Fordragon','171.569.764-27',NULL,'8574 Prohaska Spurs, Faytown, WV 33385','2022-05-22 22:12:48.332350','2022-05-22 22:12:48.332350');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (97,'Ner''zhul','137.577.191-40',NULL,'Apt. 607 1835 Predovic Wells, North Melania, RI 32351','2022-05-22 22:12:48.342491','2022-05-22 22:12:48.342491');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (98,'Mal''Ganis','394.892.449-02',NULL,'29324 Barton Garden, Strackeborough, SC 36860-5545','2022-05-22 22:12:48.352797','2022-05-22 22:12:48.352797');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (99,'Magtheridon','628.673.489-94',NULL,'7366 Brakus Harbor, Grantton, NC 73703-4000','2022-05-22 22:12:48.362894','2022-05-22 22:12:48.362894');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (100,'Arthas Menthil','983.475.277-68',NULL,'82772 Beau Prairie, New Robbyburgh, NY 35395-5620','2022-05-22 22:12:48.373199','2022-05-22 22:12:48.373199');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (101,'Orgrim Doomhammer','429.481.957-05',NULL,'86587 Maybelle Shoal, Port Del, IA 92447','2022-05-25 13:37:51.339859','2022-05-25 13:37:51.339859');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (102,'Malfurion Stormrage','749.425.851-55',NULL,'Suite 257 760 Goyette Turnpike, North Sadyeshire, MD 25966-7093','2022-05-25 13:37:51.368456','2022-05-25 13:37:51.368456');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (103,'Illidan Stormrage','245.656.727-74',NULL,'83200 Bogan Skyway, Peteberg, GA 38996-3105','2022-05-25 13:37:51.388191','2022-05-25 13:37:51.388191');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (104,'Sargeras','595.401.347-06',NULL,'Apt. 375 2543 Ila Tunnel, East Manual, CT 66289-8338','2022-05-25 13:37:51.408809','2022-05-25 13:37:51.408809');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (105,'Brann Bronzebeard','271.087.895-07',NULL,'Apt. 747 7920 Bogisich Terrace, Walkertown, GA 67894-6783','2022-05-25 13:37:51.427338','2022-05-25 13:37:51.427338');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (106,'Khadgar','480.378.197-44',NULL,'7136 Jeramy Summit, Bertport, MD 44783','2022-05-25 13:37:51.445609','2022-05-25 13:37:51.445609');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (107,'Khadgar','160.648.988-79',NULL,'Apt. 545 3527 Elliott Trail, Lake Hermilafort, UT 53640','2022-05-25 13:37:51.468678','2022-05-25 13:37:51.468678');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (108,'Blackhand','082.747.238-21',NULL,'1395 Parisian Villages, Jacintoburgh, WI 28311','2022-05-25 13:37:51.485975','2022-05-25 13:37:51.485975');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (109,'Anduin Lothar','066.359.455-39',NULL,'Suite 881 77837 Sporer Corner, West Malorie, CO 74367-0220','2022-05-25 13:37:51.504576','2022-05-25 13:37:51.504576');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (110,'Blackhand','151.810.929-26',NULL,'Apt. 459 16035 Blanda Crest, East Shalonside, ID 04911','2022-05-25 13:37:51.523158','2022-05-25 13:37:51.523158');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (111,'Gollum','686.142.883-36',NULL,'Apt. 515 66235 Simonis Stream, Leannonland, OK 37495','2022-05-25 13:37:51.541825','2022-05-25 13:37:51.541825');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (112,'Éomer','651.355.644-97',NULL,'831 Denesik Field, Orlandohaven, NY 24921-7790','2022-05-25 13:37:51.561219','2022-05-25 13:37:51.561219');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (113,'Shelob','205.982.190-80',NULL,'26088 Kutch Fields, North Micheal, IA 29327','2022-05-25 13:37:51.590357','2022-05-25 13:37:51.590357');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (114,'Frodo Baggins','219.452.586-67',NULL,'59056 Kunze Lights, Weberborough, WY 76487-0070','2022-05-25 13:37:51.614195','2022-05-25 13:37:51.614195');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (115,'Arwen Evenstar','536.857.062-76',NULL,'97775 Langworth Drive, Port Lorenbury, MT 44681','2022-05-25 13:37:51.633439','2022-05-25 13:37:51.633439');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (116,'Quickbeam','074.964.991-70',NULL,'131 Salvatore Road, North Carmine, ID 00316-5658','2022-05-25 13:37:51.659510','2022-05-25 13:37:51.659510');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (117,'Boromir','413.136.236-87',NULL,'Suite 292 9258 Gulgowski Ville, East Jonah, NY 87920','2022-05-25 13:37:51.694238','2022-05-25 13:37:51.694238');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (118,'Arwen Evenstar','073.756.855-09',NULL,'61192 Berge Stravenue, North Blancheberg, MA 40122-3425','2022-05-25 13:37:51.718554','2022-05-25 13:37:51.718554');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (119,'Faramir','894.731.753-53',NULL,'391 DuBuque Skyway, Stoltenbergmouth, NY 46441-3214','2022-05-25 13:37:51.738751','2022-05-25 13:37:51.738751');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (120,'Meriadoc Brandybuck','676.908.478-38',NULL,'Apt. 513 2625 Kunde Isle, Hoppefurt, NJ 25754-9735','2022-05-25 13:37:51.758383','2022-05-25 13:37:51.758383');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (121,'Malfurion Stormrage','722.196.589-70',NULL,'Suite 230 7530 Becker Trafficway, Adenachester, TN 82355-2674','2022-05-25 13:38:27.021285','2022-05-25 13:38:27.021285');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (122,'Magtheridon','030.298.560-38',NULL,'Suite 155 38232 Effertz Dale, West Beehaven, MS 87012','2022-05-25 13:38:27.051338','2022-05-25 13:38:27.051338');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (123,'Sargeras','942.402.761-36',NULL,'5316 Heathcote Falls, New Patrickchester, FL 70124-4520','2022-05-25 13:38:27.074088','2022-05-25 13:38:27.074088');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (124,'Lady Taria','252.697.834-36',NULL,'Apt. 715 2459 Johnston Locks, East Lesliestad, SC 61322-7149','2022-05-25 13:38:27.098200','2022-05-25 13:38:27.098200');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (125,'Gul''dan','141.721.909-28',NULL,'89946 Gerhold Underpass, Rolfsonbury, MD 38614','2022-05-25 13:38:27.122886','2022-05-25 13:38:27.122886');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (126,'Illidan Stormrage','770.392.244-70',NULL,'28048 McLaughlin Isle, South Bradly, NM 50039','2022-05-25 13:38:27.154906','2022-05-25 13:38:27.154906');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (127,'Arthas Menthil','425.569.103-72',NULL,'Suite 319 118 Kessler Crossing, South Joannstad, CO 56945-6515','2022-05-25 13:38:27.184535','2022-05-25 13:38:27.184535');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (128,'Sylvanas Windrunner','126.344.368-07',NULL,'Suite 480 316 Schimmel Mission, Port Patrickville, ND 75322','2022-05-25 13:38:27.206386','2022-05-25 13:38:27.206386');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (129,'Anduin Lothar','589.393.397-46',NULL,'Apt. 703 555 Steven Street, North Bellahaven, CT 53096','2022-05-25 13:38:27.227491','2022-05-25 13:38:27.227491');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (130,'Kael''thas Sunstrider','752.637.182-68',NULL,'Suite 123 219 Porfirio Glens, Johnstonmouth, CT 25409','2022-05-25 13:38:27.248381','2022-05-25 13:38:27.248381');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (131,'Legolas','654.444.799-40',NULL,'Apt. 553 9572 Emard Estate, Schowalterstad, VT 08018-3265','2022-05-25 13:38:27.271311','2022-05-25 13:38:27.271311');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (132,'Gollum','697.458.768-60',NULL,'Suite 986 5034 Bernhard Radial, New Yoshikoborough, VA 22315-4938','2022-05-25 13:38:27.290935','2022-05-25 13:38:27.290935');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (133,'Elrond','397.909.810-90',NULL,'Apt. 151 42419 Eugene Crest, Prosaccoton, AZ 67978','2022-05-25 13:38:27.324208','2022-05-25 13:38:27.324208');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (134,'Faramir','250.743.490-28',NULL,'8851 Thomas Springs, Lake Whitney, KS 90305-3155','2022-05-25 13:38:27.347022','2022-05-25 13:38:27.347022');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (135,'Samwise Gamgee','217.384.706-60',NULL,'Apt. 478 5421 Stevie Plains, Jenkinsstad, ME 10287-4592','2022-05-25 13:38:27.367795','2022-05-25 13:38:27.367795');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (136,'Elrond','056.367.819-46',NULL,'7693 Sterling Harbor, Schneidertown, WY 13918-6036','2022-05-25 13:38:27.390376','2022-05-25 13:38:27.390376');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (137,'Aragorn','180.425.661-74',NULL,'83640 Dare Station, Harryfurt, DE 43491-6529','2022-05-25 13:38:27.412664','2022-05-25 13:38:27.412664');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (138,'Boromir','145.056.420-89',NULL,'8923 Juliet Shores, Raleighmouth, ND 87662','2022-05-25 13:38:27.435772','2022-05-25 13:38:27.435772');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (139,'Peregrin Took','077.731.668-46',NULL,'392 Kimberlie Parks, Hilpertfurt, HI 09418','2022-05-25 13:38:27.458689','2022-05-25 13:38:27.458689');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (140,'Denethor','900.293.436-07',NULL,'Apt. 633 4833 Jessie Rest, Russelside, IA 28090-2773','2022-05-25 13:38:27.480066','2022-05-25 13:38:27.480066');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (141,'Lyra Erso','166.524.020-25',NULL,'Apt. 679 529 Schumm Lake, North Oralia, CT 02724','2022-05-25 13:38:27.501918','2022-05-25 13:38:27.501918');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (142,'Kylo Ren','233.739.457-39',NULL,'438 Dominic Row, North Dontehaven, ID 87956','2022-05-25 13:38:27.527302','2022-05-25 13:38:27.527302');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (143,'Chewbacca','522.994.855-89',NULL,'9306 Arlinda Walks, East Kellye, VA 49200','2022-05-25 13:38:27.549761','2022-05-25 13:38:27.549761');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (144,'Yoda','202.524.711-72',NULL,'438 Barrows Views, Lefflertown, ND 52592-8677','2022-05-25 13:38:27.568917','2022-05-25 13:38:27.568917');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (145,'Han Solo','306.461.041-44',NULL,'82772 Miller Streets, North Lupe, KY 76184','2022-05-25 13:38:27.589125','2022-05-25 13:38:27.589125');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (146,'Galen Erso','308.197.117-99',NULL,'Apt. 551 3366 Darwin View, Gerardport, MA 63191','2022-05-25 13:38:27.612101','2022-05-25 13:38:27.612101');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (147,'Obi-Wan Kenobi','726.621.533-18',NULL,'Suite 104 11864 Durgan Square, North Paulene, CT 13062','2022-05-25 13:38:27.632437','2022-05-25 13:38:27.632437');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (148,'Ezra Bridger','363.773.298-06',NULL,'24423 Vannessa Street, New Carenhaven, ND 07665-5465','2022-05-25 13:38:27.653702','2022-05-25 13:38:27.653702');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (149,'Vice Admiral Holdo','452.679.684-04',NULL,'Apt. 417 71383 Vida Drive, New Viva, MD 74349-1542','2022-05-25 13:38:27.675670','2022-05-25 13:38:27.675670');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (150,'Yoda','401.197.374-26',NULL,'5632 Marty Ferry, Merylview, KS 54787','2022-05-25 13:38:27.695738','2022-05-25 13:38:27.695738');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (151,'Serrit','236.755.406-42',NULL,'6817 Carrie Stream, New Roosevelt, AK 08424-3902','2022-05-25 13:38:27.715363','2022-05-25 13:38:27.715363');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (152,'Letho of Gulet','144.498.120-00',NULL,'24190 Taylor Forge, Enriquemouth, NE 75580','2022-05-25 13:38:27.735981','2022-05-25 13:38:27.735981');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (153,'Coën','152.973.049-03',NULL,'Suite 138 37941 Merna Oval, Reichertfort, GA 05393','2022-05-25 13:38:27.754719','2022-05-25 13:38:27.754719');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (154,'Auckes','694.639.978-14',NULL,'Apt. 685 1671 Mike Rue, New Delora, IA 48227-8934','2022-05-25 13:38:27.773376','2022-05-25 13:38:27.773376');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (155,'Vesemir','765.934.051-40',NULL,'Suite 588 970 Kaitlin Forges, Port Marvaview, NM 24538','2022-05-25 13:38:27.792678','2022-05-25 13:38:27.792678');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (156,'Brann Bronzebeard','287.918.357-04','21','Quadra 56 23893 Avenida Karla Fogaça, Wanderley, RR 13174-718','2022-05-29 17:34:23.421521','2022-05-29 17:34:23.421521');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (157,'Kael''thas Sunstrider','195.950.346-49','53','3937 Ponte Olívia, Munhoz, TO 85559-619','2022-05-29 17:34:23.472443','2022-05-29 17:34:23.472443');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (158,'Durotan','783.147.093-01','28','Sobrado 13 92225 Marginal Igor, Goiana, MA 76216-803','2022-05-29 17:34:23.502697','2022-05-29 17:34:23.502697');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (159,'Mannoroth','210.988.668-43','43','s/n Viela Nataniel Rebouças, Jundiá, PR 07999-731','2022-05-29 17:34:23.532549','2022-05-29 17:34:23.532549');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (160,'Varian Wrynn','574.453.428-85','51','Lote 59 94056 Travessa Ian Solimões, Ilópolis, RR 83519-400','2022-05-29 17:34:23.572733','2022-05-29 17:34:23.572733');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (161,'Varian Wrynn','667.237.208-30','73','s/n Avenida Lucas, Monsenhor Hipólito, RN 27918-075','2022-05-29 17:34:23.603094','2022-05-29 17:34:23.603094');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (162,'Balnazzar','189.291.822-67','66','s/n Rua Enzo de Lins, Paraguaçu, RS 04854-921','2022-05-29 17:34:23.638449','2022-05-29 17:34:23.638449');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (163,'Durotan','370.615.555-99','62','21555 Ponte Enzo Miguel Fontinhas, São Domingos do Norte, PB 95775-668','2022-05-29 17:34:23.672584','2022-05-29 17:34:23.672584');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (164,'Gul''dan','811.362.936-04','28','Lote 32 s/n Alameda Gustavo, Ipiaú, AC 36754-750','2022-05-29 17:34:23.702913','2022-05-29 17:34:23.702913');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (165,'Sylvanas Windrunner','718.396.972-02','24','Sobrado 78 s/n Rua Roberta Mendes, Palmeirópolis, TO 78205-752','2022-05-29 17:34:23.736881','2022-05-29 17:34:23.736881');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (166,'Meriadoc Brandybuck','736.190.606-06','62','Quadra 60 89655 Viela Isadora Ferraço, Chupinguaia, BA 33837-131','2022-05-29 17:34:23.774540','2022-05-29 17:34:23.774540');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (167,'Tom Bombadil','132.959.097-09','83','s/n Avenida Rodrigo Quarteira, Carinhanha, CE 75719-471','2022-05-29 17:34:23.815002','2022-05-29 17:34:23.815002');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (168,'Beregond','888.279.896-84','63','Apto. 558 17078 Rua Louise, Vargeão, AP 94273-030','2022-05-29 17:34:23.851381','2022-05-29 17:34:23.851381');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (169,'Faramir','996.876.522-84','21','869 Alameda Paula, São Sebastião da Amoreira, SP 22677-824','2022-05-29 17:34:23.908479','2022-05-29 17:34:23.908479');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (170,'Barliman Butterbur','975.740.477-23','51','1779 Ponte Isabel da Aldeia, São Domingos, RN 20133-982','2022-05-29 17:34:23.939752','2022-05-29 17:34:23.939752');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (171,'Shadowfax','494.716.742-47','63','s/n Rua Kaique, Rodeiro, RR 37082-242','2022-05-29 17:34:23.977355','2022-05-29 17:34:23.977355');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (172,'Frodo Baggins','879.410.171-05','99','Quadra 19 233 Rodovia Clara, Tiradentes, PI 78813-821','2022-05-29 17:34:24.012837','2022-05-29 17:34:24.012837');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (173,'Elrond','288.379.700-56','22','5574 Avenida Mathias, Júlio Borges, RN 90357-343','2022-05-29 17:34:24.051487','2022-05-29 17:34:24.051487');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (174,'Gandalf the Grey','930.292.696-63','22','Quadra 32 15230 Alameda Eduarda da Barra, Sentinela do Sul, AL 48672-167','2022-05-29 17:34:24.088705','2022-05-29 17:34:24.088705');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (175,'Samwise Gamgee','045.212.165-52','33','235 Avenida Márcio Viveiros, Florânia, AM 29074-165','2022-05-29 17:34:24.124857','2022-05-29 17:34:24.124857');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (176,'Mace Windu','646.338.667-70','27','Apto. 613 9281 Travessa Paula, Milhã, PI 27414-905','2022-05-29 17:34:24.164530','2022-05-29 17:34:24.164530');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (177,'Rune Haako','422.955.554-77','88','3297 Travessa Luiza, Dourados, MS 19442-221','2022-05-29 17:34:24.195917','2022-05-29 17:34:24.195917');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (178,'Qui-Gon Jinn','614.290.155-00','18','534 Travessa Noah Fontes, Frei Paulo, MS 62657-055','2022-05-29 17:34:24.231492','2022-05-29 17:34:24.231492');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (179,'Admiral Ackbar','761.513.598-28','62','Apto. 683 s/n Marginal Helena da Silva, Mostardas, AP 22500-193','2022-05-29 17:34:24.270954','2022-05-29 17:34:24.270954');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (180,'Admiral Ackbar','444.821.857-01','95','Lote 90 497 Marginal Giovanna Porteira, Silvanópolis, RN 93227-071','2022-05-29 17:34:24.309089','2022-05-29 17:34:24.309089');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (181,'Panaka','648.400.650-47','16','9921 Ponte Pedro Tobias Assumpção, Porto Firme, DF 89992-051','2022-05-29 17:34:24.339536','2022-05-29 17:34:24.339536');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (182,'Kylo Ren','387.318.796-59','61','Quadra 23 s/n Viela Antônio, Três Lagoas, PA 91904-944','2022-05-29 17:34:24.377609','2022-05-29 17:34:24.377609');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (183,'Galen Erso','276.627.696-31','83','9439 Marginal João Gabriel, Urupema, AP 91287-898','2022-05-29 17:34:24.423020','2022-05-29 17:34:24.423020');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (184,'Bendu','501.448.252-01','35','366 Rua Maitê, Cristinápolis, SC 79743-495','2022-05-29 17:34:24.459322','2022-05-29 17:34:24.459322');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (185,'Kylo Ren','408.929.930-65','77','772 Alameda Sirineu Castanho, Garuva, PR 91739-298','2022-05-29 17:34:24.493537','2022-05-29 17:34:24.493537');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (186,'Coën','227.642.934-88','79','9455 Avenida Yago, Taipas do Tocantins, PB 75030-317','2022-05-29 17:34:24.527522','2022-05-29 17:34:24.527522');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (187,'Ivar Evil-Eye','962.733.394-81','79','Lote 53 4772 Ponte Lorenzo Esteves, Santa Isabel, AC 71416-640','2022-05-29 17:34:24.569190','2022-05-29 17:34:24.569190');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (188,'Letho of Gulet','951.611.124-68','66','Lote 56 3337 Rodovia Malu Esteves, Nova Russas, PI 07691-958','2022-05-29 17:34:24.606249','2022-05-29 17:34:24.606249');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (189,'Kolgrim','837.888.765-06','13','Lote 56 75585 Travessa Davi Mendanha, Figueirópolis d''Oeste, MS 03262-272','2022-05-29 17:34:24.643644','2022-05-29 17:34:24.643644');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (190,'Letho of Gulet','077.751.794-90','34','Apto. 225 4689 Rua Lucas Figueira, Ferreiros, AL 50183-861','2022-05-29 17:34:24.689677','2022-05-29 17:34:24.689677');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (191,'Arthas Menthil','423.482.268-04','99','Casa 2 4737 Marginal Maria Laura Rolim, Turmalina, CE 97333-327','2022-05-29 17:36:40.478426','2022-05-29 17:36:40.478426');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (192,'Millhouse Manastorm','588.781.746-10','82','Casa 4 s/n Marginal Isabel Barbosa, Chapada dos Guimarães, GO 50000-892','2022-05-29 17:36:40.532961','2022-05-29 17:36:40.532961');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (193,'Garona Halforcen','457.102.026-06','82','Apto. 726 s/n Marginal João, Balneário Pinhal, PI 23474-489','2022-05-29 17:36:40.572307','2022-05-29 17:36:40.572307');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (194,'Sylvanas Windrunner','196.548.408-55','61','Quadra 66 71808 Rodovia Karla Nogueira, Cajazeiras, AM 42797-912','2022-05-29 17:36:40.601922','2022-05-29 17:36:40.601922');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (195,'Uther the Lightbringer','503.966.942-92','21','740 Travessa Marcela da Rosa, Cambará, PI 97746-189','2022-05-29 17:36:40.635731','2022-05-29 17:36:40.635731');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (196,'Anduin Lothar','574.140.171-68','33','749 Travessa Theo Aparício, Campanário, RS 90154-495','2022-05-29 17:36:40.665419','2022-05-29 17:36:40.665419');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (197,'Garona Halforcen','074.964.369-25','62','Sobrado 53 85479 Rua Maria Clara Crespo, Crissiumal, DF 22338-260','2022-05-29 17:36:40.695442','2022-05-29 17:36:40.695442');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (198,'Millhouse Manastorm','436.919.761-90','84','1894 Marginal Isaac, Jaú, CE 01077-714','2022-05-29 17:36:40.731091','2022-05-29 17:36:40.731091');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (199,'Gul''dan','118.834.708-03','91','Quadra 22 s/n Rodovia Natália, Augustinópolis, AC 14237-593','2022-05-29 17:36:40.763286','2022-05-29 17:36:40.763286');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (200,'Khadgar','915.623.531-36','68','s/n Rodovia Isabel, Mato Castelhano, RN 25531-674','2022-05-29 17:36:40.793355','2022-05-29 17:36:40.793355');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (201,'Galadriel','079.157.641-87','67','Sobrado 21 s/n Ponte Ayla, Munhoz, TO 40901-073','2022-05-29 17:36:40.826124','2022-05-29 17:36:40.826124');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (202,'Peregrin Took','689.203.257-58','64','55973 Rua Eduarda Antena, Santo Antônio do Pinhal, RR 61895-337','2022-05-29 17:36:40.860535','2022-05-29 17:36:40.860535');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (203,'Boromir','094.487.228-00','71','82563 Marginal Luiz Henrique, Ivatuba, SC 04197-329','2022-05-29 17:36:40.891409','2022-05-29 17:36:40.891409');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (204,'Bilbo Baggins','734.448.410-27','68','109 Travessa Anthony de Sá, Novo Itacolomi, BA 23834-140','2022-05-29 17:36:40.943741','2022-05-29 17:36:40.943741');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (205,'Grìma Wormtongue','423.320.034-01','44','Casa 5 196 Avenida Eloah Fontes, Cabeceiras, RJ 67712-003','2022-05-29 17:36:40.982354','2022-05-29 17:36:40.982354');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (206,'Tom Bombadil','943.469.850-25','24','Apto. 725 1497 Alameda Luiz Macieira, Acaraú, BA 47250-744','2022-05-29 17:36:41.018648','2022-05-29 17:36:41.018648');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (207,'Gandalf the Grey','098.215.130-69','74','Quadra 77 62775 Travessa Erick, Riolândia, PA 47328-137','2022-05-29 17:36:41.058630','2022-05-29 17:36:41.058630');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (208,'Shelob','604.778.635-90','46','Quadra 67 986 Avenida Antonella Grotas, Bandeirantes do Tocantins, DF 83293-558','2022-05-29 17:36:41.090344','2022-05-29 17:36:41.090344');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (209,'Denethor','734.320.196-45','22','9046 Alameda Maria Laura Carvalheira, Guajará-Mirim, AL 04235-973','2022-05-29 17:36:41.124924','2022-05-29 17:36:41.124924');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (210,'Samwise Gamgee','589.015.995-03','12','528 Ponte Bianca Munhoz, Arraial do Cabo, RN 89139-381','2022-05-29 17:36:41.161529','2022-05-29 17:36:41.161529');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (211,'Ben Solo','242.408.469-60','63','Sobrado 73 s/n Rua Theo, Cascalho Rico, SE 51663-865','2022-05-29 17:36:41.197743','2022-05-29 17:36:41.197743');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (212,'Chewbacca','755.813.317-31','47','Lote 65 581 Viela Maria Clara, Benevides, MT 14565-500','2022-05-29 17:36:41.229375','2022-05-29 17:36:41.229375');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (213,'Poe Dameron','953.633.991-99','41','Lote 28 427 Rodovia Paulo, Vila Flor, AL 88148-981','2022-05-29 17:36:41.260000','2022-05-29 17:36:41.260000');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (214,'Lando Calrissian','287.833.377-25','35','Quadra 82 274 Travessa Kaique Simão, Barra do Rocha, SC 66760-467','2022-05-29 17:36:41.296983','2022-05-29 17:36:41.296983');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (215,'Maz Kanata','470.744.886-07','21','s/n Rua Pedro Lucas, Taquaral de Goiás, AC 08961-332','2022-05-29 17:36:41.334775','2022-05-29 17:36:41.334775');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (216,'Nute Gunray','602.658.954-64','31','Sobrado 19 7489 Rua Washington, Matias Barbosa, MT 41880-385','2022-05-29 17:36:41.367434','2022-05-29 17:36:41.367434');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (217,'Ki-Adi-Mundi','159.599.784-90','21','105 Travessa Heloísa Coqueiro, Cachoeira de Goiás, RO 37656-770','2022-05-29 17:36:41.401401','2022-05-29 17:36:41.401401');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (218,'Yoda','285.974.618-88','87','Apto. 877 653 Ponte João Luca, Bento Gonçalves, AM 14631-975','2022-05-29 17:36:41.438589','2022-05-29 17:36:41.438589');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (219,'Mon Mothma','929.891.078-94','51','Apto. 125 s/n Avenida Matheus Fontes, Canavieiras, DF 49258-098','2022-05-29 17:36:41.476074','2022-05-29 17:36:41.476074');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (220,'Asajj Ventress','887.027.373-37','67','7432 Rua Henrique, Eugenópolis, SC 75610-441','2022-05-29 17:36:41.511965','2022-05-29 17:36:41.511965');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (221,'George of Kagen','365.183.364-04','18','s/n Marginal Carla Munhoz, Itapuã do Oeste, PR 22618-861','2022-05-29 17:36:41.555768','2022-05-29 17:36:41.555768');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (222,'Ciri','382.155.757-57','61','Casa 4 55839 Rua Pedro Henrique, Salgueiro, ES 16212-854','2022-05-29 17:36:41.604613','2022-05-29 17:36:41.604613');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (223,'Gerd','744.266.180-70','53','Casa 8 s/n Travessa Dalila Ferreira, Banabuiú, AP 07027-160','2022-05-29 17:36:41.640857','2022-05-29 17:36:41.640857');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (224,'Ivar Evil-Eye','922.697.518-33','22','Lote 29 242 Marginal Salvador Castanho, Rio do Prado, SE 52141-463','2022-05-29 17:36:41.675186','2022-05-29 17:36:41.675186');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (225,'Eskel','821.617.303-20','53','s/n Marginal Rafael, Nova Brasilândia, CE 91096-000','2022-05-29 17:36:41.706848','2022-05-29 17:36:41.706848');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (226,'Joaquim Sanches','485.954.969-43','61','Quadra 68 153 Travessa Talita, Cacoal, SE 94868-915','2022-05-29 17:38:07.397116','2022-05-29 17:38:07.397116');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (227,'Dra. Luan da Maia','990.472.956-50','48','4427 Ponte Emanuel, São Sebastião do Paraíso, ES 16889-707','2022-05-29 17:38:07.442188','2022-05-29 17:38:07.442188');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (228,'Fernando Novaes','243.546.303-03','88','1960 Ponte Pietra, Campo Belo, PA 26355-724','2022-05-29 17:38:07.477589','2022-05-29 17:38:07.477589');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (229,'Kaique Castanheira Filho','865.736.097-78','35','2039 Avenida Esther Alves, Paes Landim, GO 84427-269','2022-05-29 17:38:07.512581','2022-05-29 17:38:07.512581');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (230,'Sr. Eduardo da Barranca','975.965.581-00','28','s/n Travessa Cauã de Borba, Braúnas, PE 52183-329','2022-05-29 17:38:07.549882','2022-05-29 17:38:07.549882');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (231,'Yasmin Domingues Neto','339.250.513-76','74','39848 Avenida Letícia Menendes, Turiúba, ES 29118-136','2022-05-29 17:38:07.579730','2022-05-29 17:38:07.579730');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (232,'Srta. Mariana Rebouças','557.492.814-00','18','Lote 36 899 Ponte Lorraine da Conceição, Conceição da Barra de Minas, SE 97602-285','2022-05-29 17:38:07.606915','2022-05-29 17:38:07.606915');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (233,'Sr. Mércia Galvão','169.717.898-73','45','30160 Viela Davi Miguel Domingues, Coribe, MA 99853-637','2022-05-29 17:38:07.641196','2022-05-29 17:38:07.641196');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (234,'Malu Ribeira Neto','071.800.289-08','44','411 Ponte Augusto Ramires, Almenara, PA 39310-538','2022-05-29 17:38:07.673776','2022-05-29 17:38:07.673776');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (235,'Giovanna Gomide','551.757.326-68','15','s/n Rua Maya Negrão, Itaguaru, TO 64040-519','2022-05-29 17:38:07.705910','2022-05-29 17:38:07.705910');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (236,'Gimli','278.364.677-32','84','Sobrado 51 97502 Avenida Márcio Morais, Pitimbu, BA 05199-225','2022-05-29 17:38:07.737607','2022-05-29 17:38:07.737607');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (237,'Grìma Wormtongue','106.522.272-60','42','s/n Travessa Beatriz, Ribeira do Amparo, MS 28014-455','2022-05-29 17:38:07.770382','2022-05-29 17:38:07.770382');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (238,'Barliman Butterbur','996.785.435-91','66','s/n Travessa Mathias, Tamandaré, GO 98387-085','2022-05-29 17:38:07.801794','2022-05-29 17:38:07.801794');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (239,'Treebeard','648.954.118-18','13','98444 Ponte Pietra Alves, Centralina, RN 78570-912','2022-05-29 17:38:07.835771','2022-05-29 17:38:07.835771');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (240,'Boromir','898.176.012-85','88','Casa 9 308 Ponte Meire, Olinda, RO 96652-034','2022-05-29 17:38:07.892470','2022-05-29 17:38:07.892470');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (241,'Peregrin Took','008.632.607-48','64','s/n Rodovia Eduardo, Lassance, PR 97698-722','2022-05-29 17:38:07.923858','2022-05-29 17:38:07.923858');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (242,'Frodo Baggins','544.518.652-04','34','s/n Ponte Davi Coqueiro, Guaribas, RO 87125-991','2022-05-29 17:38:07.958550','2022-05-29 17:38:07.958550');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (243,'Elrond','592.319.724-30','13','s/n Rua Fernanda Caldeira, Rio das Ostras, AL 59114-905','2022-05-29 17:38:07.992595','2022-05-29 17:38:07.992595');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (244,'Tom Bombadil','732.406.231-88','98','Apto. 385 846 Rodovia Calebe da Conceição, Escada, PR 76591-739','2022-05-29 17:38:08.033057','2022-05-29 17:38:08.033057');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (245,'Quickbeam','447.351.356-42','33','s/n Alameda Pablo da Fontoura, São Desidério, PI 00124-092','2022-05-29 17:38:08.077488','2022-05-29 17:38:08.077488');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (246,'Yoda','955.585.627-30','22','875 Alameda Mariah, Lupércio, RJ 51527-292','2022-05-29 17:38:08.113229','2022-05-29 17:38:08.113229');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (247,'Darth Caedus','922.823.479-27','46','120 Rua Isis, Conceição das Pedras, TO 46938-132','2022-05-29 17:38:08.150402','2022-05-29 17:38:08.150402');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (248,'Sebulba','635.523.161-75','71','Lote 88 1348 Rodovia Margarida, Cubatão, AL 50565-627','2022-05-29 17:38:08.183257','2022-05-29 17:38:08.183257');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (249,'Lando Calrissian','096.191.586-28','49','Sobrado 22 s/n Ponte Sophie Corte, São Domingos do Prata, AL 59494-597','2022-05-29 17:38:08.219549','2022-05-29 17:38:08.219549');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (250,'Captain Phasma','074.466.843-30','18','s/n Marginal Lorena, São Domingos do Azeitão, SE 49082-526','2022-05-29 17:38:08.259173','2022-05-29 17:38:08.259173');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (251,'Grand Moff Tarkin','140.492.580-56','22','8439 Avenida Pérola, Macaíba, AM 88575-179','2022-05-29 17:38:08.290908','2022-05-29 17:38:08.290908');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (252,'Nute Gunray','308.077.604-63','18','4546 Ponte Kaique, Campo Mourão, MA 58345-645','2022-05-29 17:38:08.328512','2022-05-29 17:38:08.328512');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (253,'Darth Vader','668.553.485-05','17','4864 Marginal Isaac da Cunha, Maetinga, SC 78804-374','2022-05-29 17:38:08.371933','2022-05-29 17:38:08.371933');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (254,'Darth Maul','779.560.775-67','48','Casa 1 89225 Viela Ryan da Fronteira, Boituva, AM 47580-844','2022-05-29 17:38:08.403394','2022-05-29 17:38:08.403394');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (255,'Jyn Erso','764.112.555-71','43','Quadra 34 s/n Viela Roberto, Oliveira Fortes, RS 68531-692','2022-05-29 17:38:08.435949','2022-05-29 17:38:08.435949');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (256,'Ciri','373.681.273-69','88','9266 Rua Francisco Bentes, Boa Vista da Aparecida, AP 93999-812','2022-05-29 17:38:08.465773','2022-05-29 17:38:08.465773');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (257,'Lambert','909.634.326-30','91','88856 Ponte Luana Ordonhes, Pirenópolis, AM 53104-258','2022-05-29 17:38:08.497342','2022-05-29 17:38:08.497342');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (258,'Geralt of Rivia','444.787.875-57','82','Sobrado 13 54913 Ponte Luiza Palhares, Tanabi, RO 20675-990','2022-05-29 17:38:08.529964','2022-05-29 17:38:08.529964');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (259,'George of Kagen','304.374.650-39','71','Lote 41 632 Marginal Maria Helena Ordonhes, Milhã, MS 97346-531','2022-05-29 17:38:08.567270','2022-05-29 17:38:08.567270');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (260,'Ciri','535.388.864-23','89','Lote 86 s/n Travessa Maitê, Itaguara, PB 12996-149','2022-05-29 17:38:08.597749','2022-05-29 17:38:08.597749');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (261,'Maria Fernanda Vieira','444.655.248-11','22','75039 Viela Gabriela Hermingues, Santa Luzia do Norte, RN 86569-567','2022-06-03 00:45:25.091119','2022-06-03 00:45:25.091119');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (262,'Lorenzo Ramos Jr.','489.637.887-33','83','791 Ponte Pedro Tobias Aragão, Cruz, SP 01089-300','2022-06-03 00:45:25.135136','2022-06-03 00:45:25.135136');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (263,'Dra. Alice Moreira','075.821.026-49','53','Quadra 57 656 Alameda Djalma, Doutor Camargo, PB 12185-739','2022-06-03 00:45:25.167266','2022-06-03 00:45:25.167266');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (264,'Felícia Ribeiro','057.034.878-11','18','2536 Rodovia Larissa, Cachoeiro de Itapemirim, DF 96292-466','2022-06-03 00:45:25.197488','2022-06-03 00:45:25.197488');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (265,'Bárbara Moreira','912.295.272-14','93','Apto. 870 s/n Avenida Félix Vimaranes, Trindade do Sul, RJ 97599-636','2022-06-03 00:45:25.230139','2022-06-03 00:45:25.230139');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (266,'Srta. Benjamin Bentes','135.226.744-64','83','s/n Ponte Lavínia, Boracéia, GO 05374-508','2022-06-03 00:45:25.259606','2022-06-03 00:45:25.259606');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (267,'Isabella Porto','506.329.971-76','17','Sobrado 58 s/n Marginal Davi Ludmer, Ubirajara, RJ 78990-500','2022-06-03 00:45:25.285332','2022-06-03 00:45:25.285332');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (268,'Ana Júlia Espinhosa','640.938.065-86','35','Apto. 663 s/n Alameda Oliver Macieira, Passo do Sobrado, PB 44758-891','2022-06-03 00:45:25.316215','2022-06-03 00:45:25.316215');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (269,'Cecília da Fontoura','112.116.558-30','89','15061 Ponte Maria Isis, Taquaral de Goiás, RS 85167-415','2022-06-03 00:45:25.346800','2022-06-03 00:45:25.346800');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (270,'Elísio Carneiro','844.686.223-93','54','Sobrado 77 635 Avenida Lavínia Saraiva, Atalanta, GO 39360-902','2022-06-03 00:45:25.380650','2022-06-03 00:45:25.380650');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (271,'Galadriel','050.753.308-94','18','Lote 23 73875 Alameda Laís, Quiterianópolis, MT 23409-751','2022-06-03 00:45:25.415076','2022-06-03 00:45:25.415076');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (272,'Shadowfax','446.540.496-49','48','Sobrado 44 s/n Ponte Matheus, Coronel Murta, TO 42863-966','2022-06-03 00:45:25.446148','2022-06-03 00:45:25.446148');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (273,'Samwise Gamgee','270.459.579-80','37','s/n Travessa Raul, Davinópolis, PE 88572-752','2022-06-03 00:45:25.477132','2022-06-03 00:45:25.477132');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (274,'Peregrin Took','179.699.452-95','24','Lote 64 s/n Rua Pablo, Tamboril do Piauí, AP 68856-293','2022-06-03 00:45:25.510465','2022-06-03 00:45:25.510465');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (275,'Saruman the White','779.238.042-49','21','Quadra 10 7393 Avenida Mariana Siqueiro, Coração de Maria, MT 62839-731','2022-06-03 00:45:25.565718','2022-06-03 00:45:25.565718');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (276,'Arwen Evenstar','902.434.800-59','45','Quadra 74 754 Avenida Heitor Santana, Angelina, PB 32872-080','2022-06-03 00:45:25.602291','2022-06-03 00:45:25.602291');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (277,'Shelob','529.042.899-25','88','19535 Ponte Leonardo Dias, Sobrado, SE 43011-821','2022-06-03 00:45:25.639107','2022-06-03 00:45:25.639107');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (278,'Elrond','315.539.272-06','11','Sobrado 17 92097 Ponte Ruan, Guadalupe, PA 47637-152','2022-06-03 00:45:25.672236','2022-06-03 00:45:25.672236');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (279,'Meriadoc Brandybuck','963.044.399-62','31','Lote 50 82570 Avenida Bianca, Porto Firme, MA 87350-158','2022-06-03 00:45:25.713896','2022-06-03 00:45:25.713896');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (280,'Meriadoc Brandybuck','682.437.472-57','31','Quadra 32 31800 Travessa Vinícius Castro, Manoel Ribas, RN 50694-200','2022-06-03 00:45:25.750221','2022-06-03 00:45:25.750221');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (281,'Ahsoka Tano','407.758.258-08','53','338 Rodovia Luiz, Santana de Mangueira, SE 55564-926','2022-06-03 00:45:25.791120','2022-06-03 00:45:25.791120');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (282,'General Hux','152.207.348-57','87','Quadra 62 s/n Rodovia João Vitor, Riacho de Santo Antônio, MT 20393-495','2022-06-03 00:45:25.826688','2022-06-03 00:45:25.826688');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (283,'Lando Calrissian','925.909.034-21','83','Apto. 513 s/n Alameda Yasmin Marins, Pajeú do Piauí, DF 81691-667','2022-06-03 00:45:25.862969','2022-06-03 00:45:25.862969');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (284,'Supreme Leader Snoke','049.102.798-22','74','4831 Rodovia César, Cacimba de Dentro, CE 16376-377','2022-06-03 00:45:25.897500','2022-06-03 00:45:25.897500');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (285,'Kylo Ren','546.567.169-60','24','Sobrado 20 1010 Travessa Davi Miguel, Sapopema, SP 88418-186','2022-06-03 00:45:25.931045','2022-06-03 00:45:25.931045');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (286,'Mon Mothma','447.643.253-06','51','3064 Rodovia Antonella da Maia, Tunápolis, RN 48288-887','2022-06-03 00:45:25.962089','2022-06-03 00:45:25.962089');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (287,'Obi-Wan Kenobi','869.953.692-54','11','764 Alameda Fernanda Rêgo, Triunfo Potiguar, SP 89691-262','2022-06-03 00:45:25.996234','2022-06-03 00:45:25.996234');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (288,'Darth Caedus','822.753.054-08','64','Quadra 64 178 Marginal Thiago, Capela de Santana, MS 38537-338','2022-06-03 00:45:26.033836','2022-06-03 00:45:26.033836');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (289,'Rose Tico','581.919.450-02','68','Sobrado 24 94440 Rodovia Meire Fogaça, Ituberá, RO 03761-719','2022-06-03 00:45:26.069175','2022-06-03 00:45:26.069175');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (290,'Borvo the Hutt','150.477.815-42','94','Casa 1 9736 Viela Paulo, Olho d''Água, SP 18413-539','2022-06-03 00:45:26.097129','2022-06-03 00:45:26.097129');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (291,'Geralt of Rivia','086.508.197-29','69','5910 Rodovia Danilo, Olinda Nova do Maranhão, RO 63609-017','2022-06-03 00:45:26.124210','2022-06-03 00:45:26.124210');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (292,'Junod of Belhaven','460.212.975-71','89','s/n Viela Luiz Felipe Macedo, Lagoa do Ouro, SE 29073-120','2022-06-03 00:45:26.155661','2022-06-03 00:45:26.155661');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (293,'Serrit','523.627.819-84','98','s/n Avenida Leonardo, Nova Soure, MT 98935-784','2022-06-03 00:45:26.190487','2022-06-03 00:45:26.190487');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (294,'Jerome Moreau','917.284.214-89','15','9068 Alameda Sophie, Bálsamo, RR 26442-350','2022-06-03 00:45:26.228958','2022-06-03 00:45:26.228958');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (295,'Letho of Gulet','171.853.936-39','83','55408 Rua Isabel, Porto Alegre do Tocantins, CE 84162-402','2022-06-03 00:45:26.270431','2022-06-03 00:45:26.270431');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (296,'Dra. Letícia Passarinho','933.282.711-71','61','200 Alameda Eduardo, Campo Alegre de Lourdes, DF 25554-056','2022-06-03 00:45:37.554414','2022-06-03 00:45:37.554414');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (297,'Davi Lucca Ramires','498.485.430-82','21','Quadra 22 953 Ponte Malu, Chiador, RS 42771-247','2022-06-03 00:45:37.605701','2022-06-03 00:45:37.605701');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (298,'César Jaques Neto','141.002.296-07','28','Quadra 38 57591 Ponte Ana Beatriz, Santana do Deserto, RR 59234-846','2022-06-03 00:45:37.639288','2022-06-03 00:45:37.639288');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (299,'Gabriela Batista','236.259.740-70','88','s/n Viela João Guilherme da Fonseca, Serranópolis de Minas, MT 25695-772','2022-06-03 00:45:37.673862','2022-06-03 00:45:37.673862');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (300,'Olívia Garcês Filho','793.870.496-20','44','717 Rua Henry, Lambari d''Oeste, AL 98148-446','2022-06-03 00:45:37.708422','2022-06-03 00:45:37.708422');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (301,'Luiz Miguel Ribeiro','912.217.025-13','14','709 Ponte Lucca, Rio dos Índios, GO 47095-091','2022-06-03 00:45:37.741330','2022-06-03 00:45:37.741330');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (302,'Sr. Luiz Felipe Coqueiro','851.924.123-90','88','Lote 49 s/n Avenida Pedro Miguel Goulart, Redentora, AM 88884-186','2022-06-03 00:45:37.775221','2022-06-03 00:45:37.775221');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (303,'Sra. Kaique Palhares','699.310.745-74','22','854 Travessa João Samuel da Penha, Embaúba, PE 68711-943','2022-06-03 00:45:37.808475','2022-06-03 00:45:37.808475');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (304,'Maria Alice Moraes','899.769.344-16','71','Casa 8 s/n Alameda Emanuelly, Francisco Badaró, RR 06049-477','2022-06-03 00:45:37.834884','2022-06-03 00:45:37.834884');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (305,'Lucca Bouças','040.749.596-74','79','64769 Rua Arthur Henrique, Pajeú do Piauí, PI 87856-432','2022-06-03 00:45:37.866167','2022-06-03 00:45:37.866167');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (306,'Glorfindel','178.694.854-03','27','444 Avenida Luiz, Irará, AP 25097-173','2022-06-03 00:45:37.898021','2022-06-03 00:45:37.898021');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (307,'Arwen Evenstar','811.185.440-48','28','17622 Travessa Maria Laura Banheira, Colônia do Piauí, SP 52421-746','2022-06-03 00:45:37.930942','2022-06-03 00:45:37.930942');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (308,'Treebeard','810.513.429-29','65','256 Ponte Antonella Fontes, Cambira, AC 99686-719','2022-06-03 00:45:37.968776','2022-06-03 00:45:37.968776');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (309,'Aragorn','766.845.635-04','77','s/n Rodovia Isabel, Mampituba, MA 55526-302','2022-06-03 00:45:37.999195','2022-06-03 00:45:37.999195');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (310,'Elrond','394.662.329-83','75','Quadra 65 s/n Marginal Theo, Fazenda Vilanova, RJ 73723-975','2022-06-03 00:45:38.049705','2022-06-03 00:45:38.049705');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (311,'Saruman the White','795.840.127-20','64','Sobrado 74 35762 Avenida Emanuel Paes, Trairi, DF 01906-886','2022-06-03 00:45:38.083921','2022-06-03 00:45:38.083921');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (312,'Saruman the White','621.681.792-20','85','64833 Viela José Martins, Baixo Guandu, SE 69313-987','2022-06-03 00:45:38.115603','2022-06-03 00:45:38.115603');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (313,'Gimli','633.368.490-20','13','30796 Viela Margarida, Santa Helena de Minas, AM 27290-333','2022-06-03 00:45:38.145815','2022-06-03 00:45:38.145815');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (314,'Shadowfax','656.023.728-14','54','434 Avenida Marcia Nunes, Irupi, SP 86158-288','2022-06-03 00:45:38.177117','2022-06-03 00:45:38.177117');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (315,'Legolas','512.122.104-50','42','s/n Avenida Laura Macedo, Presidente Bernardes, DF 69935-399','2022-06-03 00:45:38.209680','2022-06-03 00:45:38.209680');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (316,'Shmi Skywalker','503.485.091-54','43','Sobrado 23 4652 Marginal Antônio, Cornélio Procópio, MA 66771-291','2022-06-03 00:45:38.237956','2022-06-03 00:45:38.237956');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (317,'Kylo Ren','849.213.557-38','68','Quadra 52 s/n Avenida Bento Cardoso, Sede Nova, PA 35649-237','2022-06-03 00:45:38.268618','2022-06-03 00:45:38.268618');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (318,'Mace Windu','814.606.312-85','51','530 Viela Agatha, Valparaíso, AL 09574-579','2022-06-03 00:45:38.300360','2022-06-03 00:45:38.300360');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (319,'Ezra Bridger','200.430.500-26','75','Sobrado 63 84778 Avenida Davi Luiz, Candói, BA 76135-103','2022-06-03 00:45:38.330112','2022-06-03 00:45:38.330112');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (320,'Yoda','218.880.589-51','75','Lote 35 7204 Rodovia Silas, Campos Novos, PR 57281-476','2022-06-03 00:45:38.363916','2022-06-03 00:45:38.363916');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (321,'Rune Haako','762.788.386-56','63','Lote 58 s/n Ponte Arthur Henrique, Bodoquena, ES 12671-324','2022-06-03 00:45:38.397269','2022-06-03 00:45:38.397269');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (322,'Bendu','190.073.633-01','75','2585 Rodovia Rafael, Paulicéia, PB 13751-103','2022-06-03 00:45:38.430191','2022-06-03 00:45:38.430191');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (323,'Finn','812.214.282-68','93','Quadra 27 8745 Rua Bruno Carreira, Castanhal, SP 26674-004','2022-06-03 00:45:38.467558','2022-06-03 00:45:38.467558');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (324,'Ben Solo','339.874.888-08','85','Sobrado 89 s/n Avenida Olívia Dorneles, Antônio Prado de Minas, BA 60726-924','2022-06-03 00:45:38.516328','2022-06-03 00:45:38.516328');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (325,'Sebulba','148.078.776-07','16','Lote 15 82983 Rodovia Oliver Campos, Pinheirinho do Vale, ES 61118-415','2022-06-03 00:45:38.551319','2022-06-03 00:45:38.551319');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (326,'Coën','796.992.623-11','73','Sobrado 62 7759 Rodovia Ian, Tigrinhos, RO 02367-618','2022-06-03 00:45:38.586349','2022-06-03 00:45:38.586349');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (327,'Serrit','635.379.886-56','85','Apto. 663 581 Rua João Vitor Gomide, Buritis, BA 36288-089','2022-06-03 00:45:38.624475','2022-06-03 00:45:38.624475');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (328,'Lambert','878.098.540-89','88','5058 Alameda Milena, Porto Murtinho, CE 46621-068','2022-06-03 00:45:38.655905','2022-06-03 00:45:38.655905');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (329,'Junod of Belhaven','223.044.422-00','28','Casa 5 s/n Ponte Sirineu Aguiar, Alto Rio Doce, AM 36123-896','2022-06-03 00:45:38.689816','2022-06-03 00:45:38.689816');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (330,'George of Kagen','173.615.071-58','15','s/n Marginal Elísio Rezende, Mascote, AM 68467-188','2022-06-03 00:45:38.725043','2022-06-03 00:45:38.725043');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (331,'Benício Santos','550.997.475-31','62','6465 Avenida Arthur Miguel, Curimatá, PE 58928-554','2022-06-03 00:56:39.931075','2022-06-03 00:56:39.931075');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (332,'Bernardo Ouriques','974.545.020-08','41','84463 Viela Célia Barata, Jacobina, AM 45776-962','2022-06-03 00:56:39.993313','2022-06-03 00:56:39.993313');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (333,'Elisa Cavalcanti Neto','379.476.229-06','53','Apto. 263 53455 Ponte Ana Luiza Vidal, Orlândia, TO 41389-809','2022-06-03 00:56:40.031792','2022-06-03 00:56:40.031792');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (334,'Isaac Peixoto Neto','276.802.575-58','77','s/n Ponte Carlos Eduardo, Espumoso, BA 38244-260','2022-06-03 00:56:40.069452','2022-06-03 00:56:40.069452');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (335,'Levi Videira','670.266.711-62','32','Casa 6 86491 Ponte Paula, Alfredo Vasconcelos, RR 17203-133','2022-06-03 00:56:40.115085','2022-06-03 00:56:40.115085');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (336,'Giovanna Arriaga','353.592.433-25','13','Apto. 251 718 Viela Pietro, Pontal, RO 65576-114','2022-06-03 00:56:40.153539','2022-06-03 00:56:40.153539');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (337,'Nataniel Quaresma','102.032.043-52','22','Apto. 574 342 Rodovia Theo Castanheira, Novo Triunfo, BA 13410-589','2022-06-03 00:56:40.187461','2022-06-03 00:56:40.187461');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (338,'Luiz Otávio Freitas','810.261.320-37','44','42062 Alameda Davi Luiz Monteira, Costa Marques, AC 01248-319','2022-06-03 00:56:40.222983','2022-06-03 00:56:40.222983');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (339,'Sra. Gael Longuinho','916.954.089-69','66','Sobrado 46 s/n Rodovia Eduardo, Frei Lagonegro, ES 69963-914','2022-06-03 00:56:40.265111','2022-06-03 00:56:40.265111');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (340,'Ana Beatriz dos Reis','331.126.611-09','77','Apto. 167 223 Rodovia Erick Nogueira, Mombuca, RN 74825-201','2022-06-03 00:56:40.305746','2022-06-03 00:56:40.305746');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (341,'Sauron','726.211.882-06','81','4739 Viela João Guilherme, Araputanga, RN 53624-379','2022-06-03 00:56:40.345771','2022-06-03 00:56:40.345771');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (342,'Beregond','533.885.447-35','14','Apto. 920 3561 Rodovia Carolina, Ilhabela, PI 03357-415','2022-06-03 00:56:40.379811','2022-06-03 00:56:40.379811');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (343,'Meriadoc Brandybuck','164.986.249-06','89','s/n Travessa Pietro, Agudos do Sul, SP 54931-146','2022-06-03 00:56:40.413331','2022-06-03 00:56:40.413331');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (344,'Samwise Gamgee','332.949.287-26','53','7131 Rua Ayla Sais, Morro Cabeça no Tempo, RR 06250-223','2022-06-03 00:56:40.450356','2022-06-03 00:56:40.450356');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (345,'Théoden','281.486.222-72','89','Quadra 92 6058 Alameda Marli, Salto da Divisa, SP 50614-045','2022-06-03 00:56:40.490767','2022-06-03 00:56:40.490767');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (346,'Galadriel','344.042.632-79','87','Quadra 76 91213 Avenida João Guilherme Fogaça, Gandu, AP 40710-418','2022-06-03 00:56:40.559239','2022-06-03 00:56:40.559239');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (347,'Éowyn','350.952.266-42','51','Apto. 127 s/n Alameda Ruan Campos, Pindaí, DF 18791-373','2022-06-03 00:56:40.604157','2022-06-03 00:56:40.604157');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (348,'Shadowfax','169.143.157-52','68','Casa 3 77752 Avenida Enzo Gabriel Ximenes, São Nicolau, AL 28294-722','2022-06-03 00:56:40.648679','2022-06-03 00:56:40.648679');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (349,'Legolas','284.617.554-30','34','223 Rodovia Rafaela, Rio Piracicaba, PR 51458-584','2022-06-03 00:56:40.683028','2022-06-03 00:56:40.683028');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (350,'Sauron','468.460.099-81','99','Sobrado 94 670 Viela Giulia, Carmópolis, CE 73376-351','2022-06-03 00:56:40.717618','2022-06-03 00:56:40.717618');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (351,'Borvo the Hutt','389.986.963-04','14','940 Avenida Luana Bulhões, Wanderlândia, AL 62083-585','2022-06-03 00:56:40.756738','2022-06-03 00:56:40.756738');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (352,'General Hux','245.397.693-16','98','916 Marginal João Vitor, Dois Irmãos, SC 38600-730','2022-06-03 00:56:40.790246','2022-06-03 00:56:40.790246');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (353,'Darth Maul','721.937.733-94','68','340 Viela Malu, Senhor do Bonfim, SE 09929-190','2022-06-03 00:56:40.822289','2022-06-03 00:56:40.822289');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (354,'Wedge Antilles','367.676.633-44','33','s/n Travessa Francisco Mendanha, Alcobaça, PB 66324-335','2022-06-03 00:56:40.853587','2022-06-03 00:56:40.853587');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (355,'Mace Windu','561.195.356-59','55','Casa 5 80768 Travessa Salvador, Campo Bom, MT 37859-858','2022-06-03 00:56:40.885187','2022-06-03 00:56:40.885187');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (356,'Chewbacca','334.999.204-84','18','Casa 9 831 Travessa Liz Nascimento, Santo Antônio da Platina, MT 64224-164','2022-06-03 00:56:40.915679','2022-06-03 00:56:40.915679');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (357,'Mon Mothma','876.504.740-03','47','Lote 58 84675 Rodovia Antonia Carreira, Nova Ibiá, AM 22684-241','2022-06-03 00:56:40.952670','2022-06-03 00:56:40.952670');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (358,'Grand Admiral Thrawn','277.776.950-88','62','Sobrado 30 4453 Ponte Adriana Mangueira, São Felipe d''Oeste, PE 80874-500','2022-06-03 00:56:40.984265','2022-06-03 00:56:40.984265');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (359,'Sebulba','357.651.970-00','91','3194 Marginal Sirineu Ouriques, Mandirituba, CE 64948-239','2022-06-03 00:56:41.018665','2022-06-03 00:56:41.018665');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (360,'Watto','363.180.239-09','61','s/n Alameda Hélio Bomdia, Tucano, RO 59477-294','2022-06-03 00:56:41.048211','2022-06-03 00:56:41.048211');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (361,'Serrit','362.849.288-23','98','Quadra 76 s/n Travessa Miguel Carvalheira, Umarizal, PI 73247-651','2022-06-03 00:56:41.078039','2022-06-03 00:56:41.078039');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (362,'Lambert','621.861.369-02','47','9587 Avenida Washington, Nova Palma, AC 09551-953','2022-06-03 00:56:41.108554','2022-06-03 00:56:41.108554');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (363,'Lambert','197.498.225-44','64','Sobrado 97 4637 Viela Emanuel, Itaboraí, RS 81433-228','2022-06-03 00:56:41.144026','2022-06-03 00:56:41.144026');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (364,'Jerome Moreau','086.321.566-16','24','88971 Avenida Henrique, Arame, AC 99205-349','2022-06-03 00:56:41.177712','2022-06-03 00:56:41.177712');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (365,'Lambert','193.192.635-23','11','3433 Rodovia Frederico Coqueiro, São Sebastião da Grama, RN 50525-914','2022-06-03 00:56:41.210342','2022-06-03 00:56:41.210342');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (366,'Levi Moreno','059.812.730-54','83','Casa 6 5596 Marginal Antonella, Cambira, RO 99267-733','2022-06-03 01:01:49.306297','2022-06-03 01:01:49.306297');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (367,'Isabella Quarteira','464.029.564-22','92','Apto. 919 252 Viela Fabrícia Coqueiro, Nova Crixás, AC 60530-095','2022-06-03 01:01:49.368988','2022-06-03 01:01:49.368988');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (368,'Tiago Bentes','348.929.708-32','99','Casa 8 374 Ponte Maya Menendes, Coronel Xavier Chaves, RJ 15587-724','2022-06-03 01:01:49.400558','2022-06-03 01:01:49.400558');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (369,'Tomás Santos','356.854.459-89','55','Quadra 91 49924 Ponte Margarida da Mota, Piraquê, TO 04119-860','2022-06-03 01:01:49.432793','2022-06-03 01:01:49.432793');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (370,'Lara Ferreira Jr.','532.064.739-50','12','2048 Ponte Maria Helena Xavier, Pequizeiro, AP 26926-113','2022-06-03 01:01:49.464455','2022-06-03 01:01:49.464455');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (371,'Olívia Casqueira','598.077.502-10','34','693 Ponte Valentina Barreira, São Simão, SP 89510-892','2022-06-03 01:01:49.505031','2022-06-03 01:01:49.505031');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (372,'Sra. Maria Carvalho','870.050.082-86','79','s/n Ponte João Felipe Fogaça, Pareci Novo, SC 76651-580','2022-06-03 01:01:49.542076','2022-06-03 01:01:49.542076');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (373,'Tertuliano Figueira Neto','119.740.822-37','32','Sobrado 53 s/n Ponte Júlia Cavalcanti, General Salgado, SE 67448-672','2022-06-03 01:01:49.590625','2022-06-03 01:01:49.590625');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (374,'Arthur Henrique Carreira','536.965.797-18','49','10017 Alameda Ofélia, Santana do Deserto, RS 41042-601','2022-06-03 01:01:49.633142','2022-06-03 01:01:49.633142');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (375,'Márcio Barreto','236.566.453-96','53','Lote 74 83871 Travessa Melissa Freitas, Palmitos, PR 94597-830','2022-06-03 01:01:49.669555','2022-06-03 01:01:49.669555');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (376,'Éomer','295.136.291-98','99','388 Alameda Eduardo, Goiatuba, GO 20415-969','2022-06-03 01:01:49.704129','2022-06-03 01:01:49.704129');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (377,'Elrond','301.788.324-80','91','230 Travessa Morgana Bernardes, Águia Branca, BA 03624-842','2022-06-03 01:01:49.748454','2022-06-03 01:01:49.748454');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (378,'Théoden','591.101.198-09','51','s/n Avenida Fernanda, Nina Rodrigues, AL 26313-669','2022-06-03 01:01:49.783659','2022-06-03 01:01:49.783659');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (379,'Meriadoc Brandybuck','198.052.395-94','45','Apto. 509 1667 Rodovia Thiago, Descanso, RO 27988-690','2022-06-03 01:01:49.815953','2022-06-03 01:01:49.815953');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (380,'Gimli','602.356.283-36','89','Quadra 46 7997 Rua Paulo, Panorama, PE 26770-445','2022-06-03 01:01:49.876284','2022-06-03 01:01:49.876284');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (381,'Éowyn','094.549.066-66','83','Casa 4 6511 Marginal João, Escada, PI 35366-026','2022-06-03 01:01:49.912347','2022-06-03 01:01:49.912347');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (382,'Bilbo Baggins','860.519.565-73','79','778 Rodovia Nicolas, Tavares, PA 10064-696','2022-06-03 01:01:49.944831','2022-06-03 01:01:49.944831');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (383,'Glorfindel','759.987.453-45','99','571 Ponte Alícia Sanches, Miguel Calmon, AM 06575-475','2022-06-03 01:01:49.981325','2022-06-03 01:01:49.981325');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (384,'Grìma Wormtongue','828.579.775-90','28','Quadra 41 970 Rua Noah, Rorainópolis, MS 62668-288','2022-06-03 01:01:50.019189','2022-06-03 01:01:50.019189');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (385,'Meriadoc Brandybuck','931.705.612-19','53','757 Alameda Luiz Felipe, Valença, RO 49427-121','2022-06-03 01:01:50.051956','2022-06-03 01:01:50.051956');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (386,'Padme Amidala','746.946.607-05','34','Quadra 89 42619 Avenida Patricia, Iraceminha, DF 31170-177','2022-06-03 01:01:50.089001','2022-06-03 01:01:50.089001');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (387,'Obi-Wan Kenobi','165.206.481-83','41','Casa 3 46259 Viela Júlia, Içara, ES 15494-636','2022-06-03 01:01:50.123044','2022-06-03 01:01:50.123044');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (388,'Ben Solo','675.816.826-33','62','Lote 33 s/n Rua Ígor Jaques, Bannach, RS 45761-107','2022-06-03 01:01:50.156578','2022-06-03 01:01:50.156578');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (389,'Saw Gerrera','014.809.380-92','79','2874 Rua João, Carvalhópolis, RN 59996-432','2022-06-03 01:01:50.197713','2022-06-03 01:01:50.197713');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (390,'Sabine Wren','556.202.087-45','61','7651 Alameda Noah da Cruz, Santo Antônio da Patrulha, PR 19813-946','2022-06-03 01:01:50.232448','2022-06-03 01:01:50.232448');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (391,'Rose Tico','064.830.766-22','95','Quadra 38 6801 Avenida Fernando, Piquerobi, RJ 39988-259','2022-06-03 01:01:50.266905','2022-06-03 01:01:50.266905');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (392,'Rey','492.631.096-13','79','71335 Travessa Maria Isis Souza, Ferreira Gomes, MA 22023-037','2022-06-03 01:01:50.305388','2022-06-03 01:01:50.305388');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (393,'Darth Caedus','710.952.134-66','89','Lote 72 229 Rua Emanuelly Duarte, Ibateguara, MS 73028-543','2022-06-03 01:01:50.349620','2022-06-03 01:01:50.349620');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (394,'Sabine Wren','031.655.712-95','44','Quadra 62 s/n Alameda Maria Fernanda, Passos Maia, PR 08220-655','2022-06-03 01:01:50.392174','2022-06-03 01:01:50.392174');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (395,'Saw Gerrera','243.967.739-60','77','s/n Ponte Isis, Siqueira Campos, SE 22046-300','2022-06-03 01:01:50.429139','2022-06-03 01:01:50.429139');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (396,'Coën','707.428.825-00','55','6878 Marginal Hélio Santos, Paes Landim, DF 65748-997','2022-06-03 01:01:50.469642','2022-06-03 01:01:50.469642');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (397,'Gerd','456.935.860-81','74','Quadra 33 3983 Rua Carolina, Açu, AC 92051-215','2022-06-03 01:01:50.504440','2022-06-03 01:01:50.504440');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (398,'Lambert','587.727.220-96','74','94444 Ponte Henrique da Barranca, Urussanga, AM 52958-972','2022-06-03 01:01:50.540588','2022-06-03 01:01:50.540588');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (399,'Ivar Evil-Eye','552.984.243-76','82','Apto. 242 2281 Rodovia Isabelly, Matinhos, RN 78430-986','2022-06-03 01:01:50.580462','2022-06-03 01:01:50.580462');
+INSERT INTO "clients" ("id","name","document","phone","address","created_at","updated_at") VALUES (400,'Junod of Belhaven','317.740.154-39','83','9814 Viela Emanuel, Cafelândia, RN 49129-366','2022-06-03 01:01:50.615703','2022-06-03 01:01:50.615703');
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (1,'S5','ZCS-7095','2022-05-15 23:08:04.667699','2022-05-15 23:08:04.667699',1);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (2,'Camry','HQM-4402','2022-05-15 23:08:04.677423','2022-05-15 23:08:04.677423',1);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (3,'Rogue','RWO-9592','2022-05-15 23:08:04.687970','2022-05-15 23:08:04.687970',1);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (4,'F150','TVH-1088','2022-05-15 23:08:04.698109','2022-05-15 23:08:04.698109',1);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (5,'Focus','UIX-5653','2022-05-15 23:08:04.708378','2022-05-15 23:08:04.708378',1);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (6,'Camry','MTW-6491','2022-05-15 23:08:04.718923','2022-05-15 23:08:04.718923',1);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (7,'Malibu','JEC-3240','2022-05-15 23:08:04.729400','2022-05-15 23:08:04.729400',1);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (8,'Pathfiner','KFF-7331','2022-05-15 23:08:04.740932','2022-05-15 23:08:04.740932',1);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (9,'MKZ','OSA-1536','2022-05-15 23:08:04.751439','2022-05-15 23:08:04.751439',1);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (10,'M3','ECW-8407','2022-05-15 23:08:04.759581','2022-05-15 23:08:04.759581',1);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (11,'Malibu','VYA-2176','2022-05-15 23:08:04.769701','2022-05-15 23:08:04.769701',1);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (12,'Camry','QAE-5350','2022-05-15 23:08:04.780168','2022-05-15 23:08:04.780168',1);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (13,'F150','KBH-2051','2022-05-15 23:08:04.790614','2022-05-15 23:08:04.790614',1);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (14,'Challenger','PVI-7376','2022-05-15 23:08:04.802250','2022-05-15 23:08:04.802250',1);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (15,'X5','XIH-6500','2022-05-15 23:08:04.813040','2022-05-15 23:08:04.813040',1);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (16,'Charger','LVT-1677','2022-05-15 23:08:04.823013','2022-05-15 23:08:04.823013',1);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (17,'Accord','OOZ-4532','2022-05-15 23:08:04.834242','2022-05-15 23:08:04.834242',1);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (18,'CR-V','KQN-5263','2022-05-15 23:08:04.844604','2022-05-15 23:08:04.844604',1);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (19,'Juke','AZJ-1743','2022-05-15 23:08:04.856335','2022-05-15 23:08:04.856335',1);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (20,'CR-V','WAR-7905','2022-05-15 23:08:04.870769','2022-05-15 23:08:04.870769',1);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (21,'MKX','MGX-7926','2022-05-15 23:08:04.885690','2022-05-15 23:08:04.885690',1);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (22,'Accord','QOT-2711','2022-05-15 23:08:04.898957','2022-05-15 23:08:04.898957',1);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (23,'M3','MQQ-8334','2022-05-15 23:08:04.910311','2022-05-15 23:08:04.910311',1);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (24,'Juke','MOE-8354','2022-05-15 23:08:04.920373','2022-05-15 23:08:04.920373',1);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (25,'Accord','YQA-9981','2022-05-15 23:08:04.937292','2022-05-15 23:08:04.937292',1);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (26,'S5','MYT-5857','2022-05-15 23:08:04.947965','2022-05-15 23:08:04.947965',1);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (27,'Altima','KRD-6620','2022-05-15 23:08:04.958402','2022-05-15 23:08:04.958402',1);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (28,'Odyssey','UBX-7553','2022-05-15 23:08:04.971201','2022-05-15 23:08:04.971201',1);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (29,'A7','BOD-3223','2022-05-15 23:08:04.984116','2022-05-15 23:08:04.984116',1);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (30,'Versa','FCR-2347','2022-05-15 23:08:04.997591','2022-05-15 23:08:04.997591',1);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (31,'X3','HKV-9937','2022-05-15 23:08:05.010515','2022-05-15 23:08:05.010515',1);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (32,'Corolla','TVM-3686','2022-05-15 23:08:05.022571','2022-05-15 23:08:05.022571',1);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (33,'Camero','VXE-8575','2022-05-15 23:08:05.033132','2022-05-15 23:08:05.033132',1);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (34,'X5','UMI-9553','2022-05-15 23:08:05.044326','2022-05-15 23:08:05.044326',1);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (35,'Mustang','DDX-2652','2022-05-15 23:08:05.055165','2022-05-15 23:08:05.055165',1);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (36,'CR-V','VPN-9162','2022-05-15 23:08:05.065164','2022-05-15 23:08:05.065164',1);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (37,'Focus','IDX-5984','2022-05-15 23:08:05.075872','2022-05-15 23:08:05.075872',1);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (38,'M3','GHS-8452','2022-05-15 23:08:05.085806','2022-05-15 23:08:05.085806',1);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (39,'Mustang','DVM-7660','2022-05-15 23:08:05.095751','2022-05-15 23:08:05.095751',1);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (40,'Ram','GFF-6829','2022-05-15 23:08:05.108903','2022-05-15 23:08:05.108903',1);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (41,'Versa','GZP-9512','2022-05-15 23:08:05.118260','2022-05-15 23:08:05.118260',1);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (42,'Camero','ECW-4499','2022-05-15 23:08:05.128632','2022-05-15 23:08:05.128632',1);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (43,'MKZ','GJL-5532','2022-05-15 23:08:05.138491','2022-05-15 23:08:05.138491',1);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (44,'Prius','HOV-8106','2022-05-15 23:08:05.148252','2022-05-15 23:08:05.148252',1);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (45,'MKS','ZMY-4754','2022-05-15 23:08:05.158228','2022-05-15 23:08:05.158228',1);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (46,'Camry','KBJ-7317','2022-05-15 23:08:05.171621','2022-05-15 23:08:05.171621',1);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (47,'Cube','AZA-7523','2022-05-15 23:08:05.182913','2022-05-15 23:08:05.182913',1);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (48,'A5','HJU-5348','2022-05-15 23:08:05.193884','2022-05-15 23:08:05.193884',1);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (49,'Silverado','DCI-8595','2022-05-15 23:08:05.204857','2022-05-15 23:08:05.204857',1);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (50,'Camry','JOT-3011','2022-05-15 23:08:05.217022','2022-05-15 23:08:05.217022',1);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (51,'Corolla','OCO-8411','2022-05-22 22:12:48.398873','2022-05-22 22:12:48.398873',1);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (52,'Cube','JFU-1980','2022-05-22 22:12:48.410613','2022-05-22 22:12:48.410613',1);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (53,'Camry','PAL-3678','2022-05-22 22:12:48.421164','2022-05-22 22:12:48.421164',1);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (54,'Navigator','CKZ-1432','2022-05-22 22:12:48.433298','2022-05-22 22:12:48.433298',1);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (55,'Juke','HRZ-5703','2022-05-22 22:12:48.446417','2022-05-22 22:12:48.446417',1);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (56,'Focus','ZLB-7194','2022-05-22 22:12:48.459733','2022-05-22 22:12:48.459733',1);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (57,'328i','JNK-7035','2022-05-22 22:12:48.474058','2022-05-22 22:12:48.474058',1);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (58,'Civic','BEA-5225','2022-05-22 22:12:48.485040','2022-05-22 22:12:48.485040',1);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (59,'Verano','WDG-2016','2022-05-22 22:12:48.496453','2022-05-22 22:12:48.496453',1);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (60,'Corolla','LTG-9902','2022-05-22 22:12:48.511816','2022-05-22 22:12:48.511816',1);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (61,'Silverado','UIX-5655','2022-05-22 22:12:48.522986','2022-05-22 22:12:48.522986',1);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (62,'Fiesta','HZG-7703','2022-05-22 22:12:48.533462','2022-05-22 22:12:48.533462',1);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (63,'Altima','DKI-6123','2022-05-22 22:12:48.545150','2022-05-22 22:12:48.545150',1);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (64,'Corolla','QRB-9136','2022-05-22 22:12:48.557025','2022-05-22 22:12:48.557025',1);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (65,'Malibu','RRE-6129','2022-05-22 22:12:48.567475','2022-05-22 22:12:48.567475',1);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (66,'Durango','YWP-4118','2022-05-22 22:12:48.578837','2022-05-22 22:12:48.578837',1);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (67,'Fiesta','YMU-1705','2022-05-22 22:12:48.590349','2022-05-22 22:12:48.590349',1);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (68,'Corolla','XWQ-9995','2022-05-22 22:12:48.608067','2022-05-22 22:12:48.608067',1);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (69,'Durango','CGG-5363','2022-05-22 22:12:48.622452','2022-05-22 22:12:48.622452',1);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (70,'A5','QJE-8747','2022-05-22 22:12:48.633899','2022-05-22 22:12:48.633899',1);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (71,'Malibu','ATF-1931','2022-05-22 22:12:48.647196','2022-05-22 22:12:48.647196',1);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (72,'A5','EUX-3625','2022-05-22 22:12:48.658995','2022-05-22 22:12:48.658995',1);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (73,'CR-V','JDS-3229','2022-05-22 22:12:48.669372','2022-05-22 22:12:48.669372',1);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (74,'Charger','JOM-5244','2022-05-22 22:12:48.688571','2022-05-22 22:12:48.688571',1);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (75,'Juke','RSB-8794','2022-05-22 22:12:48.710729','2022-05-22 22:12:48.710729',1);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (76,'M5','MGD-9196','2022-05-22 22:12:48.724500','2022-05-22 22:12:48.724500',1);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (77,'MKZ','MFP-8812','2022-05-22 22:12:48.736903','2022-05-22 22:12:48.736903',1);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (78,'Enclave','KXS-7806','2022-05-22 22:12:48.749314','2022-05-22 22:12:48.749314',1);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (79,'Mustang','QJX-3734','2022-05-22 22:12:48.760255','2022-05-22 22:12:48.760255',1);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (80,'S5','KTP-5708','2022-05-22 22:12:48.772986','2022-05-22 22:12:48.772986',1);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (81,'Navigator','BIA-6783','2022-05-22 22:12:48.783464','2022-05-22 22:12:48.783464',1);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (82,'Ram','GVZ-1340','2022-05-22 22:12:48.794661','2022-05-22 22:12:48.794661',1);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (83,'Rogue','EZS-8710','2022-05-22 22:12:48.805312','2022-05-22 22:12:48.805312',1);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (84,'Accord','XFL-2331','2022-05-22 22:12:48.823511','2022-05-22 22:12:48.823511',1);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (85,'Riveria','UJU-5736','2022-05-22 22:12:48.838675','2022-05-22 22:12:48.838675',1);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (86,'Focus','XFA-3662','2022-05-22 22:12:48.855095','2022-05-22 22:12:48.855095',1);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (87,'MKZ','JNV-5987','2022-05-22 22:12:48.868082','2022-05-22 22:12:48.868082',1);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (88,'Malibu','DAF-1387','2022-05-22 22:12:48.880496','2022-05-22 22:12:48.880496',1);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (89,'MKS','QRD-2867','2022-05-22 22:12:48.892120','2022-05-22 22:12:48.892120',1);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (90,'Prius','AME-9593','2022-05-22 22:12:48.904229','2022-05-22 22:12:48.904229',1);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (91,'MKS','DQK-5876','2022-05-22 22:12:48.915960','2022-05-22 22:12:48.915960',1);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (92,'MKX','ITN-8762','2022-05-22 22:12:48.928916','2022-05-22 22:12:48.928916',1);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (93,'Silverado','RFU-8968','2022-05-22 22:12:48.941465','2022-05-22 22:12:48.941465',1);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (94,'Corolla','OPL-5473','2022-05-22 22:12:48.953371','2022-05-22 22:12:48.953371',1);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (95,'CR-V','UMQ-7653','2022-05-22 22:12:48.965797','2022-05-22 22:12:48.965797',1);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (96,'Challenger','GTX-3278','2022-05-22 22:12:48.976856','2022-05-22 22:12:48.976856',1);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (97,'Versa','YUP-6775','2022-05-22 22:12:48.988793','2022-05-22 22:12:48.988793',1);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (98,'A8','WCE-8899','2022-05-22 22:12:49.000687','2022-05-22 22:12:49.000687',1);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (99,'Cube','GPN-9135','2022-05-22 22:12:49.011802','2022-05-22 22:12:49.011802',1);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (100,'M5','PSC-4650','2022-05-22 22:12:49.023269','2022-05-22 22:12:49.023269',1);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (101,'Ram','HBD-1260','2022-05-25 13:37:51.358914','2022-05-25 13:37:51.358914',101);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (102,'Charger','DWM-1713','2022-05-25 13:37:51.379236','2022-05-25 13:37:51.379236',102);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (103,'Pathfiner','QZF-8077','2022-05-25 13:37:51.399409','2022-05-25 13:37:51.399409',103);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (104,'Camry','NYZ-4397','2022-05-25 13:37:51.418358','2022-05-25 13:37:51.418358',104);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (105,'Odyssey','FEH-8298','2022-05-25 13:37:51.436829','2022-05-25 13:37:51.436829',105);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (106,'Malibu','FZM-2372','2022-05-25 13:37:51.454998','2022-05-25 13:37:51.454998',106);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (107,'MKX','HYB-4120','2022-05-25 13:37:51.477234','2022-05-25 13:37:51.477234',107);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (108,'Encore','RQB-2683','2022-05-25 13:37:51.495629','2022-05-25 13:37:51.495629',108);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (109,'A7','JFM-6109','2022-05-25 13:37:51.514124','2022-05-25 13:37:51.514124',109);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (110,'MKX','HYR-2034','2022-05-25 13:37:51.532979','2022-05-25 13:37:51.532979',110);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (111,'Corolla','LUS-1310','2022-05-25 13:37:51.551242','2022-05-25 13:37:51.551242',111);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (112,'328i','MKD-6652','2022-05-25 13:37:51.571023','2022-05-25 13:37:51.571023',112);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (113,'Altima','LIS-5315','2022-05-25 13:37:51.604595','2022-05-25 13:37:51.604595',113);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (114,'Odyssey','AJA-3607','2022-05-25 13:37:51.624244','2022-05-25 13:37:51.624244',114);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (115,'MKS','GBJ-9516','2022-05-25 13:37:51.643988','2022-05-25 13:37:51.643988',115);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (116,'Silverado','DFM-2572','2022-05-25 13:37:51.678054','2022-05-25 13:37:51.678054',116);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (117,'Cube','MOR-8909','2022-05-25 13:37:51.707173','2022-05-25 13:37:51.707173',117);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (118,'Altima','BAI-2135','2022-05-25 13:37:51.728942','2022-05-25 13:37:51.728942',118);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (119,'Odyssey','QXU-8466','2022-05-25 13:37:51.749035','2022-05-25 13:37:51.749035',119);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (120,'X3','FFS-6418','2022-05-25 13:37:51.769951','2022-05-25 13:37:51.769951',120);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (121,'Challenger','SYF-3835','2022-05-25 13:38:27.040959','2022-05-25 13:38:27.040959',121);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (122,'CR-V','VRZ-5762','2022-05-25 13:38:27.064265','2022-05-25 13:38:27.064265',122);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (123,'Odyssey','LRI-4059','2022-05-25 13:38:27.086580','2022-05-25 13:38:27.086580',123);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (124,'Rogue','TDP-5130','2022-05-25 13:38:27.111757','2022-05-25 13:38:27.111757',124);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (125,'Navigator','GRL-2299','2022-05-25 13:38:27.135058','2022-05-25 13:38:27.135058',125);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (126,'MKX','ORO-9302','2022-05-25 13:38:27.173087','2022-05-25 13:38:27.173087',126);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (127,'M3','GUU-4985','2022-05-25 13:38:27.195810','2022-05-25 13:38:27.195810',127);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (128,'Enclave','CWW-5812','2022-05-25 13:38:27.216925','2022-05-25 13:38:27.216925',128);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (129,'Fiesta','LJG-3223','2022-05-25 13:38:27.238474','2022-05-25 13:38:27.238474',129);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (130,'Riveria','IWD-6312','2022-05-25 13:38:27.260426','2022-05-25 13:38:27.260426',130);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (131,'Prius','XSX-6816','2022-05-25 13:38:27.281691','2022-05-25 13:38:27.281691',131);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (132,'Malibu','XPV-8652','2022-05-25 13:38:27.301414','2022-05-25 13:38:27.301414',132);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (133,'Camry','OPO-3264','2022-05-25 13:38:27.337295','2022-05-25 13:38:27.337295',133);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (134,'A5','SBO-5554','2022-05-25 13:38:27.358023','2022-05-25 13:38:27.358023',134);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (135,'328i','NYV-6831','2022-05-25 13:38:27.378344','2022-05-25 13:38:27.378344',135);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (136,'MKS','HAW-2931','2022-05-25 13:38:27.403107','2022-05-25 13:38:27.403107',136);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (137,'A5','RKI-9591','2022-05-25 13:38:27.422330','2022-05-25 13:38:27.422330',137);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (138,'MKZ','HMT-7826','2022-05-25 13:38:27.448403','2022-05-25 13:38:27.448403',138);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (139,'Prius','DGT-5833','2022-05-25 13:38:27.470766','2022-05-25 13:38:27.470766',139);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (140,'Juke','KYZ-8888','2022-05-25 13:38:27.491460','2022-05-25 13:38:27.491460',140);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (141,'X3','XHH-5916','2022-05-25 13:38:27.512522','2022-05-25 13:38:27.512522',141);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (142,'Silverado','RJL-9766','2022-05-25 13:38:27.539796','2022-05-25 13:38:27.539796',142);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (143,'Verano','GBC-8285','2022-05-25 13:38:27.559546','2022-05-25 13:38:27.559546',143);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (144,'Riveria','PBC-9245','2022-05-25 13:38:27.579481','2022-05-25 13:38:27.579481',144);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (145,'A7','VOK-5629','2022-05-25 13:38:27.599173','2022-05-25 13:38:27.599173',145);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (146,'Mustang','JGK-5474','2022-05-25 13:38:27.623037','2022-05-25 13:38:27.623037',146);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (147,'M5','LQR-3868','2022-05-25 13:38:27.643881','2022-05-25 13:38:27.643881',147);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (148,'CR-V','EDN-5595','2022-05-25 13:38:27.665866','2022-05-25 13:38:27.665866',148);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (149,'Rogue','AAY-1034','2022-05-25 13:38:27.686110','2022-05-25 13:38:27.686110',149);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (150,'X1','YAE-1350','2022-05-25 13:38:27.705464','2022-05-25 13:38:27.705464',150);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (151,'MKX','CAT-4349','2022-05-25 13:38:27.727275','2022-05-25 13:38:27.727275',151);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (152,'Challenger','POH-8893','2022-05-25 13:38:27.745695','2022-05-25 13:38:27.745695',152);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (153,'CR-V','GBD-1462','2022-05-25 13:38:27.764329','2022-05-25 13:38:27.764329',153);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (154,'Odyssey','EFH-9424','2022-05-25 13:38:27.782859','2022-05-25 13:38:27.782859',154);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (155,'Challenger','SYJ-3199','2022-05-25 13:38:27.803544','2022-05-25 13:38:27.803544',155);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (156,'Malibu','VQL4C85','2022-05-29 17:34:23.457839','2022-05-29 17:34:23.457839',156);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (157,'Corolla','LGU-1475','2022-05-29 17:34:23.488558','2022-05-29 17:34:23.488558',157);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (158,'Camry','XCO-8272','2022-05-29 17:34:23.518582','2022-05-29 17:34:23.518582',158);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (159,'Malibu','TFF5I89','2022-05-29 17:34:23.553595','2022-05-29 17:34:23.553595',159);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (160,'Riveria','FUS-3356','2022-05-29 17:34:23.588964','2022-05-29 17:34:23.588964',160);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (161,'Cube','QLU21R8','2022-05-29 17:34:23.622814','2022-05-29 17:34:23.622814',161);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (162,'Durango','SWQ81R1','2022-05-29 17:34:23.655461','2022-05-29 17:34:23.655461',162);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (163,'A8','ONM-7210','2022-05-29 17:34:23.688983','2022-05-29 17:34:23.688983',163);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (164,'LaCrosse','OCN-5305','2022-05-29 17:34:23.721953','2022-05-29 17:34:23.721953',164);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (165,'Durango','JZT8Q58','2022-05-29 17:34:23.756037','2022-05-29 17:34:23.756037',165);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (166,'X3','DJI3U04','2022-05-29 17:34:23.792935','2022-05-29 17:34:23.792935',166);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (167,'Encore','VLI-1325','2022-05-29 17:34:23.834705','2022-05-29 17:34:23.834705',167);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (168,'Verano','CBF25X5','2022-05-29 17:34:23.870991','2022-05-29 17:34:23.870991',168);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (169,'X5','QPT13G1','2022-05-29 17:34:23.926318','2022-05-29 17:34:23.926318',169);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (170,'X5','HML7N01','2022-05-29 17:34:23.958819','2022-05-29 17:34:23.958819',170);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (171,'Encore','HPD9A27','2022-05-29 17:34:23.995859','2022-05-29 17:34:23.995859',171);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (172,'Odyssey','INX52Y5','2022-05-29 17:34:24.033554','2022-05-29 17:34:24.033554',172);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (173,'Malibu','HWR6N22','2022-05-29 17:34:24.070285','2022-05-29 17:34:24.070285',173);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (174,'Durango','NCM75A5','2022-05-29 17:34:24.108386','2022-05-29 17:34:24.108386',174);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (175,'CR-V','WGS8X87','2022-05-29 17:34:24.146460','2022-05-29 17:34:24.146460',175);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (176,'Enclave','ZJA2Q75','2022-05-29 17:34:24.181036','2022-05-29 17:34:24.181036',176);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (177,'Altima','IVH-7744','2022-05-29 17:34:24.214424','2022-05-29 17:34:24.214424',177);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (178,'Versa','FOA64Z6','2022-05-29 17:34:24.252389','2022-05-29 17:34:24.252389',178);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (179,'328i','GEY46A8','2022-05-29 17:34:24.291942','2022-05-29 17:34:24.291942',179);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (180,'MKS','OVE-6788','2022-05-29 17:34:24.325122','2022-05-29 17:34:24.325122',180);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (181,'Focus','RIQ36X0','2022-05-29 17:34:24.357174','2022-05-29 17:34:24.357174',181);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (182,'MKZ','QDQ-1086','2022-05-29 17:34:24.405897','2022-05-29 17:34:24.405897',182);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (183,'Civic','AKC1Q20','2022-05-29 17:34:24.441252','2022-05-29 17:34:24.441252',183);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (184,'Charger','YCC6T60','2022-05-29 17:34:24.477520','2022-05-29 17:34:24.477520',184);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (185,'328i','ORN4R68','2022-05-29 17:34:24.514357','2022-05-29 17:34:24.514357',185);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (186,'Challenger','PBF-5581','2022-05-29 17:34:24.550467','2022-05-29 17:34:24.550467',186);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (187,'Versa','QBT-6358','2022-05-29 17:34:24.589407','2022-05-29 17:34:24.589407',187);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (188,'X1','ORU9Y92','2022-05-29 17:34:24.627815','2022-05-29 17:34:24.627815',188);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (189,'Pathfiner','MYC49G1','2022-05-29 17:34:24.668812','2022-05-29 17:34:24.668812',189);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (190,'Malibu','PWW-8627','2022-05-29 17:34:24.711516','2022-05-29 17:34:24.711516',190);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (191,'Challenger','WXF-3792','2022-05-29 17:36:40.514317','2022-05-29 17:36:40.514317',191);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (192,'Navigator','RMI7P33','2022-05-29 17:36:40.556665','2022-05-29 17:36:40.556665',192);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (193,'Charger','VMQ69H8','2022-05-29 17:36:40.588254','2022-05-29 17:36:40.588254',193);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (194,'Odyssey','ACF4I56','2022-05-29 17:36:40.622301','2022-05-29 17:36:40.622301',194);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (195,'Focus','JQI7J17','2022-05-29 17:36:40.651253','2022-05-29 17:36:40.651253',195);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (196,'Regal','YMX-3867','2022-05-29 17:36:40.681361','2022-05-29 17:36:40.681361',196);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (197,'CR-V','HDS1T44','2022-05-29 17:36:40.714080','2022-05-29 17:36:40.714080',197);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (198,'X5','PXN5G37','2022-05-29 17:36:40.748159','2022-05-29 17:36:40.748159',198);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (199,'Ram','FMD-5082','2022-05-29 17:36:40.779163','2022-05-29 17:36:40.779163',199);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (200,'Mustang','IYI8A73','2022-05-29 17:36:40.810481','2022-05-29 17:36:40.810481',200);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (201,'A4','KGD7D96','2022-05-29 17:36:40.843511','2022-05-29 17:36:40.843511',201);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (202,'CR-V','FKO24W8','2022-05-29 17:36:40.875887','2022-05-29 17:36:40.875887',202);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (203,'Camero','OLC3K68','2022-05-29 17:36:40.908840','2022-05-29 17:36:40.908840',203);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (204,'MKS','VIO72B3','2022-05-29 17:36:40.964677','2022-05-29 17:36:40.964677',204);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (205,'Malibu','RKN9A32','2022-05-29 17:36:41.001207','2022-05-29 17:36:41.001207',205);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (206,'328i','VYQ-6985','2022-05-29 17:36:41.041587','2022-05-29 17:36:41.041587',206);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (207,'X5','LUL-4611','2022-05-29 17:36:41.075978','2022-05-29 17:36:41.075978',207);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (208,'Corolla','QZJ70X3','2022-05-29 17:36:41.110289','2022-05-29 17:36:41.110289',208);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (209,'Regal','SPP1S33','2022-05-29 17:36:41.141430','2022-05-29 17:36:41.141430',209);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (210,'MKS','NHB1N32','2022-05-29 17:36:41.180529','2022-05-29 17:36:41.180529',210);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (211,'Malibu','RUC9P93','2022-05-29 17:36:41.214024','2022-05-29 17:36:41.214024',211);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (212,'Silverado','XWK81K6','2022-05-29 17:36:41.245727','2022-05-29 17:36:41.245727',212);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (213,'Malibu','AYQ-8189','2022-05-29 17:36:41.277471','2022-05-29 17:36:41.277471',213);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (214,'X3','VAV22E2','2022-05-29 17:36:41.322426','2022-05-29 17:36:41.322426',214);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (215,'X1','TYG58G4','2022-05-29 17:36:41.352403','2022-05-29 17:36:41.352403',215);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (216,'Cube','UQO56D2','2022-05-29 17:36:41.385476','2022-05-29 17:36:41.385476',216);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (217,'MKZ','CBP94P1','2022-05-29 17:36:41.422694','2022-05-29 17:36:41.422694',217);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (218,'Rogue','QOK-2140','2022-05-29 17:36:41.461934','2022-05-29 17:36:41.461934',218);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (219,'LaCrosse','EUG6G34','2022-05-29 17:36:41.491602','2022-05-29 17:36:41.491602',219);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (220,'Prius','HSS70P5','2022-05-29 17:36:41.537162','2022-05-29 17:36:41.537162',220);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (221,'Charger','DAE5T61','2022-05-29 17:36:41.581827','2022-05-29 17:36:41.581827',221);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (222,'Charger','VPH24B8','2022-05-29 17:36:41.626248','2022-05-29 17:36:41.626248',222);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (223,'Focus','CUO-7425','2022-05-29 17:36:41.659055','2022-05-29 17:36:41.659055',223);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (224,'A4','KDE86F6','2022-05-29 17:36:41.691361','2022-05-29 17:36:41.691361',224);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (225,'A4','EOF-4503','2022-05-29 17:36:41.729270','2022-05-29 17:36:41.729270',225);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (226,'F150','KOF3W30','2022-05-29 17:38:07.428744','2022-05-29 17:38:07.428744',226);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (227,'Navigator','FNO-3703','2022-05-29 17:38:07.461176','2022-05-29 17:38:07.461176',227);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (228,'LaCrosse','AXO78I0','2022-05-29 17:38:07.496296','2022-05-29 17:38:07.496296',228);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (229,'Corolla','TSH7I53','2022-05-29 17:38:07.530635','2022-05-29 17:38:07.530635',229);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (230,'Cube','CQA-1149','2022-05-29 17:38:07.567444','2022-05-29 17:38:07.567444',230);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (231,'Camry','DCZ1R19','2022-05-29 17:38:07.592946','2022-05-29 17:38:07.592946',231);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (232,'Corolla','VLR-7330','2022-05-29 17:38:07.625866','2022-05-29 17:38:07.625866',232);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (233,'Corolla','INT-7483','2022-05-29 17:38:07.658601','2022-05-29 17:38:07.658601',233);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (234,'Cube','VON-8996','2022-05-29 17:38:07.691344','2022-05-29 17:38:07.691344',234);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (235,'Civic','OHG63S0','2022-05-29 17:38:07.724127','2022-05-29 17:38:07.724127',235);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (236,'Juke','LHX58L8','2022-05-29 17:38:07.752863','2022-05-29 17:38:07.752863',236);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (237,'M5','IID18S6','2022-05-29 17:38:07.787339','2022-05-29 17:38:07.787339',237);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (238,'Silverado','SWW-2802','2022-05-29 17:38:07.820821','2022-05-29 17:38:07.820821',238);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (239,'Juke','ZDJ8W43','2022-05-29 17:38:07.873993','2022-05-29 17:38:07.873993',239);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (240,'Odyssey','HUB7D39','2022-05-29 17:38:07.906740','2022-05-29 17:38:07.906740',240);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (241,'X3','RPP5V14','2022-05-29 17:38:07.941221','2022-05-29 17:38:07.941221',241);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (242,'MKS','GYS65Y5','2022-05-29 17:38:07.977537','2022-05-29 17:38:07.977537',242);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (243,'Durango','YYE3Q69','2022-05-29 17:38:08.012980','2022-05-29 17:38:08.012980',243);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (244,'Juke','CCL30D7','2022-05-29 17:38:08.053784','2022-05-29 17:38:08.053784',244);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (245,'Fiesta','OIB9U96','2022-05-29 17:38:08.097921','2022-05-29 17:38:08.097921',245);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (246,'MKZ','WBV67M5','2022-05-29 17:38:08.133725','2022-05-29 17:38:08.133725',246);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (247,'MKS','IUY-7487','2022-05-29 17:38:08.169047','2022-05-29 17:38:08.169047',247);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (248,'Focus','UPT1Y79','2022-05-29 17:38:08.203365','2022-05-29 17:38:08.203365',248);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (249,'Enclave','EBJ8J69','2022-05-29 17:38:08.240258','2022-05-29 17:38:08.240258',249);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (250,'X1','DMC1X74','2022-05-29 17:38:08.276762','2022-05-29 17:38:08.276762',250);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (251,'Enclave','VFA46N6','2022-05-29 17:38:08.307661','2022-05-29 17:38:08.307661',251);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (252,'F150','AJY25E8','2022-05-29 17:38:08.347217','2022-05-29 17:38:08.347217',252);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (253,'Malibu','KHU5J95','2022-05-29 17:38:08.390083','2022-05-29 17:38:08.390083',253);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (254,'328i','WAE-7552','2022-05-29 17:38:08.421779','2022-05-29 17:38:08.421779',254);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (255,'Riveria','HQZ1A94','2022-05-29 17:38:08.451405','2022-05-29 17:38:08.451405',255);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (256,'Odyssey','ITE16V6','2022-05-29 17:38:08.482635','2022-05-29 17:38:08.482635',256);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (257,'Mustang','WFW55A7','2022-05-29 17:38:08.514739','2022-05-29 17:38:08.514739',257);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (258,'MKX','YGH-6219','2022-05-29 17:38:08.551604','2022-05-29 17:38:08.551604',258);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (259,'X5','PNX69K9','2022-05-29 17:38:08.582488','2022-05-29 17:38:08.582488',259);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (260,'MKX','SIN-8338','2022-05-29 17:38:08.615308','2022-05-29 17:38:08.615308',260);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (261,'S5','LGR8X83','2022-06-03 00:45:25.122018','2022-06-03 00:45:25.122018',261);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (262,'X3','WLN17S3','2022-06-03 00:45:25.152840','2022-06-03 00:45:25.152840',262);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (263,'Durango','KHM72G8','2022-06-03 00:45:25.183111','2022-06-03 00:45:25.183111',263);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (264,'Encore','YCJ-7504','2022-06-03 00:45:25.213589','2022-06-03 00:45:25.213589',264);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (265,'Ram','MFB-6102','2022-06-03 00:45:25.247370','2022-06-03 00:45:25.247370',265);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (266,'Versa','CGO7H83','2022-06-03 00:45:25.273316','2022-06-03 00:45:25.273316',266);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (267,'A5','QRE88Y8','2022-06-03 00:45:25.301960','2022-06-03 00:45:25.301960',267);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (268,'A5','DDA48O7','2022-06-03 00:45:25.331647','2022-06-03 00:45:25.331647',268);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (269,'Camry','QNW96Q9','2022-06-03 00:45:25.364495','2022-06-03 00:45:25.364495',269);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (270,'Odyssey','KJL98O7','2022-06-03 00:45:25.400678','2022-06-03 00:45:25.400678',270);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (271,'Silverado','OBJ3J96','2022-06-03 00:45:25.431804','2022-06-03 00:45:25.431804',271);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (272,'MKX','KXQ7K78','2022-06-03 00:45:25.463223','2022-06-03 00:45:25.463223',272);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (273,'Cube','DTS-4559','2022-06-03 00:45:25.495217','2022-06-03 00:45:25.495217',273);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (274,'Juke','QVZ72T7','2022-06-03 00:45:25.526153','2022-06-03 00:45:25.526153',274);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (275,'Focus','UWA-2912','2022-06-03 00:45:25.586164','2022-06-03 00:45:25.586164',275);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (276,'328i','IIY31C4','2022-06-03 00:45:25.622412','2022-06-03 00:45:25.622412',276);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (277,'Focus','XKU28K1','2022-06-03 00:45:25.656261','2022-06-03 00:45:25.656261',277);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (278,'Regal','QWE-3193','2022-06-03 00:45:25.697036','2022-06-03 00:45:25.697036',278);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (279,'A5','GSS4J28','2022-06-03 00:45:25.734331','2022-06-03 00:45:25.734331',279);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (280,'Focus','VXQ37E5','2022-06-03 00:45:25.774456','2022-06-03 00:45:25.774456',280);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (281,'X5','GZF79G0','2022-06-03 00:45:25.810862','2022-06-03 00:45:25.810862',281);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (282,'Civic','ZTE-9028','2022-06-03 00:45:25.845057','2022-06-03 00:45:25.845057',282);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (283,'Camry','LWU-6701','2022-06-03 00:45:25.881224','2022-06-03 00:45:25.881224',283);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (284,'328i','LUA7J21','2022-06-03 00:45:25.917246','2022-06-03 00:45:25.917246',284);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (285,'Fiesta','WLI6U88','2022-06-03 00:45:25.945396','2022-06-03 00:45:25.945396',285);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (286,'MKX','XIS4R30','2022-06-03 00:45:25.979969','2022-06-03 00:45:25.979969',286);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (287,'Prius','XMV-2905','2022-06-03 00:45:26.017754','2022-06-03 00:45:26.017754',287);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (288,'A7','HVX-8957','2022-06-03 00:45:26.052523','2022-06-03 00:45:26.052523',288);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (289,'Accord','PSB3G82','2022-06-03 00:45:26.084708','2022-06-03 00:45:26.084708',289);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (290,'A8','KGL-9207','2022-06-03 00:45:26.111420','2022-06-03 00:45:26.111420',290);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (291,'A4','CHT13C9','2022-06-03 00:45:26.141118','2022-06-03 00:45:26.141118',291);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (292,'CR-V','LJJ-8461','2022-06-03 00:45:26.175144','2022-06-03 00:45:26.175144',292);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (293,'Silverado','EFN-7678','2022-06-03 00:45:26.209268','2022-06-03 00:45:26.209268',293);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (294,'Rogue','MUI2T59','2022-06-03 00:45:26.252816','2022-06-03 00:45:26.252816',294);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (295,'CR-V','ATZ-7391','2022-06-03 00:45:26.289529','2022-06-03 00:45:26.289529',295);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (296,'M3','NTO8A65','2022-06-03 00:45:37.589180','2022-06-03 00:45:37.589180',296);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (297,'LaCrosse','GJZ9N46','2022-06-03 00:45:37.623594','2022-06-03 00:45:37.623594',297);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (298,'Civic','NEV3X95','2022-06-03 00:45:37.657654','2022-06-03 00:45:37.657654',298);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (299,'A8','TDX4V43','2022-06-03 00:45:37.693934','2022-06-03 00:45:37.693934',299);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (300,'A8','TYO40X5','2022-06-03 00:45:37.726044','2022-06-03 00:45:37.726044',300);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (301,'Rogue','CRB8C82','2022-06-03 00:45:37.759441','2022-06-03 00:45:37.759441',301);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (302,'Prius','JUS24I9','2022-06-03 00:45:37.792099','2022-06-03 00:45:37.792099',302);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (303,'Camero','DKP7A71','2022-06-03 00:45:37.821813','2022-06-03 00:45:37.821813',303);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (304,'X3','RQT36X9','2022-06-03 00:45:37.851427','2022-06-03 00:45:37.851427',304);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (305,'Encore','YFP71W2','2022-06-03 00:45:37.883760','2022-06-03 00:45:37.883760',305);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (306,'Civic','NNF9F88','2022-06-03 00:45:37.915520','2022-06-03 00:45:37.915520',306);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (307,'A8','TWI-6806','2022-06-03 00:45:37.949522','2022-06-03 00:45:37.949522',307);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (308,'X5','GNG68K2','2022-06-03 00:45:37.985450','2022-06-03 00:45:37.985450',308);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (309,'F150','UBL4V33','2022-06-03 00:45:38.035240','2022-06-03 00:45:38.035240',309);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (310,'Camero','UNX92K5','2022-06-03 00:45:38.067233','2022-06-03 00:45:38.067233',310);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (311,'F150','MFQ2Z75','2022-06-03 00:45:38.102303','2022-06-03 00:45:38.102303',311);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (312,'Silverado','ZST-6630','2022-06-03 00:45:38.131484','2022-06-03 00:45:38.131484',312);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (313,'Riveria','WNY-1181','2022-06-03 00:45:38.161873','2022-06-03 00:45:38.161873',313);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (314,'S5','ZZY-6034','2022-06-03 00:45:38.194930','2022-06-03 00:45:38.194930',314);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (315,'A7','OVG8X49','2022-06-03 00:45:38.223839','2022-06-03 00:45:38.223839',315);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (316,'Silverado','MME9F09','2022-06-03 00:45:38.254141','2022-06-03 00:45:38.254141',316);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (317,'Mustang','CWV-1434','2022-06-03 00:45:38.284858','2022-06-03 00:45:38.284858',317);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (318,'MKX','XAO3N89','2022-06-03 00:45:38.316467','2022-06-03 00:45:38.316467',318);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (319,'A5','EMZ22L9','2022-06-03 00:45:38.348458','2022-06-03 00:45:38.348458',319);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (320,'Silverado','UFG5N00','2022-06-03 00:45:38.381205','2022-06-03 00:45:38.381205',320);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (321,'Cube','UZO82P7','2022-06-03 00:45:38.415362','2022-06-03 00:45:38.415362',321);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (322,'Riveria','OKL72Z7','2022-06-03 00:45:38.446636','2022-06-03 00:45:38.446636',322);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (323,'A5','ONN1Q96','2022-06-03 00:45:38.496843','2022-06-03 00:45:38.496843',323);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (324,'Regal','RKN19N5','2022-06-03 00:45:38.536417','2022-06-03 00:45:38.536417',324);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (325,'Prius','APW1V59','2022-06-03 00:45:38.568969','2022-06-03 00:45:38.568969',325);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (326,'MKS','AZO68C7','2022-06-03 00:45:38.610977','2022-06-03 00:45:38.610977',326);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (327,'Versa','SVE-5398','2022-06-03 00:45:38.641839','2022-06-03 00:45:38.641839',327);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (328,'Charger','NOZ6U63','2022-06-03 00:45:38.674196','2022-06-03 00:45:38.674196',328);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (329,'Civic','LAQ2B83','2022-06-03 00:45:38.708050','2022-06-03 00:45:38.708050',329);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (330,'Regal','MOR9G38','2022-06-03 00:45:38.742770','2022-06-03 00:45:38.742770',330);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (331,'Corolla','UUE3Z42','2022-06-03 00:56:39.976502','2022-06-03 00:56:39.976502',331);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (332,'X1','VIY8V17','2022-06-03 00:56:40.013458','2022-06-03 00:56:40.013458',332);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (333,'Accord','KBI-1626','2022-06-03 00:56:40.051345','2022-06-03 00:56:40.051345',333);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (334,'Challenger','ISJ16W2','2022-06-03 00:56:40.090771','2022-06-03 00:56:40.090771',334);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (335,'Juke','FMX4E54','2022-06-03 00:56:40.136206','2022-06-03 00:56:40.136206',335);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (336,'Verano','SEM-1558','2022-06-03 00:56:40.171556','2022-06-03 00:56:40.171556',336);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (337,'Odyssey','POM-9620','2022-06-03 00:56:40.205415','2022-06-03 00:56:40.205415',337);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (338,'X5','KDW-1301','2022-06-03 00:56:40.245826','2022-06-03 00:56:40.245826',338);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (339,'Altima','DAJ35I6','2022-06-03 00:56:40.285815','2022-06-03 00:56:40.285815',339);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (340,'Fiesta','IFC85V6','2022-06-03 00:56:40.327905','2022-06-03 00:56:40.327905',340);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (341,'Silverado','ODO32W7','2022-06-03 00:56:40.364451','2022-06-03 00:56:40.364451',341);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (342,'Verano','LDJ-4389','2022-06-03 00:56:40.398264','2022-06-03 00:56:40.398264',342);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (343,'Camero','WYK-7499','2022-06-03 00:56:40.432460','2022-06-03 00:56:40.432460',343);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (344,'LaCrosse','TLJ-3600','2022-06-03 00:56:40.472954','2022-06-03 00:56:40.472954',344);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (345,'Durango','QRW-6674','2022-06-03 00:56:40.542385','2022-06-03 00:56:40.542385',345);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (346,'Fiesta','IHE-3182','2022-06-03 00:56:40.579466','2022-06-03 00:56:40.579466',346);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (347,'Odyssey','EFG-8554','2022-06-03 00:56:40.628355','2022-06-03 00:56:40.628355',347);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (348,'Silverado','OKD2J76','2022-06-03 00:56:40.668978','2022-06-03 00:56:40.668978',348);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (349,'X3','PHV45E1','2022-06-03 00:56:40.700435','2022-06-03 00:56:40.700435',349);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (350,'MKZ','LYB51B6','2022-06-03 00:56:40.738823','2022-06-03 00:56:40.738823',350);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (351,'Regal','URB-9440','2022-06-03 00:56:40.774180','2022-06-03 00:56:40.774180',351);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (352,'Prius','JIK3H77','2022-06-03 00:56:40.807256','2022-06-03 00:56:40.807256',352);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (353,'X3','DEW1T66','2022-06-03 00:56:40.838272','2022-06-03 00:56:40.838272',353);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (354,'Corolla','YRO-5580','2022-06-03 00:56:40.869848','2022-06-03 00:56:40.869848',354);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (355,'Durango','DJA58B6','2022-06-03 00:56:40.901166','2022-06-03 00:56:40.901166',355);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (356,'MKX','EGF1O82','2022-06-03 00:56:40.937567','2022-06-03 00:56:40.937567',356);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (357,'Corolla','UXX76P3','2022-06-03 00:56:40.970509','2022-06-03 00:56:40.970509',357);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (358,'Camero','LMN6A03','2022-06-03 00:56:41.001530','2022-06-03 00:56:41.001530',358);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (359,'X1','JHG-3480','2022-06-03 00:56:41.034809','2022-06-03 00:56:41.034809',359);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (360,'Charger','SAQ28P6','2022-06-03 00:56:41.063935','2022-06-03 00:56:41.063935',360);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (361,'X5','CMM5C01','2022-06-03 00:56:41.094308','2022-06-03 00:56:41.094308',361);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (362,'Mustang','HLK-2671','2022-06-03 00:56:41.128598','2022-06-03 00:56:41.128598',362);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (363,'Ram','PTF14D6','2022-06-03 00:56:41.161432','2022-06-03 00:56:41.161432',363);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (364,'LaCrosse','FQE59Q1','2022-06-03 00:56:41.196135','2022-06-03 00:56:41.196135',364);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (365,'Silverado','GGQ36R7','2022-06-03 00:56:41.225995','2022-06-03 00:56:41.225995',365);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (366,'Prius','HEH8O80','2022-06-03 01:01:49.352852','2022-06-03 01:01:49.352852',366);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (367,'Civic','JNU33V7','2022-06-03 01:01:49.386290','2022-06-03 01:01:49.386290',367);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (368,'A4','ILL-9245','2022-06-03 01:01:49.417444','2022-06-03 01:01:49.417444',368);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (369,'M3','MXF4B56','2022-06-03 01:01:49.449935','2022-06-03 01:01:49.449935',369);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (370,'F150','IDA1E14','2022-06-03 01:01:49.488862','2022-06-03 01:01:49.488862',370);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (371,'Verano','ABM-5646','2022-06-03 01:01:49.526018','2022-06-03 01:01:49.526018',371);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (372,'Malibu','SCS79E1','2022-06-03 01:01:49.566641','2022-06-03 01:01:49.566641',372);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (373,'A4','ABD-5881','2022-06-03 01:01:49.614806','2022-06-03 01:01:49.614806',373);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (374,'A5','FFH55F8','2022-06-03 01:01:49.651918','2022-06-03 01:01:49.651918',374);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (375,'Mustang','MZS49Y8','2022-06-03 01:01:49.687564','2022-06-03 01:01:49.687564',375);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (376,'Enclave','GOT-1036','2022-06-03 01:01:49.724314','2022-06-03 01:01:49.724314',376);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (377,'Civic','CIY-1277','2022-06-03 01:01:49.767654','2022-06-03 01:01:49.767654',377);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (378,'A5','DEA-4855','2022-06-03 01:01:49.801679','2022-06-03 01:01:49.801679',378);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (379,'LaCrosse','EBT-7356','2022-06-03 01:01:49.854768','2022-06-03 01:01:49.854768',379);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (380,'Focus','IYO8E39','2022-06-03 01:01:49.893551','2022-06-03 01:01:49.893551',380);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (381,'Silverado','RBY-2666','2022-06-03 01:01:49.930777','2022-06-03 01:01:49.930777',381);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (382,'Camero','MFH-3603','2022-06-03 01:01:49.965250','2022-06-03 01:01:49.965250',382);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (383,'MKZ','VYU3S49','2022-06-03 01:01:49.998858','2022-06-03 01:01:49.998858',383);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (384,'LaCrosse','JOO5R93','2022-06-03 01:01:50.038036','2022-06-03 01:01:50.038036',384);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (385,'Civic','SHM2F02','2022-06-03 01:01:50.071241','2022-06-03 01:01:50.071241',385);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (386,'Camry','AXA60W1','2022-06-03 01:01:50.108410','2022-06-03 01:01:50.108410',386);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (387,'Accord','PPQ38L5','2022-06-03 01:01:50.140829','2022-06-03 01:01:50.140829',387);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (388,'A4','TWV2U71','2022-06-03 01:01:50.180113','2022-06-03 01:01:50.180113',388);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (389,'Navigator','FDR62O3','2022-06-03 01:01:50.216670','2022-06-03 01:01:50.216670',389);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (390,'Focus','TTL90Z6','2022-06-03 01:01:50.251459','2022-06-03 01:01:50.251459',390);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (391,'Malibu','UNO-6512','2022-06-03 01:01:50.290690','2022-06-03 01:01:50.290690',391);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (392,'Focus','YDQ-7964','2022-06-03 01:01:50.331097','2022-06-03 01:01:50.331097',392);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (393,'Accord','YTE-1456','2022-06-03 01:01:50.375551','2022-06-03 01:01:50.375551',393);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (394,'MKZ','LFE8Y26','2022-06-03 01:01:50.410635','2022-06-03 01:01:50.410635',394);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (395,'Civic','NQE24I0','2022-06-03 01:01:50.452357','2022-06-03 01:01:50.452357',395);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (396,'Durango','RBZ2Q32','2022-06-03 01:01:50.487925','2022-06-03 01:01:50.487925',396);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (397,'S5','KFL3M83','2022-06-03 01:01:50.524270','2022-06-03 01:01:50.524270',397);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (398,'Focus','XHK76G1','2022-06-03 01:01:50.562324','2022-06-03 01:01:50.562324',398);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (399,'Corolla','LCJ-8104','2022-06-03 01:01:50.598735','2022-06-03 01:01:50.598735',399);
+INSERT INTO "vehicles" ("id","model","registration_plate","created_at","updated_at","client_id") VALUES (400,'Navigator','MBD10P1','2022-06-03 01:01:50.635949','2022-06-03 01:01:50.635949',400);
+INSERT INTO "tasks" ("id","title","description","status","estimative","created_at","updated_at","service_id","finish_date") VALUES (1,'Arrumar cabeçote','aahghahaja',0,'2022-05-25','2022-05-29 21:48:17.004091','2022-05-29 21:48:17.004091',3,NULL);
+INSERT INTO "tasks" ("id","title","description","status","estimative","created_at","updated_at","service_id","finish_date") VALUES (2,'Ronaldinho','32323',0,'2022-06-28','2022-06-04 00:59:17.490528','2022-06-04 00:59:17.490528',1,NULL);
+INSERT INTO "tasks" ("id","title","description","status","estimative","created_at","updated_at","service_id","finish_date") VALUES (3,'Josefi','23232',0,'2022-06-29','2022-06-04 01:00:27.920546','2022-06-04 01:00:27.920546',1,NULL);
+INSERT INTO "tasks" ("id","title","description","status","estimative","created_at","updated_at","service_id","finish_date") VALUES (4,'Desamassar Teto','SIm',0,'2022-06-22','2022-06-04 13:02:32.172073','2022-06-04 13:02:32.172073',2,NULL);
+INSERT INTO "tasks" ("id","title","description","status","estimative","created_at","updated_at","service_id","finish_date") VALUES (5,'warrior of light','cirus',NULL,NULL,'2022-06-04 13:29:33.076843','2022-06-04 13:29:33.076843',1,NULL);
+INSERT INTO "dashboards" ("id","created_at","updated_at","comission_percentage") VALUES (1,'2022-05-15 23:08:03.783365','2022-05-23 22:22:21.190589',10);
+INSERT INTO "dashboards" ("id","created_at","updated_at","comission_percentage") VALUES (2,'2022-05-22 22:12:47.558442','2022-05-22 22:12:47.558442',10);
+INSERT INTO "dashboards" ("id","created_at","updated_at","comission_percentage") VALUES (3,'2022-05-25 13:37:51.082271','2022-05-25 13:37:51.082271',10);
+INSERT INTO "dashboards" ("id","created_at","updated_at","comission_percentage") VALUES (4,'2022-05-25 13:38:26.765639','2022-05-25 13:38:26.765639',10);
+INSERT INTO "dashboards" ("id","created_at","updated_at","comission_percentage") VALUES (5,'2022-05-29 17:34:22.966995','2022-05-29 17:34:22.966995',10);
+INSERT INTO "dashboards" ("id","created_at","updated_at","comission_percentage") VALUES (6,'2022-05-29 17:36:39.884066','2022-05-29 17:36:39.884066',10);
+INSERT INTO "dashboards" ("id","created_at","updated_at","comission_percentage") VALUES (7,'2022-05-29 17:38:06.931330','2022-05-29 17:38:06.931330',10);
+INSERT INTO "dashboards" ("id","created_at","updated_at","comission_percentage") VALUES (8,'2022-06-03 00:45:24.654616','2022-06-03 00:45:24.654616',10);
+INSERT INTO "dashboards" ("id","created_at","updated_at","comission_percentage") VALUES (9,'2022-06-03 00:45:37.116011','2022-06-03 00:45:37.116011',10);
+INSERT INTO "dashboards" ("id","created_at","updated_at","comission_percentage") VALUES (10,'2022-06-03 00:56:39.194675','2022-06-03 00:56:39.194675',10);
+INSERT INTO "dashboards" ("id","created_at","updated_at","comission_percentage") VALUES (11,'2022-06-03 01:01:48.559356','2022-06-03 01:01:48.559356',10);
+INSERT INTO "services" ("id","title","status","estimative","value","created_at","updated_at","vehicle_id","finish_date") VALUES (1,'Uno Mille',0,'2022-05-25',124.0,'2022-05-17 01:20:07.270096','2022-05-17 01:20:07.270096',32,NULL);
+INSERT INTO "services" ("id","title","status","estimative","value","created_at","updated_at","vehicle_id","finish_date") VALUES (2,'Josefi',0,'2022-05-25',980.0,'2022-05-22 19:34:56.235482','2022-05-22 19:34:56.235482',11,NULL);
+INSERT INTO "services" ("id","title","status","estimative","value","created_at","updated_at","vehicle_id","finish_date") VALUES (3,'Teste sem sale',1,'2022-05-26',170.0,'2022-05-26 01:21:24.479653','2022-05-29 21:50:05.449615',10,'2022-05-29');
+INSERT INTO "services" ("id","title","status","estimative","value","created_at","updated_at","vehicle_id","finish_date") VALUES (4,'Teste Dois',1,'2020-06-21',987.0,'2022-06-04 13:41:16.849538','2022-06-04 13:49:40.897332',6,'2022-06-04');
+INSERT INTO "users" ("id","email","encrypted_password","reset_password_token","reset_password_sent_at","remember_created_at","created_at","updated_at","role","name") VALUES (1,'super@admin.com','$2a$12$i4LnYvq4JPQ9OzWzi6VMpe4EFMA9hv0ml7lTr5N6q.6DkesEWOYkO',NULL,NULL,NULL,'2022-05-15 23:08:03.772167','2022-05-15 23:08:03.772167',0,'DarthVader');
+INSERT INTO "sale_parts" ("id","sale_id","part_id","part_value","created_at","updated_at") VALUES (1,2,1,NULL,'2022-05-17 01:21:01.213250','2022-05-17 01:21:01.213250');
+INSERT INTO "sale_parts" ("id","sale_id","part_id","part_value","created_at","updated_at") VALUES (2,3,1,NULL,'2022-05-18 01:02:58.015929','2022-05-18 01:02:58.015929');
+INSERT INTO "sale_parts" ("id","sale_id","part_id","part_value","created_at","updated_at") VALUES (3,4,1,NULL,'2022-05-18 01:07:46.882344','2022-05-18 01:07:46.882344');
+INSERT INTO "sale_parts" ("id","sale_id","part_id","part_value","created_at","updated_at") VALUES (4,5,1,NULL,'2022-05-18 01:09:27.355820','2022-05-18 01:09:27.355820');
+INSERT INTO "sale_parts" ("id","sale_id","part_id","part_value","created_at","updated_at") VALUES (5,5,2,NULL,'2022-05-18 01:09:27.366521','2022-05-18 01:09:27.366521');
+INSERT INTO "sale_parts" ("id","sale_id","part_id","part_value","created_at","updated_at") VALUES (6,6,1,NULL,'2022-05-18 01:10:32.789357','2022-05-18 01:10:32.789357');
+INSERT INTO "sale_parts" ("id","sale_id","part_id","part_value","created_at","updated_at") VALUES (7,6,2,NULL,'2022-05-18 01:10:32.798224','2022-05-18 01:10:32.798224');
+INSERT INTO "sale_parts" ("id","sale_id","part_id","part_value","created_at","updated_at") VALUES (8,7,1,NULL,'2022-05-18 01:11:32.572138','2022-05-18 01:11:32.572138');
+INSERT INTO "sale_parts" ("id","sale_id","part_id","part_value","created_at","updated_at") VALUES (9,7,2,NULL,'2022-05-18 01:11:32.587615','2022-05-18 01:11:32.587615');
+INSERT INTO "sale_parts" ("id","sale_id","part_id","part_value","created_at","updated_at") VALUES (10,8,1,NULL,'2022-05-23 22:41:11.752773','2022-05-23 22:41:11.752773');
+INSERT INTO "sale_parts" ("id","sale_id","part_id","part_value","created_at","updated_at") VALUES (11,8,2,NULL,'2022-05-23 22:41:11.763900','2022-05-23 22:41:11.763900');
+INSERT INTO "sale_parts" ("id","sale_id","part_id","part_value","created_at","updated_at") VALUES (12,9,1,NULL,'2022-05-23 22:41:56.389666','2022-05-23 22:41:56.389666');
+INSERT INTO "sale_parts" ("id","sale_id","part_id","part_value","created_at","updated_at") VALUES (14,9,3,NULL,'2022-06-08 01:06:23.671048','2022-06-08 01:06:23.671048');
+INSERT INTO "sale_parts" ("id","sale_id","part_id","part_value","created_at","updated_at") VALUES (15,9,4,NULL,'2022-06-08 01:06:23.694606','2022-06-08 01:06:23.694606');
+INSERT INTO "sale_parts" ("id","sale_id","part_id","part_value","created_at","updated_at") VALUES (16,9,5,NULL,'2022-06-08 01:06:23.719211','2022-06-08 01:06:23.719211');
+INSERT INTO "sales" ("id","name","description","value","created_at","updated_at","service_id","client_id","finished","comission_value","user_id") VALUES (3,'Orçamento para Benton Stracke MD - 2022-05-25','Ronaldinho gaucho',190,'2022-05-18 01:02:58.005218','2022-05-25 22:18:41.762956',NULL,11,1,19,1);
+INSERT INTO "sales" ("id","name","description","value","created_at","updated_at","service_id","client_id","finished","comission_value","user_id") VALUES (5,'Orçamento para Mark Wolff - 2022-05-29','Creme suiço',320,'2022-05-18 01:09:27.347984','2022-05-29 21:24:51.254944',NULL,12,1,32,1);
+INSERT INTO "sales" ("id","name","description","value","created_at","updated_at","service_id","client_id","finished","comission_value","user_id") VALUES (6,'Orçamento para Season Brown - 2022-06-14','Josefi thanus',130,'2022-05-18 01:10:32.780956','2022-06-14 12:14:29.259433',NULL,2,0,13,1);
+INSERT INTO "sales" ("id","name","description","value","created_at","updated_at","service_id","client_id","finished","comission_value","user_id") VALUES (7,'Orçamento para Mark Wolff - 2022-06-14','Josefino caninus',130,'2022-05-18 01:11:32.562257','2022-06-14 12:14:29.304057',NULL,12,0,13,1);
+INSERT INTO "sales" ("id","name","description","value","created_at","updated_at","service_id","client_id","finished","comission_value","user_id") VALUES (8,'Orçamento para Uno Mille - 2022-06-14','AHAHAHAHHA',130,'2022-05-23 22:41:11.744607','2022-06-14 12:14:29.352221',1,NULL,0,13,1);
+INSERT INTO "sales" ("id","name","description","value","created_at","updated_at","service_id","client_id","finished","comission_value","user_id") VALUES (9,'Orçamento para Gul''dan - 2022-06-14','ahahahhaahhahahahahahahha',18600,'2022-05-23 22:41:56.380307','2022-06-14 12:12:51.687668',2,82,1,1860,1);
+INSERT INTO "providers" ("id","name","cnpj","address","phone","created_at","updated_at") VALUES (1,'Avalanche Moto Peças ','38792893298328923','Rua do Zap 308','44 99834828','2022-05-29 20:57:02.172012','2022-05-29 20:57:02.172012');
+INSERT INTO "providers" ("id","name","cnpj","address","phone","created_at","updated_at") VALUES (2,'Ronaldinho Auto Peças ','3232233232323','Rua do Coqueiro 51 Jussara PR','23898298329832','2022-05-29 20:57:51.835602','2022-05-29 20:57:51.835602');
+INSERT INTO "providers" ("id","name","cnpj","address","phone","created_at","updated_at") VALUES (3,'Ratinho Moto Peças','23313131313311313','Rua do Zap 980','33223232323','2022-06-03 00:19:00.493279','2022-06-03 00:19:00.493279');
+INSERT INTO "providers" ("id","name","cnpj","address","phone","created_at","updated_at") VALUES (4,'Fornecedor Local','Local','Local','Local','2022-06-03 00:45:24.307884','2022-06-03 00:45:24.307884');
+INSERT INTO "parts" ("id","name","value","created_at","updated_at","model","provider_id") VALUES (2,'Motor',130.0,'2022-05-18 01:09:03.088953','2022-06-02 23:24:34.107721','Lamborghini',2);
+INSERT INTO "parts" ("id","name","value","created_at","updated_at","model","provider_id") VALUES (3,'Teto',9870.0,'2022-06-03 00:18:15.152150','2022-06-03 00:18:15.152150','Ferrari',2);
+INSERT INTO "parts" ("id","name","value","created_at","updated_at","model","provider_id") VALUES (4,'Porta',8760.0,'2022-06-03 00:19:14.878821','2022-06-03 00:19:14.878821','Genérico',3);
+INSERT INTO "parts" ("id","name","value","created_at","updated_at","model","provider_id") VALUES (5,'Josiah',0.0,'2022-06-03 01:02:45.699447','2022-06-03 01:02:45.699447','Genérico',4);
+INSERT INTO "parts" ("id","name","value","created_at","updated_at","model","provider_id") VALUES (6,'Josi',0.0,'2022-06-08 01:06:01.728338','2022-06-08 01:06:01.728338','Genérico',2);
+CREATE INDEX IF NOT EXISTS "index_vehicles_on_client_id" ON "vehicles" (
+	"client_id"
+);
+CREATE INDEX IF NOT EXISTS "index_tasks_on_service_id" ON "tasks" (
+	"service_id"
+);
+CREATE INDEX IF NOT EXISTS "index_services_on_vehicle_id" ON "services" (
+	"vehicle_id"
+);
+CREATE UNIQUE INDEX IF NOT EXISTS "index_users_on_email" ON "users" (
+	"email"
+);
+CREATE UNIQUE INDEX IF NOT EXISTS "index_users_on_reset_password_token" ON "users" (
+	"reset_password_token"
+);
+CREATE INDEX IF NOT EXISTS "index_sale_parts_on_sale_id" ON "sale_parts" (
+	"sale_id"
+);
+CREATE INDEX IF NOT EXISTS "index_sale_parts_on_part_id" ON "sale_parts" (
+	"part_id"
+);
+CREATE INDEX IF NOT EXISTS "index_sales_on_service_id" ON "sales" (
+	"service_id"
+);
+CREATE INDEX IF NOT EXISTS "index_sales_on_client_id" ON "sales" (
+	"client_id"
+);
+CREATE INDEX IF NOT EXISTS "index_sales_on_user_id" ON "sales" (
+	"user_id"
+);
+CREATE INDEX IF NOT EXISTS "index_parts_on_provider_id" ON "parts" (
+	"provider_id"
+);
+COMMIT;

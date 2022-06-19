@@ -1,4 +1,4 @@
-    <style>
+<style>
         .row {
             text-align: center;
             margin: 0 auto;
@@ -21,17 +21,17 @@
             </div>
         </div>
     </div>
-    <h2 class="text-center mx-auto pt-5 pb-2"> Todos os clientes cadastrados: </h2>
-    
-    <div class="mt-5 text-center">
-        <h4> Procurar por nome: </h4>
+
+    <h1 class=""> Clientes </h1>
+
+    <div class="text-end ">
         <%= form_tag(clients_path, method: :get) do %>
             <%= text_field_tag(:search, params[:search]) %>
-            <%= submit_tag ("Procurar")%>
+            <%= submit_tag ("Pesquisar") %>
         <% end %>
     </div>
-    <div class="container border border-dark p-5 text-center ">
-
+  
+   
 
     
     <table class="table">
@@ -54,9 +54,8 @@
     </tbody>
     </table>
         <div class="digg_pagination text-center mt-4">
-            <%= paginate @clients  %>
+            <%= paginate @clients %>
 
         </div>
-    </div>
     </div>
 

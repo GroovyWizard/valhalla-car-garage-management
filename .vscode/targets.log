@@ -8,7 +8,7 @@ make: *** No rule to make target 'all'.  Stop.
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Tue Jun 14 10:17:34 2022
+# Make data base, printed on Sun Jun 19 12:16:33 2022
 
 # Variables
 
@@ -19,9 +19,9 @@ LC_ALL = C
 # environment
 NO_AT_BRIDGE = 1
 # environment
-I3SOCK = /run/user/1000/i3/ipc-socket.642
+I3SOCK = /run/user/1000/i3/ipc-socket.1491
 # environment
-VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-ecb8c6e9-6789-4eda-a724-f83c59db7b09.sock
+VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-f96185c1-b0dc-440c-8bdc-a4ecd450d857.sock
 # environment
 VSCODE_CWD = /home/skeletor
 # default
@@ -45,7 +45,7 @@ VSCODE_LOG_STACK = false
 # automatic
 %F = $(notdir $%)
 # environment
-VSCODE_CODE_CACHE_PATH = /home/skeletor/.config/Code/CachedData/4af164ea3a06f701fe3e89a2bcbb421d2026b68f
+VSCODE_CODE_CACHE_PATH = /home/skeletor/.config/Code/CachedData/30d9c6cd9483b2cc586687151bcbcd635f373630
 # environment
 XDG_SESSION_PATH = /org/freedesktop/DisplayManager/Session0
 # environment
@@ -81,7 +81,7 @@ MAKEFILE_LIST := Makefile
 # environment
 VSCODE_VERBOSE_LOGGING = true
 # environment
-VSCODE_PID = 2963
+VSCODE_PID = 2741
 # environment
 XDG_SESSION_TYPE = x11
 # automatic
@@ -163,7 +163,7 @@ HOME = /home/skeletor
 # environment
 ELECTRON_RUN_AS_NODE = 1
 # environment
-VSCODE_IPC_HOOK = /run/user/1000/vscode-f3f08d6a-1.68.0-main.sock
+VSCODE_IPC_HOOK = /run/user/1000/vscode-f3f08d6a-1.68.1-main.sock
 # environment
 XDG_SESSION_ID = 2
 # default
@@ -333,6 +333,6 @@ down:
 # strcache performance: lookups = 69 / hit rate = 23%
 # hash-table stats:
 # Load=53/8192=1%, Rehash=0, Collisions=0/69=0%
-# Finished Make data base on Tue Jun 14 10:17:34 2022
+# Finished Make data base on Sun Jun 19 12:16:33 2022
 
  

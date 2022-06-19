@@ -1,6 +1,26 @@
 <p id="notice"><%= notice %></p>
 
+
+<div class="container mx-auto w-50 text-center">
+        <div class="card w-56 border border-primary text-center mx-auto mt-5">
+            <div class="card-body">
+                <div class="card-title">
+                    Cadastre um novo Fornecedor
+                </div>
+                <%= link_to "Clique aqui", new_provider_path, class: "btn btn-primary" %>
+            </div>
+        </div>
+    </div>
+
 <h1>Fornecedores</h1>
+
+ <div class="text-end ">
+        <%= form_tag(providers_path, method: :get) do %>
+            <%= text_field_tag(:search, params[:search]) %>
+            <%= submit_tag ("Pesquisar") %>
+        <% end %>
+    </div>
+  
 
 <table class="table">
   <thead>

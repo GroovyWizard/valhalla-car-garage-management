@@ -11,4 +11,14 @@ class Provider < ApplicationRecord
     
     return @parts
   end
+
+  def self.search(search)
+    if search 
+        @result = Provider.where("cnpj LIKE ?", "%" + search + "%")
+        puts(@result, "here")
+        return @result ? @result : Provider.all
+    else 
+        return Provider.all 
+    end  
+  end 
 end
