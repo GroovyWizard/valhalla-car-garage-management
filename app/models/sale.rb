@@ -96,4 +96,13 @@ class Sale < ApplicationRecord
       return 0
     end
   end
+
+  def self.sale_by_period(start_date, end_date)
+    if start_date && end_date
+      @sales = Sale.where(:created_at => start_date..end_date)
+      return @sales
+    end
+  end
+
+
 end

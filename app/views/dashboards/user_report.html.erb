@@ -5,12 +5,57 @@
                 <p> Nesta página você poderá inspecionar dados relacionados a orçamentos </p>
                 <div class="row mb-5">
                 <%= render 'user-featured' %>
+               </div>
 
                <div class="row mb-5">
                     <%= render 'user_by_sale' %>
                 </div>
 
                 <div class="row my-5">
+
+                <div class="col-12 col-md-12 mb-4 align-items-center">
+                    <div class="card w-75">
+                        <h5 class="card-header text-primary"> Usuarios por Valor de Orçamento realizado </h5>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                        <th scope="col">Id</th>
+                                        <th scope="col">Nome</th>
+                                        <th scope="col">Função</th></th>
+                                        <th scope="col">Valor somado dos Orçamentos</th>
+                                        <th scope="col">Data de cadastro</th>
+                                        <th scope="col"></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <% @users_by_sale_value.each do |user| %>
+                                            <tr>
+                                                <th scope="row"> <%= user.id %></th>
+                                                <td><%= user.name %></td>
+                                                <td><%= user.parsed_role %> </td>
+                                                <td><%= user.sales.sum("value") %></td>
+                                                <td><%= user.created_at_normalized %></td>
+                                            </tr>
+                                        <% end %>
+                                    </tbody>
+                                    </table>
+                            </div>
+                                
+                            </div>
+                            </div>
+                    </div>
+
+
+
+
+
+
+
+
+
+
 
                 </div>
             </main>

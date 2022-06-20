@@ -52,12 +52,14 @@ class DashboardsController < ApplicationController
     @sale_value_by_period = Sale.value_by_period(
       params[:start_date], params[:end_date]
     )
-    puts(@sale_value_by_period, "hereee")
-
+    @sale_by_period = Sale.sale_by_period(params[:start_date], params[:end_date])
   end
 
+
   def user_report
+    
     @users = User.all
+    @users_by_sale_value = User.users_by_sale_value
     @users_by_sale = User.users_by_sale
     return @users_by_sale ? @users_by_sale.length > 1 : [@users_by_sale]
   end

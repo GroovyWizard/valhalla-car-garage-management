@@ -8,7 +8,7 @@ make: *** No rule to make target 'all'.  Stop.
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Sun Jun 19 12:16:33 2022
+# Make data base, printed on Mon Jun 20 07:58:03 2022
 
 # Variables
 
@@ -19,9 +19,9 @@ LC_ALL = C
 # environment
 NO_AT_BRIDGE = 1
 # environment
-I3SOCK = /run/user/1000/i3/ipc-socket.1491
+I3SOCK = /run/user/1000/i3/ipc-socket.686
 # environment
-VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-f96185c1-b0dc-440c-8bdc-a4ecd450d857.sock
+VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-32327216-d950-49d1-9323-87709aec68a5.sock
 # environment
 VSCODE_CWD = /home/skeletor
 # default
@@ -81,7 +81,7 @@ MAKEFILE_LIST := Makefile
 # environment
 VSCODE_VERBOSE_LOGGING = true
 # environment
-VSCODE_PID = 2741
+VSCODE_PID = 2466
 # environment
 XDG_SESSION_TYPE = x11
 # automatic
@@ -285,6 +285,7 @@ migrate:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
+ 
 #  recipe to execute (from 'Makefile', line 41):
 	@echo "Migrating"
 	@docker exec valhalla bash -c "rails db:migrate"
@@ -301,7 +302,6 @@ gem-sync:
 #  Modification time never checked.
 #  File has not been updated.
 #  recipe to execute (from 'Makefile', line 27):
- 
 	@echo "Updating gems"
 	@docker exec valhalla bash -c "bundle install"
 
@@ -333,6 +333,6 @@ down:
 # strcache performance: lookups = 69 / hit rate = 23%
 # hash-table stats:
 # Load=53/8192=1%, Rehash=0, Collisions=0/69=0%
-# Finished Make data base on Sun Jun 19 12:16:33 2022
+# Finished Make data base on Mon Jun 20 07:58:03 2022
 
  

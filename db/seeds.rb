@@ -28,6 +28,26 @@ end
 end
 
 1.times do 
+    func = User.new 
+    func.email = 'super@func.com'
+    func.role = 0
+    func.name = 'Gandalf'
+    func.password = '123456'
+    func.password_confirmation = '123456' 
+    func.save()
+end
+
+1.times do 
+    func = User.new 
+    func.email = 'normal@func.com'
+    func.role = 1
+    func.name = 'Legolas'
+    func.password = '123456'
+    func.password_confirmation = '123456' 
+    func.save()
+end
+
+1.times do 
     dashboard = Dashboard.new 
     dashboard.comission_percentage = 10
     dashboard.save()

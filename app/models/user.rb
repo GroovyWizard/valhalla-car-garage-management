@@ -31,6 +31,15 @@ class User < ApplicationRecord
     return @users_by_sale
   end
 
+
+  def self.users_by_sale_value
+    @users_by_sale = User
+      .left_joins(:sales)
+      .group(:id)
+      .order("sales.value DESC")
+    return @users_by_sale
+  end
+
   def created_at_normalized
     return Date.parse(self.created_at.to_s)
   end
