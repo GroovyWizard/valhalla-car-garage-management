@@ -1,5 +1,18 @@
 <p id="notice"><%= notice %></p>
 
+
+    <div class="container mx-auto w-50 text-center">
+        <div class="card w-56 border border-primary text-center mx-auto mt-5">
+            <div class="card-body">
+                <div class="card-title">
+                    Cadastre uma nova peça
+                </div>
+                <%= link_to "Clique aqui", new_part_path, class: "btn btn-primary" %>
+            </div>
+        </div>
+    </div>
+
+
 <h1>Peças</h1>
 
 
@@ -19,9 +32,6 @@
   <tbody>
   </tbody>
 </table>
-
-
-<%= link_to "New Part", new_part_path %>
 
 
 <script type="text/javascript">

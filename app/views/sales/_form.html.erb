@@ -5,16 +5,6 @@
   <% end %>
 
   <%= form_with(model: sale) do |form| %>
-  <% if sale.errors.any? %>
-  <div id="error_explanation">
-    <h2> Erros: <%= pluralize(sale.errors.count, "error") %>  </h2>
-    <ul>
-      <% sale.errors.each do |error| %>
-      <li><%= error.full_message %></li>
-      <% end %>
-    </ul>
-  </div>
-  <% end %>
 
   <div class="from-group pt-2">
     <%= form.label :description, value: "Descrição do orçamento" %>
@@ -64,11 +54,10 @@
                                                     { :multiple => true,  :class => "form-select border border-dark p-5" }) %>
   </div>
 
-  <label for=""> Valor Total Estimado: </label>
-  <strong> 300 PLACEHOLDER</strong>
-
   <div class="lead pt-5">
-    <%= form.submit "Concluir", class: "btn btn-primary" %>
+    <%= form.submit "Cadastrar", class: "btn btn-primary" %>
+    <%= link_to 'Voltar', sales_path, class: "btn btn-primary" %>    
+
   </div>
   <% end %>
 

@@ -40,15 +40,19 @@
       <th scope="col">ID</th>
       <th scope="col">Nome</th>
       <th scope="col">CPF / CNPJ </th>
+      <th class="text-center" colspan="3">Ações</th>
+
     </tr>
   </thead>
   <tbody>
     
     <% @clients.each do |client| %>    
         <tr>
-        <td> <%= link_to client.id %> </td>
-        <td> <%= link_to client.name, client %></td>
-        <td> <%= client.document %> </td>
+            <td> <%= client.id %> </td>
+            <td> <%= link_to client.name, client %></td>
+            <td> <%= client.document %> </td>
+            <td><%= link_to 'Editar', edit_client_path(client) %></td>
+            <td><%= link_to 'Deletar', client, method: :delete, data: { confirm: 'Tem certeza que deseja deletar este cliente?' } %></td>
         </tr>
     <% end %>
     </tbody>

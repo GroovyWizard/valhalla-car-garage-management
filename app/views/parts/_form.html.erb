@@ -3,7 +3,10 @@
     <%= f.input :model, value: "Modelo da peça" %>
     <%= f.association :provider %>
     <%= f.input :value, value: "Valor" %>
-    <%= f.button :submit, 'Cadastrar peça', class: "btn btn-primary" %>
+    <div class="my-5">
+      <%= f.button :submit, 'Cadastrar peça', class: "btn btn-primary" %>
+      <%= link_to 'Voltar', parts_path, class: "btn btn-primary" %>
+    </div>
   <% end %>
 
 

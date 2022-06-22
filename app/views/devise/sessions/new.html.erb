@@ -1,14 +1,35 @@
-<h2>Log in</h2>
+<style>
+  
+  #bg { 
+    background-image: url("https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fimg00.deviantart.net%2Fd6f5%2Fi%2F2015%2F172%2F1%2Fc%2Fable_blacksmith_by_draken4o-d8y51lu.jpg&f=1&nofb=1");
+    background-repeat: no-repeat;
+    background-position: center right;
+    background-size: cover;
+    height: 1000px;
+    background-attachment: scroll;
+  }
+</style>
 
+
+
+<div class="container border border-black p-5 mx-auto">
+<h2 class="text-center display-4 fw-bold mb-2" style="font-family: norse;">Entrar</h2>
+
+<div class="row">
+<div class="col-6" id="bg">
+
+</div>
+
+<div class="col-6 p-5 mb-5">
 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
   <div class="field">
     <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+    <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control" %>
   </div>
 
-  <div class="field">
+  <div class="field my-4">
     <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "current-password" %>
+    <%= f.password_field :password, autocomplete: "current-password", class: "form-control" %>
   </div>
 
   <% if devise_mapping.rememberable? %>
@@ -18,9 +39,12 @@
     </div>
   <% end %>
 
-  <div class="actions">
-    <%= f.submit "Log in" %>
+  <div class="actions my-5">
+    <%= f.submit "Entrar", class: "btn btn-lg btn-primary" %>
   </div>
 <% end %>
 
 <%= render "devise/shared/links" %>
+</div>
+</div>
+</div>

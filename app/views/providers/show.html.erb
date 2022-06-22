@@ -1,24 +1,61 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @provider.name %>
-</p>
 
-<p>
-  <strong>Cnpj:</strong>
-  <%= @provider.cnpj %>
-</p>
 
-<p>
-  <strong>Address:</strong>
-  <%= @provider.address %>
-</p>
+<div class="container mx-auto border border-black p-5 m-5">
 
-<p>
-  <strong>Phone:</strong>
-  <%= @provider.phone %>
-</p>
+  <h2>
+    <strong>Nome:</strong>
+    <%= @provider.name %>
+  </h2>
 
-<%= link_to 'Edit', edit_provider_path(@provider) %> |
-<%= link_to 'Back', providers_path %>
+  <h2>
+    <strong>Cnpj:</strong>
+    <%= @provider.cnpj %>
+  </h2>
+
+  <h2>
+    <strong>Endereço</strong>
+    <%= @provider.address %>
+  </h2>
+
+  <h2>
+    <strong>Telefone:</strong>
+    <%= @provider.phone %>
+  </h2>
+
+
+  <h3 class="text-center mt-5"> Possui as peças </h3>
+
+      
+      <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Identificacao</th>
+        <th scope="col">Modelo </th>
+      </tr>
+    </thead>
+    <tbody>
+      
+      <% @provider.parts do |part| %>    
+          <tr>
+          <td> <%= part.id %> </td>
+          <td> <%= link_to part.name %> </td>
+          <td> <%= part.model %></td>
+          </tr>
+      <% end %>
+      </tbody>
+      </table>
+        
+      </div>
+
+
+
+
+  <div class="text-center">
+    <%= link_to 'Voltar', providers_path, class: "btn btn-primary" %>
+    <%= link_to 'Editar', edit_provider_path(@provider) , class: "btn btn-primary" %> 
+  </div>
+
+</div>

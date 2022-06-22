@@ -25,6 +25,7 @@
 <table class="table">
   <thead>
     <tr>
+      <th>ID</th>
       <th>Nome</th>
       <th>Cnpj</th>
       <th>Endereço</th>
@@ -36,18 +37,20 @@
   <tbody>
     <% @providers.each do |provider| %>
       <tr>
-        <td><%= provider.name %></td>
+        <td><%= provider.id %></td>
+        <td><%= link_to provider.name, provider%></td>
         <td><%= provider.cnpj %></td>
         <td><%= provider.address %></td>
         <td><%= provider.phone %></td>
-        <td><%= link_to 'Ver', provider %></td>
         <td><%= link_to 'Editar', edit_provider_path(provider) %></td>
-        <td><%= link_to 'Deletar', provider, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Deletar', provider, method: :delete, data: { confirm: 'Tem certeza que deseja deletar este fornecedor?' } %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
+    <div class="digg_pagination text-center mt-4">
+            <%= paginate @providers %>
 
-<br>
+    </div>
 
-<%= link_to 'New Provider', new_provider_path %>
+
