@@ -1,0 +1,159 @@
+BEGIN TRANSACTION;
+CREATE TABLE IF NOT EXISTS "clients" (
+	"id"	integer NOT NULL,
+	"name"	varchar,
+	"document"	varchar,
+	"phone"	varchar,
+	"address"	varchar,
+	"created_at"	datetime(6) NOT NULL,
+	"updated_at"	datetime(6) NOT NULL,
+	PRIMARY KEY("id" AUTOINCREMENT)
+);
+CREATE TABLE IF NOT EXISTS "vehicles" (
+	"id"	integer NOT NULL,
+	"model"	varchar DEFAULT NULL,
+	"registration_plate"	varchar DEFAULT NULL,
+	"created_at"	datetime(6) NOT NULL,
+	"updated_at"	datetime(6) NOT NULL,
+	"client_id"	integer DEFAULT NULL,
+	CONSTRAINT "fk_rails_71757241f0" FOREIGN KEY("client_id") REFERENCES "clients"("id"),
+	PRIMARY KEY("id")
+);
+CREATE TABLE IF NOT EXISTS "tasks" (
+	"id"	integer NOT NULL,
+	"title"	varchar,
+	"description"	text,
+	"status"	boolean,
+	"estimative"	date,
+	"created_at"	datetime(6) NOT NULL,
+	"updated_at"	datetime(6) NOT NULL,
+	"service_id"	integer,
+	"finish_date"	date,
+	PRIMARY KEY("id" AUTOINCREMENT)
+);
+CREATE TABLE IF NOT EXISTS "dashboards" (
+	"id"	integer NOT NULL,
+	"created_at"	datetime(6) NOT NULL,
+	"updated_at"	datetime(6) NOT NULL,
+	"comission_percentage"	integer,
+	PRIMARY KEY("id" AUTOINCREMENT)
+);
+CREATE TABLE IF NOT EXISTS "services" (
+	"id"	integer NOT NULL,
+	"title"	varchar DEFAULT NULL,
+	"status"	boolean DEFAULT NULL,
+	"estimative"	date DEFAULT NULL,
+	"value"	float DEFAULT NULL,
+	"created_at"	datetime(6) NOT NULL,
+	"updated_at"	datetime(6) NOT NULL,
+	"vehicle_id"	integer DEFAULT NULL,
+	"finish_date"	date DEFAULT NULL,
+	PRIMARY KEY("id")
+);
+CREATE TABLE IF NOT EXISTS "installs" (
+	"id"	integer NOT NULL,
+	"email"	varchar NOT NULL DEFAULT '',
+	"encrypted_password"	varchar NOT NULL DEFAULT '',
+	"reset_password_token"	varchar,
+	"reset_password_sent_at"	datetime,
+	"remember_created_at"	datetime,
+	"created_at"	datetime(6) NOT NULL,
+	"updated_at"	datetime(6) NOT NULL,
+	PRIMARY KEY("id" AUTOINCREMENT)
+);
+CREATE TABLE IF NOT EXISTS "users" (
+	"id"	integer NOT NULL,
+	"email"	varchar NOT NULL DEFAULT '',
+	"encrypted_password"	varchar NOT NULL DEFAULT '',
+	"reset_password_token"	varchar,
+	"reset_password_sent_at"	datetime,
+	"remember_created_at"	datetime,
+	"created_at"	datetime(6) NOT NULL,
+	"updated_at"	datetime(6) NOT NULL,
+	"role"	integer,
+	"name"	varchar,
+	PRIMARY KEY("id" AUTOINCREMENT)
+);
+CREATE TABLE IF NOT EXISTS "sale_parts" (
+	"id"	integer NOT NULL,
+	"sale_id"	integer,
+	"part_id"	integer,
+	"part_value"	float,
+	"created_at"	datetime(6) NOT NULL,
+	"updated_at"	datetime(6) NOT NULL,
+	PRIMARY KEY("id" AUTOINCREMENT)
+);
+CREATE TABLE IF NOT EXISTS "sales" (
+	"id"	integer NOT NULL,
+	"name"	varchar DEFAULT NULL,
+	"description"	varchar DEFAULT NULL,
+	"value"	decimal(3, 2) DEFAULT NULL,
+	"created_at"	datetime(6) NOT NULL,
+	"updated_at"	datetime(6) NOT NULL,
+	"service_id"	integer DEFAULT NULL,
+	"client_id"	integer DEFAULT NULL,
+	"finished"	boolean DEFAULT NULL,
+	"comission_value"	decimal(3, 2) DEFAULT NULL,
+	"user_id"	integer DEFAULT NULL,
+	PRIMARY KEY("id")
+);
+CREATE TABLE IF NOT EXISTS "providers" (
+	"id"	integer NOT NULL,
+	"name"	varchar,
+	"cnpj"	varchar,
+	"address"	varchar,
+	"phone"	varchar,
+	"created_at"	datetime(6) NOT NULL,
+	"updated_at"	datetime(6) NOT NULL,
+	PRIMARY KEY("id" AUTOINCREMENT)
+);
+CREATE TABLE IF NOT EXISTS "parts" (
+	"id"	integer NOT NULL,
+	"name"	varchar DEFAULT NULL,
+	"value"	float DEFAULT NULL,
+	"created_at"	datetime(6) NOT NULL,
+	"updated_at"	datetime(6) NOT NULL,
+	"model"	varchar DEFAULT NULL,
+	"provider_id"	integer DEFAULT NULL,
+	PRIMARY KEY("id")
+);
+CREATE INDEX IF NOT EXISTS "index_vehicles_on_client_id" ON "vehicles" (
+	"client_id"
+);
+CREATE INDEX IF NOT EXISTS "index_tasks_on_service_id" ON "tasks" (
+	"service_id"
+);
+CREATE INDEX IF NOT EXISTS "index_services_on_vehicle_id" ON "services" (
+	"vehicle_id"
+);
+CREATE UNIQUE INDEX IF NOT EXISTS "index_installs_on_email" ON "installs" (
+	"email"
+);
+CREATE UNIQUE INDEX IF NOT EXISTS "index_installs_on_reset_password_token" ON "installs" (
+	"reset_password_token"
+);
+CREATE UNIQUE INDEX IF NOT EXISTS "index_users_on_email" ON "users" (
+	"email"
+);
+CREATE UNIQUE INDEX IF NOT EXISTS "index_users_on_reset_password_token" ON "users" (
+	"reset_password_token"
+);
+CREATE INDEX IF NOT EXISTS "index_sale_parts_on_sale_id" ON "sale_parts" (
+	"sale_id"
+);
+CREATE INDEX IF NOT EXISTS "index_sale_parts_on_part_id" ON "sale_parts" (
+	"part_id"
+);
+CREATE INDEX IF NOT EXISTS "index_sales_on_service_id" ON "sales" (
+	"service_id"
+);
+CREATE INDEX IF NOT EXISTS "index_sales_on_client_id" ON "sales" (
+	"client_id"
+);
+CREATE INDEX IF NOT EXISTS "index_sales_on_user_id" ON "sales" (
+	"user_id"
+);
+CREATE INDEX IF NOT EXISTS "index_parts_on_provider_id" ON "parts" (
+	"provider_id"
+);
+COMMIT;

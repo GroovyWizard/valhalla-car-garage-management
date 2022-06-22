@@ -1,27 +1,57 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Nome:</strong>
-  <%= @part.name %>
-</p>
+<div class="container mx-auto border border-black p-5 m-5">
+  <h2>
+    <strong>Nome:</strong>
+    <%= @part.name %>
+  </h2>
 
-<p>
-  <strong>Valor:</strong>
-  <%= @part.value %>
-</p>
+  <h2>
+    <strong>Valor:</strong>
+    <%= @part.value %>
+  </h2>
 
-<% if @part.provider %>
-  <p>
-    <strong>Fornecedor:</strong>
-    <%= @part.provider.name %>
-  </p>
-<% end %>
+  <% if @part.provider %>
+    <h2>
+      <strong>Fornecedor:</strong>
+      <%= @part.provider.name %>
+    </h2>
+  <% end %>
 
-<p>
-  <strong>Modelo da peça:</strong>
-  <%= @part.model %>
-</p>
+  <h2>
+    <strong>Modelo da peça:</strong>
+    <%= @part.model %>
+  </h2>
+
+  <h3 class="text-center mt-5"> Contido nos orçamentos: </h3>
+
+     
+    <table class="table">
+  <thead>
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">Identificacao</th>
+      <th scope="col">Feito por </th>
+    </tr>
+  </thead>
+  <tbody>
+    
+    <% @part.sales.each do |sale| %>    
+        <tr>
+        <td> <%= sale.id %> </td>
+        <td> <%= link_to sale.name %> </td>
+        <td> <%= sale.user.name %></td>
+        <td> <%=  %> </td>
+        </tr>
+    <% end %>
+    </tbody>
+    </table>
+       
+    </div>
 
 
-<%= link_to 'Edit', edit_part_path(@part) %> |
-<%= link_to 'Back', parts_path %>
+  <div class="text-center">
+    <%= link_to 'Voltar', parts_path, class: "btn btn-primary"%>
+    <%= link_to 'Editar', edit_part_path(@part), class: "btn btn-primary" %> 
+  </div>
+</div>

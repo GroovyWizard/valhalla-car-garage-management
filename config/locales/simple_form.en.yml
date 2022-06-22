@@ -10,6 +10,9 @@ pt-BR:
       # html: '<abbr title="required">*</abbr>'
     labels:
       defaults:
+        address: "Endereço"
+        phone: "Telefone"
+        part: "peça"
         model: 'Modelo'
         value: 'Valor'
         provider: 'Escolha um Fornecedor'

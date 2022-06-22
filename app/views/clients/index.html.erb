@@ -1,4 +1,4 @@
-    <style>
+<style>
         .row {
             text-align: center;
             margin: 0 auto;
@@ -21,11 +21,17 @@
             </div>
         </div>
     </div>
-    <h2 class="text-center mx-auto pt-5 pb-2"> Todos os clientes cadastrados: </h2>
-    
-    
-    <div class="container border border-dark p-5 text-center ">
 
+    <h1 class=""> Clientes </h1>
+
+    <div class="text-end ">
+        <%= form_tag(clients_path, method: :get) do %>
+            <%= text_field_tag(:search, params[:search]) %>
+            <%= submit_tag ("Pesquisar") %>
+        <% end %>
+    </div>
+  
+   
 
     
     <table class="table">
@@ -34,23 +40,26 @@
       <th scope="col">ID</th>
       <th scope="col">Nome</th>
       <th scope="col">CPF / CNPJ </th>
+      <th class="text-center" colspan="3">Ações</th>
+
     </tr>
   </thead>
   <tbody>
     
     <% @clients.each do |client| %>    
         <tr>
-        <td> <%= link_to client.id %> </td>
-        <td> <%= link_to client.name, client %></td>
-        <td> <%= client.document %> </td>
+            <td> <%= client.id %> </td>
+            <td> <%= link_to client.name, client %></td>
+            <td> <%= client.document %> </td>
+            <td><%= link_to 'Editar', edit_client_path(client) %></td>
+            <td><%= link_to 'Deletar', client, method: :delete, data: { confirm: 'Tem certeza que deseja deletar este cliente?' } %></td>
         </tr>
     <% end %>
     </tbody>
     </table>
         <div class="digg_pagination text-center mt-4">
-            <%= paginate @clients  %>
+            <%= paginate @clients %>
 
         </div>
-    </div>
     </div>
 

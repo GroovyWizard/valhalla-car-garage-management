@@ -23,17 +23,21 @@
         </div>
     </div>
 </div>
-<h2 class="text-center mx-auto pt-5 pb-2"> Todos os Veículos cadastrados: </h2>
-<div class="container border border-dark p-5 text-center ">
 
-
-    
-    <table class="table">
+<h1> Veiculos </h1>
+    <div class="text-end ">
+        <%= form_tag(vehicles_path, method: :get) do %>
+            <%= text_field_tag(:search, params[:search]) %>
+            <%= submit_tag ("Pesquisar") %>
+        <% end %>
+    </div>
+ 
+<table class="table">
   <thead>
     <tr>
-      <th scope="col">ID</th>
-      <th scope="col">Nome</th>
-      <th scope="col">Placa </th>
+      <th>ID</th>
+      <th>Nome</th>
+      <th>Placa </th>
     </tr>
   </thead>
   <tbody>
@@ -48,9 +52,8 @@
     </tbody>
     </table>
         <div class="digg_pagination text-center mt-4">
-            <%= paginate @vehicles  %>
+            <%= paginate @vehicles %>
 
         </div>
-    </div>
     </div>
 

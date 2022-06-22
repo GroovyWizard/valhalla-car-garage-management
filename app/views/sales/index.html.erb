@@ -1,5 +1,17 @@
 <p id="notice"><%= notice %></p>
 
+
+    <div class="container mx-auto w-50 text-center">
+        <div class="card w-56 border border-primary text-center mx-auto mt-5">
+            <div class="card-body">
+                <div class="card-title">
+                    Cadastre um novo Orçamento
+                </div>
+                <%= link_to "Clique aqui", new_sale_path, class: "btn btn-primary" %>
+            </div>
+        </div>
+    </div>
+
 <h1>Orçamentos</h1>
 
 <table id="sales-datatable" class="table table-striped table-bordered" style="width:100%" data-source="<%= sales_path(format: :json) %>">
@@ -46,6 +58,7 @@
       function initialiseTable(){
  
   $('#sales-datatable').dataTable({
+      "language": { url: "https://cdn.datatables.net/plug-ins/1.12.1/i18n/pt-BR.json" } ,
       "processing": true,
       "serverSide": true,
       "bDestroy": true,

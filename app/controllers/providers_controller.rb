@@ -3,7 +3,13 @@ class ProvidersController < ApplicationController
 
   # GET /providers or /providers.json
   def index
-    @providers = Provider.all
+
+
+    @providers_raw = Provider.search(params[:search])
+
+    @providers =
+      Kaminari.paginate_array(@providers_raw)
+        .page(params[:page])
   end
 
   # GET /providers/1 or /providers/1.json
@@ -65,6 +71,6 @@ class ProvidersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def provider_params
-      params.require(:provider).permit(:name, :cnpj, :address, :phone)
+      params.require(:provider).permit(:search, :name, :cnpj, :address, :phone)
     end
 end

@@ -43,12 +43,23 @@ class DashboardsController < ApplicationController
     @on_time_services = Dashboard.services_done_on_time
   end
 
-  def sale_report
-    @sales = Sale.all
+  def part_report
+    @part_by_sale = Part.parts_by_sale_amount
   end
 
+  def sale_report
+    @sales = Sale.all
+    @sale_value_by_period = Sale.value_by_period(
+      params[:start_date], params[:end_date]
+    )
+    @sale_by_period = Sale.sale_by_period(params[:start_date], params[:end_date])
+  end
+
+
   def user_report
+    
     @users = User.all
+    @users_by_sale_value = User.users_by_sale_value
     @users_by_sale = User.users_by_sale
     return @users_by_sale ? @users_by_sale.length > 1 : [@users_by_sale]
   end

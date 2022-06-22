@@ -12,26 +12,26 @@
       </tr>
     </thead>
     <tbody>
-      <% @service.tasks.each do |part| %>
+      <% @service.tasks.each do |task| %>
         <tr>
-        <% if part %>
+        <% if task %>
           <td>
-            <%= part.id %>
+            <%= task.id %>
           </td>
           <td>
-            <%= part.title %>
+            <%= task.title %>
           </td>
           <td>
-            <%= part.description %>
+            <%= task.description %>
           </td>
           <td>
-            <%= part.status %>
+            <%= task.status %>
           </td>
           <td>
-            <%= part.estimative %>
+            <%= task.estimative %>
           </td>
           <td> 
-            <%= part.finish_date %>
+            <%= task.finish_date %>
           </td>
         <% end %>
         </tr>

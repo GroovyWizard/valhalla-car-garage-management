@@ -42,4 +42,5 @@ Rails.application.routes.draw do
   get "/dashboards/report/service" => "dashboards#service_report", as: "service_report"
   get "/dashboards/report/sale" => "dashboards#sale_report", as: "sale_report"
   get "/dashboards/report/user" => "dashboards#user_report", as: "user_report"
+  get "/dashboards/report/part" => "dashboards#part_report", as: "part_report"
 end

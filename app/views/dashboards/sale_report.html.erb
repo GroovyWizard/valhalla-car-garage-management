@@ -1,10 +1,63 @@
-<%= render "side-panel"%>
+<%= render "side-panel" %>
 
   <main class="container">
                 <h1 class="h2">Relatórios de Orçamentos </h1>
                 <p> Nesta página você poderá inspecionar dados relacionados a orçamentos </p>
-                <%= render 'sale-featured' %>
+                <%= render "sale-featured" %>
+                
+
                 <div class="row my-5">
+
+                <div class="my-5">
+                        <h2 class="fw-bold"> 
+                            Faturamento em Comissão de Orçamento Por Período : 
+                        </h2>
+                        <%= form_tag(sale_report_path, method: :get) do %>
+                            <%= date_field_tag(:start_date, params[:start_date]) %>
+                            <%= date_field_tag(:end_date, params[:end_date])%>
+                            <br class="my-3">
+                            <%= submit_tag ("Procurar"), class: "btn btn-primary" %>
+                        <% end %>
+                </div>
+
+
+                 <div class="col-12 col-xl-8 mb-4 mb-lg-0">
+                        <h2 class="fw-bold"> Valor Total:  <%= @sale_value_by_period %> </h2>
+                        <div class="card">
+                            <h5 class="card-header text-primary">Lista</h5>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead>
+                                          <tr>
+                                            <th scope="col">Id</th>
+                                            <th scope="col">Identificacao</th>
+                                            <th scope="col">Descrição</th></th>
+                                            <th scope="col">Comissão</th>
+                                            <th scope="col">Valor total</th>
+                                            <th scope="col"></th>
+                                          </tr>
+                                        </thead>
+                                        <tbody>
+                                        <% if @sale_by_period%>
+                                            <% @sale_by_period.each do |sale| %>
+                                                <tr>
+                                                    <th scope="row"> <%= sale.id %></th>
+                                                    <td><%= sale.name %></td>
+                                                    <td><%= sale.description %> </td>
+                                                    <td><%= sale.comission_value %></td>
+                                                    <td><%= sale.get_total_value %></td>
+                                                    <td> <%= link_to "Ver", sale, class: "btn btn-primary" %> </td>
+                                                </tr>
+                                            <% end %>
+                                          <% end %>
+                                        </tbody>
+                                      </table>
+                                </div>
+                                   
+                                </div>
+                                </div>
+                            </div>
 
                 </div>
             </main>
