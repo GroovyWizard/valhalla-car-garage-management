@@ -15,7 +15,7 @@ pt-BR:
         part: "peça"
         model: 'Modelo'
         value: 'Valor'
-        provider: 'Escolha um Fornecedor'
+        provider: 'fornecedor'
         name: 'Nome'
         create_part: 'Botão'
     

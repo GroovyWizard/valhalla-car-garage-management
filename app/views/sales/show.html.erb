@@ -1,9 +1,9 @@
 <p id="notice"><%= notice %></p>
 <div class="container mx-auto text-center" >
-  <h2 class="text-center"> Visualizar <%= @sale.name %> </h2>
+  <h2 class="text-center my-4"> Visualizar <%= @sale.name %> </h2>
 
   <% if !@sale.finished %>
-    <%= link_to "Aprovar orçamento", finish_sale_sale_path(@sale), class: "btn-lg btn-success text-center" %>
+    <%= link_to "Aprovar orçamento", finish_sale_sale_path(@sale), class: "mb-4 btn-lg btn-success text-center" %>
   <% elsif @sale.finished == nil%>
     <h3> Orçamento cancelado a pedido do cliente.</h3>
   <% else %>
@@ -11,7 +11,7 @@
   <% end %>
 
 
-  <p>
+  <p class="mt-4">
     <strong> Feito por: </strong>
     <%= @sale.user.name %>
   </p>
@@ -21,11 +21,11 @@
   <%= @sale.parsed_finished%>
   </p>
   <p>
-    <strong>Name:</strong>
+    <strong>Nome:</strong>
     <%= @sale.name %>
   </p>
   <p>
-    <strong>Description:</strong>
+    <strong>Descrição:</strong>
     <%= @sale.description %>
   </p>
   <p>

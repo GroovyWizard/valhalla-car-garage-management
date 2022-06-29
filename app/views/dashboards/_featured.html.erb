@@ -22,8 +22,8 @@
                         <div class="card text-center">
                             <h5 class="card-header"> Funcionario Destaque  </h5>
                             <div class="card-body">
-                              <h5 class="card-title"><%= Dashboard.featured_user.name ||= 'Nenhum' %></h5>
-                              <h5 > <%= Dashboard.featured_user.sales.count %> </h5>
+                              <h5 class="card-title"><%= Dashboard.featured_user ? Dashboard.featured_user.name : 'Nenhum' %></h5>
+                              <h5 > <%= Dashboard.featured_user ? Dashboard.featured_user.sales.count : 0 %> </h5>
                               <p class="card-text fw-bold"><%= @month_first_day %> -- <%= @month_last_day %></p>
                             </div>
                         </div>

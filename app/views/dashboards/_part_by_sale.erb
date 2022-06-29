@@ -7,6 +7,7 @@
                 <thead>
                   <tr>
                     <th scope="col">Id</th>
+                    <th scope="col">Nome</th>
                     <th scope="col">Modelo</th></th>
                     <th scope="col">Fornecedor</th>
                     <th scope="col">Apareceu em orçamentos</th>
@@ -18,7 +19,8 @@
                   <% @part_by_sale.each do |part| %>
                     <tr>
                         <th scope="row"> <%= part.provider.id %></th>
-                        <td><%= part.model%></td>
+                        <td><%= part.name %> </td>
+                        <td><%= part.model %></td>
                         <td><%= part.provider.name %> </td>
                         <td><%= part.readable_sales_count %> </td>
                         <td><%= part.provider.created_at.to_date %></td>

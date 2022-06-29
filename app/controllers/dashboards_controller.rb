@@ -57,7 +57,6 @@ class DashboardsController < ApplicationController
 
 
   def user_report
-    
     @users = User.all
     @users_by_sale_value = User.users_by_sale_value
     @users_by_sale = User.users_by_sale
