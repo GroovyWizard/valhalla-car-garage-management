@@ -12,9 +12,9 @@ class Vehicle < ApplicationRecord
   def self.search(search)
     if search
       @result = Vehicle.where("registration_plate LIKE ?", "%" + search + "%")
-      return @result ? @result : Vehicle.all
+      return @result ? @result : Vehicle.all.reverse
     else
-      return Vehicle.all
+      return Vehicle.all.reverse
     end
   end
 end
