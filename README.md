@@ -2,7 +2,7 @@
 <img src="https://user-images.githubusercontent.com/78284549/160327748-a3fe942b-102e-4fee-9bce-b4280d6bb936.png" width="300" height="150">
 </p>
 
-<h1 align='center'> Valhalla - Car Repair Shop 
+<h1 align='center'> Valhalla - Car Garage Management System 
   <br> 
   
   ![main](https://github.com/GroovyWizard/valhalla-car-repair-shop/actions/workflows/main.yml/badge.svg) 
