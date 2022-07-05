@@ -13,7 +13,8 @@
 
 <h2 align='center'> Valhalla is an Open Source app made in Ruby On Rails focused on Car Repair Shops, featuring Sales, Services and general Management features! </h2>
 
-![2022-04-24-223142_1347x593_scrot](https://user-images.githubusercontent.com/78284549/165006661-9622c640-8ebc-40d1-9b7e-096500329745.png)
+![homepage](https://user-images.githubusercontent.com/78284549/177229344-8b5957f6-a305-45f2-91f3-d97de125991f.png)
+
 
 
 <h1> Instructions for running the app for the first time using Docker: </h1>
