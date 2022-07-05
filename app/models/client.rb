@@ -39,9 +39,9 @@ class Client < ApplicationRecord
     if search 
         @result = Client.where("name LIKE ?", "%" + search + "%")
         puts(@result, "here")
-        return @result ? @result : Client.all.reverse
+        return @result ? @result : Client.all
     else 
-        return Client.all.reverse
+        return Client.all
     end  
   end 
 

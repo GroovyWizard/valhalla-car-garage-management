@@ -21,7 +21,7 @@ end
     admin = User.new 
     admin.email = 'super@admin.com'
     admin.role = 0
-    admin.name = 'DarthVader'
+    admin.name = 'Administrador'
     admin.password = '123456'
     admin.password_confirmation = '123456' 
     admin.save()
@@ -53,10 +53,11 @@ end
     dashboard.save()
 end 
 
-10.times do 
+20.times do 
+    Faker::Config.locale = 'pt-BR'
     name = Faker::Name.name
     document = Faker::CPF.pretty
-    phone = Faker::PhoneNumber.area_code #=> "201"
+    phone = Faker::PhoneNumber.phone_number
     address = Faker::Address.full_address
     @client = Client.create!(name: name, document: document, phone: phone, address: address )
     
@@ -66,47 +67,6 @@ end
     Vehicle.create!(model: model, registration_plate: registration_plate, client_id: client_id)
 end
 
-10.times do 
-    name = Faker::Movies::LordOfTheRings.character
-    document = Faker::CPF.pretty
-    phone = Faker::PhoneNumber.area_code #=> "201"
-    address = Faker::Address.full_address
-    @client = Client.create!(name: name, document: document, phone: phone, address: address )
-    
-    model = Faker::Vehicle.model
-    registration_plate = Faker::Vehicle.license_plate
-    client_id = @client.id
-    Vehicle.create!(model: model, registration_plate: registration_plate, client_id: client_id)
-end
-
-
-10.times do 
-    name = Faker::Movies::StarWars.character
-    document = Faker::CPF.pretty
-    phone = Faker::PhoneNumber.area_code #=> "201"
-    address = Faker::Address.full_address
-    
-    @client = Client.create!(name: name, document: document, phone: phone, address: address )
-    
-    model = Faker::Vehicle.model
-    registration_plate = Faker::Vehicle.license_plate
-    client_id = @client.id
-    Vehicle.create!(model: model, registration_plate: registration_plate, client_id: client_id)
-end
-
-5.times do 
-    name = Faker::Games::Witcher.witcher
-    document = Faker::CPF.pretty
-    phone = Faker::PhoneNumber.area_code #=> "201"
-    address = Faker::Address.full_address
-
-    @client = Client.create!(name: name, document: document, phone: phone, address: address )
-    
-    model = Faker::Vehicle.model
-    registration_plate = Faker::Vehicle.license_plate
-    client_id = @client.id
-    Vehicle.create!(model: model, registration_plate: registration_plate, client_id: client_id)
-end
 
 
 
