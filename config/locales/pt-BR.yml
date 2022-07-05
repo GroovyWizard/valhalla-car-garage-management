@@ -1,6 +1,9 @@
 pt-BR:
   activerecord:
     attributes:
+     sale: 
+        name: "Nome"
+        description: "Descrição"
      part: 
       new_part: "Nova peça"
      user:

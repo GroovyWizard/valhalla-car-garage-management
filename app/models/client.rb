@@ -41,7 +41,7 @@ class Client < ApplicationRecord
         puts(@result, "here")
         return @result ? @result : Client.all
     else 
-        return Client.all 
+        return Client.all
     end  
   end 
 

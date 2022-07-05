@@ -6,19 +6,21 @@ class Dashboard < ApplicationRecord
   end
 
   def self.featured_user
-    @all_ids = Sale.all.pluck :user_id
-    @id_counter = Hash.new(0)
-    
-    @all_ids.each do |id|
-        @id_counter[id] += 1
+    if Sale.count > 0 
+      @all_ids = Sale.all.pluck :user_id
+      @id_counter = Hash.new(0)
+      
+      @all_ids.each do |id|
+          @id_counter[id] += 1
+      end
+
+      #order by count (reversed major to minor) then get the first entry
+      #then get the id which is the first value in the entry [0] or first
+      @featured_user_id = (@id_counter.sort_by { |id, count| -count }).first[0]
+      @featured_user = User.find(@featured_user_id)
+
+      return @featured_user
     end
-
-    #order by count (reversed major to minor) then get the first entry
-    #then get the id which is the first value in the entry [0] or first
-    @featured_user_id = (@id_counter.sort_by { |id, count| -count }).first[0]
-    @featured_user = User.find(@featured_user_id)
-
-    return @featured_user
   end
 
   def self.featured_vehicles

@@ -11,6 +11,18 @@
   </div>
 
   <div class="form-actions">
-    <%= f.button :submit, class: "btn btn-primary" %>
+    <%= f.button :submit, 'Cadastrar Fornecedor', class: "btn btn-primary" %>
   </div>
 <% end %>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/5.0.7/jquery.inputmask.min.js" integrity="sha512-jTgBq4+dMYh73dquskmUFEgMY5mptcbqSw2rmhOZZSJjZbD2wMt0H5nhqWtleVkyBEjmzid5nyERPSNBafG4GQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<script>
+  $("input[id*='phone']").inputmask('(99) 9999[9]-9999');  
+
+  $("input[id*='cnpj']").inputmask({
+    mask: ['999.999.999-99', '99.999.999/9999-99'],
+    keepStatic: true
+  });
+</script>

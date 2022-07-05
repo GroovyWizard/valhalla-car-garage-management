@@ -8,7 +8,7 @@ make: *** No rule to make target 'all'.  Stop.
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Wed Jun 22 15:07:57 2022
+# Make data base, printed on Mon Jul  4 21:19:30 2022
 
 # Variables
 
@@ -19,17 +19,13 @@ LC_ALL = C
 # environment
 NO_AT_BRIDGE = 1
 # environment
-I3SOCK = /run/user/1000/i3/ipc-socket.1292
+I3SOCK = /run/user/1000/i3/ipc-socket.1831
 # environment
-VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-16f208f5-e888-4885-af64-334610e94cbc.sock
+VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-cda7dbed-78b6-4a2c-9989-5009bfed3cdc.sock
 # environment
-VSCODE_CWD = /home/skeletor/dev/eadstock-web
-# environment
-WINDOWID = 50331663
+VSCODE_CWD = /home/skeletor
 # default
 MAKE_COMMAND := make
-# environment
-VSCODE_GIT_ASKPASS_EXTRA_ARGS = --ms-enable-electron-run-as-node
 # automatic
 @D = $(patsubst %/,%,$(dir $@))
 # environment
@@ -41,11 +37,7 @@ PWD = /home/skeletor/Workspace/ruby/valhalla-car-repair-shop
 # automatic
 %D = $(patsubst %/,%,$(dir $%))
 # environment
-LSCOLORS = Gxfxcxdxbxegedabagacad
-# environment
 MAIL = /var/spool/mail/skeletor
-# environment
-OLDPWD = /home/skeletor/dev
 # automatic
 ^D = $(patsubst %/,%,$(dir $^))
 # environment
@@ -78,12 +70,8 @@ APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = 1
 MFLAGS = -pqrR
 # default
 .SHELLFLAGS := -c
-# environment
-DOCKER_HOME = /home/skeletor
 # automatic
 +D = $(patsubst %/,%,$(dir $+))
-# environment
-GIT_ASKPASS = /opt/visual-studio-code/resources/app/extensions/git/dist/askpass.sh
 # environment
 XDG_SESSION_DESKTOP = i3
 # makefile (from 'Makefile', line 1)
@@ -91,11 +79,9 @@ MAKEFILE_LIST := Makefile
 # automatic
 @F = $(notdir $@)
 # environment
-ZSH = /home/skeletor/.oh-my-zsh
-# environment
 VSCODE_VERBOSE_LOGGING = true
 # environment
-VSCODE_PID = 90336
+VSCODE_PID = 4228
 # environment
 XDG_SESSION_TYPE = x11
 # automatic
@@ -112,8 +98,6 @@ DBUS_SESSION_BUS_ADDRESS = unix:path=/run/user/1000/bus
 VSCODE_NLS_CONFIG = {"locale":"en-us","availableLanguages":{},"_languagePackSupport":true}
 # default
 MAKE_HOST := x86_64-pc-linux-gnu
-# environment
-ANDROID_HOME = /home/skeletor/Android/Sdk
 # makefile
 SHELL = /bin/sh
 # default
@@ -121,45 +105,31 @@ MAKECMDGOALS := all
 # environment
 DOTNET_BUNDLE_EXTRACT_BASE_DIR = /home/skeletor/.cache/dotnet_bundle_extract
 # environment
-SHLVL = 2
-# environment
-TERMINFO = /usr/lib/kitty/terminfo
+SHLVL = 1
 # environment
 MAKELEVEL := 0
 # default
 MAKE = $(MAKE_COMMAND)
 # environment
-PATH = /usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/home/skeletor/.dotnet/tools:/usr/lib/jvm/default/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl:/home/skeletor/.local/share/gem/ruby/3.0.0/bin
+PATH = /usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/opt/android-sdk/platform-tools:/home/skeletor/.dotnet/tools:/usr/lib/jvm/default/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl
 # default
 MAKEFILES := 
-# environment
-VSCODE_GIT_IPC_HANDLE = /run/user/1000/vscode-git-cb947f24c2.sock
-# environment
-VSCODE_GIT_ASKPASS_NODE = /opt/visual-studio-code/code
 # environment
 MOTD_SHOWN = pam
 # automatic
 ^F = $(notdir $^)
 # environment
-VSCODE_GIT_ASKPASS_MAIN = /opt/visual-studio-code/resources/app/extensions/git/dist/askpass-main.js
-# environment
 VSCODE_LOG_NATIVE = false
-# environment
-TERM_PROGRAM = vscode
 # automatic
 ?F = $(notdir $?)
 # environment
 XDG_SEAT = seat0
 # environment
 XDG_CURRENT_DESKTOP = i3
-# environment
-LS_COLORS = rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=00:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.avif=01;35:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:*~=00;90:*#=00;90:*.bak=00;90:*.old=00;90:*.orig=00;90:*.part=00;90:*.rej=00;90:*.swp=00;90:*.tmp=00;90:*.dpkg-dist=00;90:*.dpkg-old=00;90:*.ucf-dist=00;90:*.ucf-new=00;90:*.ucf-old=00;90:*.rpmnew=00;90:*.rpmorig=00;90:*.rpmsave=00;90:
 # automatic
 +F = $(notdir $+)
 # environment
 XDG_SEAT_PATH = /org/freedesktop/DisplayManager/Seat0
-# environment
-LESS = -R
 # environment
 DESKTOP_SESSION = i3
 # environment
@@ -173,8 +143,6 @@ XDG_VTNR = 7
 # makefile
 .DEFAULT_GOAL := build
 # environment
-KITTY_WINDOW_ID = 1
-# environment
 DISPLAY = :0
 # environment
 GTK_MODULES = canberra-gtk-module
@@ -183,17 +151,9 @@ USER = skeletor
 # default
 MAKE_VERSION := 4.3
 # environment
-KITTY_PID = 152891
-# environment
-PAGER = less
-# environment
 _ = /usr/bin/make
 # environment
-GEM_HOME = /home/skeletor/.local/share/gem/ruby/3.0.0
-# environment
 XDG_RUNTIME_DIR = /run/user/1000
-# environment
-COLORTERM = truecolor
 # environment
 XDG_SESSION_CLASS = user
 # environment
@@ -204,8 +164,6 @@ HOME = /home/skeletor
 ELECTRON_RUN_AS_NODE = 1
 # environment
 VSCODE_IPC_HOOK = /run/user/1000/vscode-f3f08d6a-1.68.1-main.sock
-# environment
-TERM = xterm-kitty
 # environment
 XDG_SESSION_ID = 2
 # default
@@ -223,15 +181,11 @@ XDG_GREETER_DATA_DIR = /var/lib/lightdm-data/skeletor
 # default
 .FEATURES := target-specific order-only second-expansion else-if shortest-stem undefine oneshell nocomment grouped-target extra-prereqs archives jobserver output-sync check-symlink guile load
 # environment
-KITTY_INSTALLATION_DIR = /usr/lib/kitty
-# environment
-TERM_PROGRAM_VERSION = 1.68.1
-# environment
 DOTNET_ROOT = /usr/share/dotnet
 # environment
 GDMSESSION = i3
 # variable set hash-table stats:
-# Load=109/1024=11%, Rehash=0, Collisions=7/139=5%
+# Load=86/1024=8%, Rehash=0, Collisions=3/116=3%
 
 # Pattern-specific Variable Values
 
@@ -293,7 +247,6 @@ run-test:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
- 
 #  recipe to execute (from 'Makefile', line 31):
 	@echo "Running tests"
 	@docker exec valhalla bash -c "rails test"
@@ -378,7 +331,8 @@ down:
 
 # strcache performance: lookups = 69 / hit rate = 23%
 # hash-table stats:
+ 
 # Load=53/8192=1%, Rehash=0, Collisions=0/69=0%
-# Finished Make data base on Wed Jun 22 15:07:57 2022
+# Finished Make data base on Mon Jul  4 21:19:30 2022
 
  
